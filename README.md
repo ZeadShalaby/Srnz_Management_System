@@ -1,3 +1,186 @@
+
+<br/>
+<p align="center">
+  <a href="https://github.com/ZeadShalaby/SRZN_Project_System">
+    <img src="https://i.imgur.com/6kMSHq5.png" alt="Logo" width="300" height="270">
+  </a>
+
+<h3 align="center">SRZN Project System</h3>
+
+  <p align="center">
+    A Project not define yet
+    <br/>
+    <br/>
+  </p>
+
+
+![Forks](https://img.shields.io/github/forks/ZeadShalaby/SRZN_Project_System?style=social) ![Issues](https://img.shields.io/github/issues/ZeadShalaby/SRZN_Project_System) ![License](https://img.shields.io/github/license/ZeadShalaby/SRZN_Project_System)
+
+## Table Of Contents
+
+* [About the Project](#about-the-project)
+* [Built With](#built-with)
+* [Getting Started](#getting-started)
+    * [Prerequisites](#prerequisites)
+    * [Installation](#installation)
+* [Usage](#usage)
+    * [Locally](#running-locally)
+    * [Via Container](#running-via-container)
+* [Contributing](#contributing)
+* [Authors](#authors)
+
+## About The Project
+
+
+
+It is a site for displaying antique products, pictures and picturesque artifacts, for artists and how to communicate with each other to sell or display them anywhere through it
+
+## Built With
+
+**Client:** Blade, Bootstrap
+
+**Server:** Apache, Laravel
+
+**Containerization Service:** Docker
+
+**Miscellaneous:** Github
+Actions, [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images), [Docker Login](https://github.com/marketplace/actions/docker-login)
+
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+* npm
+
+```sh
+npm install npm@latest -g
+```
+
+* laravel
+
+```sh
+composer global require laravel/installer
+```
+
+Make sure that either **MySQL** or **MariaDB** are installed either manually or via **phpMyAdmin**
+
+### Installation
+
+Clone the project
+
+```bash
+  https://github.com/ZeadShalaby/SRZN_Project_System
+```
+
+Go to the project directory
+
+```bash
+  cd SRZN_Project_System
+```
+
+Install dependencies
+
+```bash
+  composer install
+```
+
+```bash
+  npm install
+```
+
+## Usage
+
+### Running Locally
+
+Make the migrations to update the database
+
+```bash
+    php artisan migrate
+```
+
+Seed the Database
+
+```bash
+    php artisan db:seed
+```
+
+Start the server and run watch
+
+```bash
+    php artisan serve
+```
+
+```bash
+    npx run watch
+````
+
+or alternatively run the .bat
+
+```bash
+    /autorun.bat
+```
+
+go to the following route
+
+```
+    http://127.0.0.1:8000/
+```
+
+### Running via container
+
+pull the image 
+
+```
+docker pull zeadshalaby/lms
+``` 
+
+ run the container
+
+ ```
+ docker run --name lms -p 8000:8000 -d zeadshalaby/lms
+ ```
+ 
+ connect to Container Terminal
+ 
+ ```
+ docker exec -it lms /bin/sh
+ ```
+ 
+ make the migrations to update the database
+
+```bash
+    php artisan migrate
+```
+
+ go to the following page
+ ```
+ <container-ip>:8000
+ ```
+## Contributing
+
+Any contributions you make are **greatly appreciated**.
+
+* If you have suggestions for adding or removing projects, feel free
+  to [open an issue](https://github.com/ZeadShalaby/SRZN_Project_System/issues/new) to discuss it, or directly
+  create a pull request after you edit the *README.md* file with necessary changes.
+* Please make sure you check your spelling and grammar.
+* Create individual PR for each suggestion.
+* Make sure to add a meaningful description
+
+### Creating A Pull Request
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/GoalFeature`)
+3. Commit your Changes (`git commit -m 'Add some GoalFeature'`)
+4. Push to the Branch (`git push origin feature/GoalFeature`)
+5. Open a Pull Request
+
+## Authors
+* **Ziad Shalaby** - *Computer Science Student* - [Ziad Shalaby](https://github.com/ZeadShalaby)
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -7,60 +190,3 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
