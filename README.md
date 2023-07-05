@@ -1,11 +1,11 @@
 
 <br/>
 <p align="center">
-  <a href="https://github.com/ZeadShalaby/SRZN_Project_System">
+  <a href="https://github.com/ZeadShalaby/SRNZ_PROJECT_SYSTEM">
     <img src="https://i.imgur.com/6kMSHq5.png" alt="Logo" width="300" height="270">
   </a>
 
-<h3 align="center">SRZN Project System</h3>
+<h3 align="center">SRZN PROJECT SYSTEM</h3>
 
   <p align="center">
     A Project not define yet
@@ -14,7 +14,7 @@
   </p>
 
 
-![Forks](https://img.shields.io/github/forks/ZeadShalaby/SRZN_Project_System?style=social) ![Issues](https://img.shields.io/github/issues/ZeadShalaby/SRZN_Project_System) ![License](https://img.shields.io/github/license/ZeadShalaby/SRZN_Project_System)
+![Forks](https://img.shields.io/github/forks/ZeadShalaby/SRNZ_PROJECT_SYSTEM?style=social) ![Issues](https://img.shields.io/github/issues/ZeadShalaby/SRNZ_PROJECT_SYSTEM) ![License](https://img.shields.io/github/license/ZeadShalaby/SRNZ_PROJECT_SYSTEM)
 
 ## Table Of Contents
 
@@ -163,7 +163,7 @@ docker pull zeadshalaby/lms
 Any contributions you make are **greatly appreciated**.
 
 * If you have suggestions for adding or removing projects, feel free
-  to [open an issue](https://github.com/ZeadShalaby/SRZN_Project_System/issues/new) to discuss it, or directly
+  to [open an issue](https://github.com/ZeadShalaby/SRNZ_PROJECT_SYSTEM/issues/new) to discuss it, or directly
   create a pull request after you edit the *README.md* file with necessary changes.
 * Please make sure you check your spelling and grammar.
 * Create individual PR for each suggestion.
