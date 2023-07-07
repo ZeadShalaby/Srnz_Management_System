@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orders;
+use App\Traits\ImgTrait;
 use App\Models\Departments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class DepartmentsController extends Controller
 {
+    use ImgTrait;
     /**
      * Display a listing of the resource.
      */
@@ -48,11 +50,8 @@ class DepartmentsController extends Controller
 
 
         //save image (Departments) in folder 
-        $file_extension = $request->img->getClientOriginalExtension();
-        $file_name = time().'.'.$file_extension;
-        $path = 'image/departments';
-        $request->img->move($path,$file_name);
-        
+        $folder = 'image/departments';
+        $file_name = $this->saveImage($request->img,$folder);
        
         $name = $request->name;
         $code = $request->code;
@@ -138,13 +137,14 @@ class DepartmentsController extends Controller
             return Redirect::route('departments.index')->with('status', 'Deleted Successfully.');
         }
     }
-
+    
+    //view restore
     public function restore_index()
     {
         return view('trash.departments_restore', ['departments' => Departments::onlyTrashed()->get()]);
     }
     
-    // restore
+    //restore
     public function restore()
     {
        $id = Request()->id;

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
+
+
 use Illuminate\Support\Str;
-
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -75,10 +76,16 @@ class UsersController extends Controller
     }
 
 
+    public function homepage()
+    {
+        $user = auth()->user();
+      if (Auth::user()->role == Role::ADMIN) {
+            return view('home-page.admin',['SeAdmin'=>$user]);
+        }
+        else{return view('home-page.customer',['SeCustomer'=>$user]);}    
+    }
 
-
-    //
-
+    //login
     function loginindex()
     {
         return view('login');
@@ -99,14 +106,16 @@ class UsersController extends Controller
             'password' => $request->get('password')
         );
 
+
+
         if (!(Auth::attempt($user_data))) {
             return back()->with('error', 'Wrong Login Details');
         }
-        if (Auth::user()->role == 1) {
-
+        if (Auth::user()->role == Role::ADMIN) {
             return view('home-page.admin',['SeAdmin'=>$source]);
         }
-        if (Auth::user()->role == 2) {
+        if (Auth::user()->role == Role::CUSTOMER) {
+
             return view('home-page.customer',['SeCustomer'=>$source]);
 
         }

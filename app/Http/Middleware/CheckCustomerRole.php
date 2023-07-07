@@ -5,9 +5,15 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-class CheckAdminRole
+class CheckCustomerRole
 {
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
     public function handle(Request $request, Closure $next)
     {
         $role = auth()->user();
@@ -15,7 +21,7 @@ class CheckAdminRole
            $role = 0 ;
         }
         else{$role = auth()->user()->role;}
-        if ( $role!= Role::ADMIN) {
+        if ( $role!= Role::CUSTOMER) {
             abort(403, 'Unauthorized');
         }
 

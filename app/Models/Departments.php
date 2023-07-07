@@ -30,5 +30,7 @@ class Departments extends Model
      'deleted_at',
  ];
 
+ 
+
 }
 

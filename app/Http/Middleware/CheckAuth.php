@@ -6,19 +6,22 @@ use Closure;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
-class CheckAdminRole
+class CheckAuth
 {
     public function handle(Request $request, Closure $next)
     {
         $role = auth()->user();
         if(!$role){
            $role = 0 ;
+           abort(403, 'Unauthorized');
+
         }
         else{$role = auth()->user()->role;}
-        if ( $role!= Role::ADMIN) {
-            abort(403, 'Unauthorized');
-        }
+        if ( ($role == Role::ADMIN)||($role == Role::CUSTOMER)) {
+            return $next($request);
 
-        return $next($request);
-    }
-}
+        }
+    
+        abort(403, 'Unauthorized');
+    
+}}

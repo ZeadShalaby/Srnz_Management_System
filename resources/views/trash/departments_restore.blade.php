@@ -27,7 +27,6 @@
    <a href="{{ route('departments.restore', [ 'id'=> $department->id]) }}">
         <button class="btn btn-danger" style="margin-left: 900px;margin-top: -65px;">restore</button>
    </a>
-    </form>
 </div>
 
     @endforeach
@@ -37,6 +36,7 @@
     <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
     <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
+    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
 
     <br>
     @endsection
