@@ -10,20 +10,25 @@
 
     @extends('extends')
     @section('content')
-    
-    @if (session('status'))
+    @if (session('favourite'))
     <div class="alert alert-success">  
-        {{session('status')}}
+        {{"Add your favourite"}}
     </div>
     @endif
-    
+    @if (session('faverror'))
+    <div class="alert alert-danger">  
+        {{session('faverror')}}
+    </div>
+    @endif
     @if (session('error'))
     <div class="alert alert-danger">
         
         {{session('error')}}
     </div>
     @endif
-    <h1>Orders</h1>
+    <h1>Orders <a href="{{route('ordersite.create')}}"> <img width="50px" height="50px" src="{{URL('image/addgallery.png')}}"  alt="add" ></i>
+    </a></h1>
+   
 <br>
  <div class="container mt-5">
         <div classs="form-group">
@@ -62,23 +67,37 @@
     </a>
 
 
-    <form action="{{route('orders.destroy',$order->id)}}" method="POST" >
+
+    <form action="{{route('orders.favourite',$order->id)}}" method="POST">
         @csrf
-        @method('DELETE')
-        <button class="btn btn-danger"  style="margin-left: 150px;">DELETE</button>
+<input style="width: 0%;height: 0%;background-color:white;border: rgb(255, 255, 255) " name="id" type="text"value="{{$order->id}}">
+        @if(session('favourite')==$order->id)
+        <button  name="favourite" class="btn btn-lg"><i class="fa fa-heart" style="color: red;" type="submit"></i></button> 
+        @else
+        <button  name="favourite" class="btn btn-lg"><i class="fa fa-heart" style="color: gold;" type="submit"></i></button> 
+
+        @isset($interesteds)
+        @foreach ($interesteds as $interested)
+        @if(($interested->user_id==$userid)&($interested->order_id==$order->id))
+        <div style="margin-left: 8.5px;margin-top: -48px">
+        <button  name="favourite" class="btn btn-lg"><i class="fa fa-heart" style="color: red; " type="submit"></i></button> 
+        </div>
+        @endif
+        @endforeach
+        @else
+         
+        @endisset 
+
+        @endif
     </form>
+
         <br><br>
 
     @endforeach
     <br>
     {{ $orders->links() }}
-
     <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
-    <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
-    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
     <br>
     @endsection
     

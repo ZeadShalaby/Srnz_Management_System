@@ -20,10 +20,12 @@
   <span><h1 style="color: blue">Cde  : </h1>  <h2 style="color: coral">  {{$departments->code}} </h2>  </span>
   <span><h1 style="color: blue">img  : </h1>  <h2 style="color: coral">  {{$departments->img}}  </h2>  </span>
 
+    
+    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>  
     <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
     <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
-    <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">restore</a>
+    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
+    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
     <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
 
 

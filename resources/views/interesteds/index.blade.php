@@ -18,10 +18,8 @@
     @endforeach
     <br>
     {{ $interesteds->links() }}
-
-    <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
-    <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
-    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
+    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
+    <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
     <br>
     @endsection
 </body>

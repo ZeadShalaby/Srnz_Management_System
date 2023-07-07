@@ -27,9 +27,9 @@
 <br>
  <div class="container mt-5">
         <div classs="form-group">
-            <form action="{{route('orders.search')}}" method="POST">
+            <form action="{{route('orders.search.restore')}}" method="POST">
             @csrf
-            <button type="submit" name="searchs"> <i class='bx bx-search' ></i></button>
+            <button type="submit" name="searchs_restore"> <i class='bx bx-search' ></i></button>
             <input type="text" id="search" name="search" placeholder="Search" class="form-control" />
             </form>
 
@@ -37,7 +37,7 @@
     </div>
     
     <script type="text/javascript">
-        var route = "{{ url('autocomplete-search-orders') }}";
+        var route = "{{ url('autocomplete-search-orders-restore') }}";
         $('#search').typeahead({
             source: function (query, process) {
                 return $.get(route, {
@@ -51,7 +51,7 @@
 
     <br><br>
     @foreach ($orders as $order)
-    <a href="{{route('orders.show',$order->id)}}" class="inside-page__btn inside-page__btn--beach">
+    <a href="#" class="inside-page__btn inside-page__btn--beach">
         {{$order->id}}-{{$order->name}}
         <br>
         {{$order->user->name}}
@@ -62,23 +62,21 @@
     </a>
 
 
-    <form action="{{route('orders.destroy',$order->id)}}" method="POST" >
-        @csrf
-        @method('DELETE')
-        <button class="btn btn-danger"  style="margin-left: 150px;">DELETE</button>
-    </form>
+   <br><br>
+    <a href="{{ route('orders.restore', [ 'id'=> $order->id]) }}">
+        <button class="btn btn-danger" style="margin-left: 900px;margin-top: -65px;">restore</button>
+   </a>
         <br><br>
 
     @endforeach
     <br>
-    {{ $orders->links() }}
 
     <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
     <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
+    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
     <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
     <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
-    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
     <br>
     @endsection
     

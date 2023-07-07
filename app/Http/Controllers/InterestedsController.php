@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\interesteds;
+use App\Models\Interesteds;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class InterestedsController extends Controller
 {
@@ -14,7 +15,7 @@ class InterestedsController extends Controller
     public function index(Request $request)
     {
         //
-        $interesteds = interesteds::paginate(5);
+        $interesteds = Interesteds::where('user_id',Auth::user()->id)->paginate(5);
         return view('interesteds.index',['interesteds' => $interesteds]);
     }
 

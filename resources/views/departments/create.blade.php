@@ -59,10 +59,12 @@
     </form>
     <br><br>
 <div style="margin-top: 450px">
+
+    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
     <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
     <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
-    <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">restore</a>
+    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
+    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
     <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
 
 </div>

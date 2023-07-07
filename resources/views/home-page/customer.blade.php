@@ -21,8 +21,7 @@
     @endif
    <h1> Customer Page</h1>
    <br>
-
-    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
+    <a href="{{ route('ordersite.index',$SeCustomer->id) }}" class="btn btn-dark">Orders</a>
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
     <br>
     @endsection
