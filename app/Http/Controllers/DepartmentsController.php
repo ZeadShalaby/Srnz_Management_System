@@ -108,10 +108,10 @@ class DepartmentsController extends Controller
         ]);
 
         //update img
-        $file_extension = $request->img->getClientOriginalExtension();
-        $file_name = time().'.'.$file_extension;
-        $path = 'image/departments';
-        $request->img->move($path,$file_name);
+        //update image
+        $folder = 'image/departments';
+        $file_name = $this->saveImage($request->img,$folder);
+        
         
 
         $department->update([

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->bigInteger('department_id')->unsigned();
             $table->index('department_id');
             $table->string('gmail');
-            $table->bigInteger('phone')->unsigned()->unique();
+            $table->bigInteger('phone');
             $table->bigInteger('price')->unsigned()->nullable();
             $table->string('description');
             $table->string('path');

@@ -6,6 +6,7 @@ use App\Models\Interesteds;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class InterestedsController extends Controller
 {
@@ -16,7 +17,7 @@ class InterestedsController extends Controller
     {
         //
         $interesteds = Interesteds::where('user_id',Auth::user()->id)->paginate(5);
-        return view('interesteds.index',['interesteds' => $interesteds]);
+        return view('interesteds.index',['interesteds' => $interesteds,'user_id'=>auth()->user()->id]);
     }
 
     /**
@@ -62,8 +63,24 @@ class InterestedsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Interesteds $interested)
     {
         //
+        if(isset($_POST['deleteall']))
+        {
+            $user_interested = Interesteds::where('user_id',Auth::user()->id)->value('user_id');
+            if($user_interested){
+          $deleteall = Interesteds::where('user_id',Auth::user()->id)->get();
+          foreach($deleteall as $delete){
+          $delete->delete();}
+          return Redirect::route('interesteds.index')->with('deleteall', 'Remove AllFavourite Successfully.');
+          }
+          else{
+            return Redirect::route('interesteds.index')->with('error', 'Error Nothing to remove it.');
+
+          }
+        }
+        $interested->delete();
+        return Redirect::route('interesteds.index')->with('status', 'Remove Favourite Successfully.');
     }
 }

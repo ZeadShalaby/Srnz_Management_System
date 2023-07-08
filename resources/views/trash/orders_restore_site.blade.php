@@ -63,7 +63,7 @@
 
 
    <br><br>
-    <a href="{{ route('orders.restore', [ 'id'=> $order->id]) }}">
+    <a href="{{ route('orders.restore.site', [ 'id'=> $order->id]) }}">
         <button class="btn btn-danger" style="margin-left: 900px;margin-top: -65px;">restore</button>
    </a>
         <br><br>
@@ -72,10 +72,8 @@
     <br>
 
     <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
-    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
-    <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
+    <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
+    <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">Or-restore</a>
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
 
     <br>

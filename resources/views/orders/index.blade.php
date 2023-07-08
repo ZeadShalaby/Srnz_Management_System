@@ -61,12 +61,17 @@
         {{$order->price}}
     </a>
 
-
+   @if($userid==$check)
     <form action="{{route('orders.destroy',$order->id)}}" method="POST" >
         @csrf
         @method('DELETE')
         <button class="btn btn-danger"  style="margin-left: 150px;">DELETE</button>
     </form>
+   
+        
+    @else
+        
+    @endif
         <br><br>
 
     @endforeach
