@@ -19,7 +19,7 @@
             {{ session('danger') }}
         </div>
     @endif
-    <h1>CREATE DEPARTMENTS</h1>
+    <h1>CREATE ORDERS</h1>
     
     <form action="{{route('ordersite.store')}}" method="post" enctype="multipart/form-data" style="margin-top:10%;margin-left: 20%;position: absolute; background-color: black ;border: 2px solid rgb(64, 64, 64) ;border-radius: 20px;width: 50%">
         @csrf
@@ -82,7 +82,8 @@
 
     <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
     <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">restore</a>
+    <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">OR-restore</a>
+    <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
 
 </div>
     @endsection

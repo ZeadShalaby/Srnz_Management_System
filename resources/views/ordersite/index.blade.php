@@ -26,6 +26,12 @@
         {{session('error')}}
     </div>
     @endif
+    @if (session('status'))
+    <div class="alert alert-success">
+        
+        {{session('status')}}
+    </div>
+    @endif
     <h1>Orders <a href="{{route('ordersite.create')}}"> <img width="50px" height="50px" src="{{URL('image/addgallery.png')}}"  alt="add" ></i>
     </a></h1>
    
@@ -56,7 +62,7 @@
 
     <br><br>
     @foreach ($orders as $order)
-    <a href="{{route('orders.show',$order->id)}}" class="inside-page__btn inside-page__btn--beach">
+    <a href="{{route('ordersite.show',$order->id)}}" class="inside-page__btn inside-page__btn--beach">
         {{$order->id}}-{{$order->name}}
         <br>
         {{$order->user->name}}
@@ -68,7 +74,7 @@
 
 
 
-    <form action="{{route('orders.favourite',$order->id)}}" method="POST">
+    <form action="{{route('ordersite.favourite',$order->id)}}" method="POST">
         @csrf
 <input style="width: 0%;height: 0%;background-color:white;border: rgb(255, 255, 255) " name="id" type="text"value="{{$order->id}}">
         @if(session('favourite')==$order->id)
@@ -93,10 +99,29 @@
 
         <br><br>
 
+        @isset($orders_user)
+        @foreach($orders_user as $oruser)
+        @if($oruser->id==$order->id)
+        <a href="{{route('ordersite.edit', $order->id)}}" class="btn btn-info"
+        
+            style="margin-left: 200px;margin-top: -150px;"> EDIT </a>
+     
+        <form action="{{route('ordersite.destroy',$order->id)}}" method="POST" >
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger"  style="margin-top: -200px;margin-left: 400px;">DELETE</button>
+        </form>
+        @else
+        @endif
+        @endforeach 
+        @endisset 
+
     @endforeach
     <br>
     {{ $orders->links() }}
     <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
+    <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
+    <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">OR-restore</a>
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
     <br>
     @endsection

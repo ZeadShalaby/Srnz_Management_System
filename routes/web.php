@@ -39,6 +39,9 @@ use App\Http\Controllers\InterestedsController;
         Route::get('/autocomplete-search-orders', [OrdersController::class, 'autocompleteSearch']);
         Route::get('/autocomplete-search-orders-restore', [OrdersController::class, 'autocompleteSearch_restore']);
 
+        // controller with resource
+        Route::resource('/orders', OrdersController::class);
+
         //search
         Route::POST('/search-orders', [OrdersController::class, 'search_orders'])->name('orders.search');
         Route::POST('/search-orders_restore', [OrdersController::class, 'search_orders_restore'])->name('orders.search.restore');
@@ -50,7 +53,6 @@ use App\Http\Controllers\InterestedsController;
     //Admin Middleware
     Route::middleware(CheckAdminRole::class)->group(function () {
         // controller with rescource
-        Route::resource('/orders', OrdersController::class);
         Route::resource('/departments', DepartmentsController::class);
         Route::resource('/users', UsersController::class);
         //restore departments
@@ -61,8 +63,6 @@ use App\Http\Controllers\InterestedsController;
         Route::get('/orders/restore/do', [OrdersController::class, 'restore'])->name('orders.restore');
         //autocompleteSearch
         Route::get('/autocomplete-search-departments', [DepartmentsController::class, 'autocompleteSearch']);
-        Route::get('/autocomplete-search-departments', [DepartmentsController::class, 'autocompleteSearch']);
-
         //search
         Route::POST('/search-departments', [DepartmentsController::class, 'search_departments'])->name('departments.search');
     
@@ -74,7 +74,11 @@ use App\Http\Controllers\InterestedsController;
         Route::resource('/ordersite', OrdersSiteController::class);
         Route::resource('/interesteds', InterestedsController::class);
         //favourite 
-        Route::POST('/orders-favoruite', [OrdersController::class, 'favoruite'])->name('orders.favourite');
+        Route::POST('/orders-favoruite', [OrdersSiteController::class, 'favoruite'])->name('ordersite.favourite');
+        //restore orders
+        Route::get('/orders-restore-site', [OrdersSiteController::class, 'restore_index_site'])->name('orders.restore.site.index');
+        Route::get('/orders/restore/site/do', [OrdersSiteController::class, 'restore_site'])->name('orders.restore.site');
+
         });
    
         
