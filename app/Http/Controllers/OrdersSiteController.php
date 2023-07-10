@@ -173,7 +173,6 @@ class OrdersSiteController extends Controller
             foreach ($check_order as $check) {
             if(($check->user_id == auth()->user()->id)&($check->order_id == $order_id)){
                 //            $favdelete = $check->id->delete();}}}
-
             return back()->with('faverror',"Alredy Aded Favourite");}}}
                 $formFields = interesteds::create([
                 'user_id' => auth()->user()->id,

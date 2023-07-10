@@ -9,6 +9,7 @@ use App\Models\Interesteds;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class OrdersController extends Controller
@@ -148,9 +149,16 @@ class OrdersController extends Controller
             $search=$request->search;
             $orders = Orders::where('name',$search)->paginate(12);
             $interested = interesteds::get();
+            $orders_user = Orders::where('user_id', Auth::user()->id)->get();
+
             $check=Role::ADMIN;
-            return view('orders.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'check'=>$check]);
-                       
+            if(auth()->user()->role==Role::ADMIN){
+            return view('orders.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'check'=>$check,'orders_user'=>$orders_user]);
+            }
+            else{
+                return view('ordersite.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'check'=>$check,'orders_user'=>$orders_user]);
+
+            }         
         } 
 
         if (isset($_POST['favourite'])) {

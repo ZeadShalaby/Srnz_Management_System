@@ -164,7 +164,7 @@ class DepartmentsController extends Controller
     public function search_departments (Request $request)
      {
          if (isset($_POST['search'])) {
-             $search=$_POST['search'];
+             $search=$request->search;
              $deoartments = Departments::where('name',$search)->paginate(12);
      
              return view('departments.index', ['departments'=>$deoartments]);

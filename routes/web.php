@@ -30,7 +30,7 @@ use App\Http\Controllers\InterestedsController;
     Route::get('/login', [UsersController::class, 'loginIndex']);
     Route::post('/login/checklogin', [UsersController::class, 'checklogin']);
     Route::get('/login/checklogin',function (){redirect(route('logout'));});
-    Route::get('/logout', [UsersController::class, 'logout']);
+    Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
     
     //Auth Middleware
     Route::middleware(CheckAuth::class)->group(function () {
@@ -51,7 +51,7 @@ use App\Http\Controllers\InterestedsController;
         });
 
     //Admin Middleware
-    Route::middleware(CheckAdminRole::class)->group(function () {
+    //Route::middleware(CheckAdminRole::class)->group(function () {
         // controller with rescource
         Route::resource('/departments', DepartmentsController::class);
         Route::resource('/users', UsersController::class);
@@ -65,8 +65,16 @@ use App\Http\Controllers\InterestedsController;
         Route::get('/autocomplete-search-departments', [DepartmentsController::class, 'autocompleteSearch']);
         //search
         Route::POST('/search-departments', [DepartmentsController::class, 'search_departments'])->name('departments.search');
-    
-        });
+       
+        //autocompleteSearch
+        Route::get('/autocomplete-search-users', [UsersController::class, 'autocompleteSearch']);
+        Route::get('/autocomplete-search-users-restore', [UsersController::class, 'autocompleteSearch_restore']);
+      
+      
+        //search
+        Route::POST('/search-users', [UsersController::class, 'search_users'])->name('users.search');
+        
+       // });
     
     //Customer Middleware
     Route::middleware(CheckCustomerRole::class)->group(function () {
@@ -78,7 +86,7 @@ use App\Http\Controllers\InterestedsController;
         //restore orders
         Route::get('/orders-restore-site', [OrdersSiteController::class, 'restore_index_site'])->name('orders.restore.site.index');
         Route::get('/orders/restore/site/do', [OrdersSiteController::class, 'restore_site'])->name('orders.restore.site');
-
+            
         });
    
         

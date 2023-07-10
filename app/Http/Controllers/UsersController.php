@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
-
-
+use App\Models\Orders;
+use App\Models\Interesteds;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,8 +23,10 @@ class UsersController extends Controller
     public function index()
     {
         //
-        $users = User::paginate(10);
+        $users = User::where('role',Role::CUSTOMER)->paginate(10);
+        
         return view('users.index',['users'=>$users]);
+
     }
 
     /**
@@ -56,9 +58,10 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
         //
+        return view('users.edit',['users'=>$user]);
     }
 
     /**
@@ -72,9 +75,35 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
         //
+        $orders = Orders::where('user_id', $user->id)->get()->value('id');
+        $interesteds = Interesteds::where('user_id',$user->id)->get()->value('id');
+        //delete all
+      /*  if(isset($interesteds)){
+            if(isset($orders)){
+                $interesteds->delete();
+                $orders->delete();
+                $user->delete();
+             }
+             else{
+        $interesteds->delete();}}
+        else{
+            if(isset($orders)){
+               $orders->delete();
+               $user->delete();
+            }
+        }
+        */
+        if(isset($interesteds)){$interesteds->delete();}else{
+            dd('okay');
+        }
+        if ($orders||$interesteds) {
+            return Redirect::route('users.index')->with('status', 'Deleted Successfully, And Delete All Orders & Interesteds for this user.');
+        } else {
+            return Redirect::route('users.index')->with('status', 'Deleted Successfully.');
+        }
     }
 
 
@@ -109,7 +138,6 @@ class UsersController extends Controller
         );
 
 
-
         if (!(Auth::attempt($user_data))) {
             return back()->with('error', 'Wrong Login Details');
         }
@@ -132,4 +160,24 @@ class UsersController extends Controller
         return redirect('login');
     }
 
+    //autocompleteSearch
+    public function autocompleteSearch(Request $request)
+    {
+          $query = $request->get('query');
+          $filterResult = User::where('name', 'LIKE', '%'. $query. '%')->get();
+          return response()->json($filterResult);
+    } 
+    
+    //search
+    public function search_users (Request $request)
+     {
+         if (isset($_POST['search'])) {
+             //$_post['search']
+             $search=$request->search;
+             $users = User::where('name',$search)->paginate(12);
+     
+             return view('users.index', ['users'=>$users]);
+                        
+         } 
+     }
 }

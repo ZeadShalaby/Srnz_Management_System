@@ -24,6 +24,7 @@
     <a href="{{ route('ordersite.index',$SeCustomer->id) }}" class="btn btn-dark">Orders</a>
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
     <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">OR-restore</a>
+    <a href="{{route('logout')}}"class="btn btn-success">Logout</a>
 
     <br>
     @endsection

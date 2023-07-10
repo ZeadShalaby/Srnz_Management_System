@@ -98,7 +98,6 @@
     </form>
 
         <br><br>
-
         @isset($orders_user)
         @foreach($orders_user as $oruser)
         @if($oruser->id==$order->id)
@@ -112,6 +111,7 @@
             <button class="btn btn-danger"  style="margin-top: -200px;margin-left: 400px;">DELETE</button>
         </form>
         @else
+       
         @endif
         @endforeach 
         @endisset 
