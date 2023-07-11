@@ -4,24 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registration </title>
+    <title>Create Admin</title>
 </head>
 <body>
     @extends('extends')
     @section('content')
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-    @if (session('danger'))
-        <div class="alert alert-danger">
-            {{ session('danger') }}
-        </div>
-    @endif
-    <h1>Registration</h1>
-    
-    <form action="{{route('ordersite.store')}}" method="post" enctype="multipart/form-data" style="margin-top:10%;margin-left: 20%;position: absolute; background-color: black ;border: 2px solid rgb(64, 64, 64) ;border-radius: 20px;width: 50%">
+    <h1>Create Admin</h1>
+    <br>
+    <form action="{{route('users.store')}}" method="post" enctype="multipart/form-data" style="margin-top:10%;margin-left: 20%;position: absolute; background-color: black ;border: 2px solid rgb(64, 64, 64) ;border-radius: 20px;width: 50%">
         @csrf
         <div>
             <label style="color: aliceblue">Name</label>
@@ -35,27 +25,27 @@
        
 
         <div>
-            <label style="color: aliceblue">department_id</label>
-            <input class="form-control" type="text" placeholder="code" name="department_id" value="{{ old('department_id') }}">
-            @error('department_id')
+            <label style="color: aliceblue">Email</label>
+            <input class="form-control" type="text" placeholder="email" name="email" value="{{ old('email') }}">
+            @error('email')
             <div class="alert alert-danger">
                 {{ $message }}
             </div>
             @enderror
         </div>
         <div>
-            <label style="color: aliceblue">description</label>
-            <input class="form-control" type="text" placeholder="code" name="description" value="{{ old('description') }}">
-            @error('description')
+            <label style="color: aliceblue">password</label>
+            <input class="form-control" type="password" placeholder="password" name="password" value="{{ old('password') }}">
+            @error('password')
             <div class="alert alert-danger">
                 {{ $message }}
             </div>
             @enderror
         </div>
         <div>
-            <label style="color: aliceblue">price</label>
-            <input class="form-control" type="text" placeholder="code" name="price" value="{{ old('price') }}">
-            @error('price')
+            <label style="color: aliceblue">gmail</label>
+            <input class="form-control" type="text" placeholder="gmail" name="gmail" value="{{ old('gmail') }}">
+            @error('gmail')
             <div class="alert alert-danger">
                 {{ $message }}
             </div>
@@ -64,28 +54,24 @@
         
 
         <div>
-            <label style="color: aliceblue">path</label>
-            <input class="form-control" type="file" placeholder="Img" name="path" value="{{ old('path') }}">
-            @error('path')
+            <label style="color: aliceblue">phone</label>
+            <input class="form-control" type="text" placeholder="phone" name="phone" value="{{ old('phone') }}">
+            @error('phone')
             <div class="alert alert-danger">
                 {{ $message }}
             </div>
             @enderror
         </div>
 
+        
+        
+<br>
+
         <div>
-            <button class="btn btn-success" style="margin-left: 46%;margin-top: 5%"type="submit">Save</button>
+            <button class="btn btn-success" style="margin-left: 46%;margin-top: -5%"type="submit">Create</button>
         </div>
     </form>
-    <br><br>
-<div style="margin-top: 450px">
-
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">OR-restore</a>
-    <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-
-</div>
     @endsection
+
 </body>
 </html>

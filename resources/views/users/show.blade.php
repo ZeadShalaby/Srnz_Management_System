@@ -22,7 +22,7 @@
   <span><h1 style="color: blue">gmail : </h1>  <h2 style="color: coral">       {{$users->gmail}} </h2>  </span>
   <span><h1 style="color: blue">phone : </h1>  <h2 style="color: coral">       {{$users->phone}} </h2>  </span>
   <span><h1 style="color: blue">password : </h1>  <h2 style="color: coral"> {{$users->password}} </h2>  </span>
-  <span><h1 style="color: blue">role : </h1>  <h2 style="color: coral">       {{$users->role}} </h2>  </span>
+  <span><h1 style="color: blue">role : </h1>  <h2 style="color: coral">   @if($users->role == 2)  {{"Customer"}} @else {{"Admin"}} @endif  </h2>  </span>
 
  
   

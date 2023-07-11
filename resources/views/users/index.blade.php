@@ -9,7 +9,16 @@
 <body>
     @extends('extends')
     @section('content')
-    <h1>Users</h1>
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+
+    <h1>Users
+    <a href="{{route('users.create')}}"> <img width="50px" height="50px" src="{{URL('image/add1.png')}}"  alt="add" > Create New Admin</i>
+    </a>
+    </h1>
     <br>
     <div class="container mt-5">
         <div classs="form-group">
@@ -39,18 +48,18 @@
     <a href="{{route('users.show',$user->id)}}" class="inside-page__btn inside-page__btn--beach">
         
         {{$user->id}}-{{$user->name}}-
-        @if($user->role > 1) 
+        @if($user->role > $roles) 
         <span class="spans">  
         {{"Customer"}} </span>
-        @else{{"Admin"}}
-            
+        @else
+        {{"Admin"}}   
         @endif
         <br>
         {{$user->profile_photo}}
         
 
     </a>
-
+        
     <div style="margin-top: -30px">
         <a href="{{route('users.edit', $user->id)}}" class="btn btn-info"
             
@@ -71,7 +80,9 @@
     <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
     <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-<br>
+    <a href="{{route('users.admin')}}" class="btn btn-info" type="submit">Admins</a>
+
+
     @endsection
 </body>
 </html>

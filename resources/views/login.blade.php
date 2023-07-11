@@ -78,6 +78,11 @@
 <div class="container">
     <h3>Login</h3>
     <br/>
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
 
     @if(isset(Auth::user()->email))
         <script>window.location = "/login/successlogin";</script>
@@ -116,5 +121,7 @@
         </div>
     </form>
 </div>
+<a href="{{route('registration.create')}}"> <img width="50px" height="50px" src="{{URL('image/add1.png')}}"  alt="add" > Singup</i>
+</a>
 </body>
 </html>

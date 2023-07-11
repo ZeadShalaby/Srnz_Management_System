@@ -25,8 +25,13 @@ class UsersController extends Controller
         //
         $users = User::where('role',Role::CUSTOMER)->paginate(10);
         
-        return view('users.index',['users'=>$users]);
+        return view('users.index',['users'=>$users,'roles'=>1]);
 
+    }
+
+    public function admin(){
+        $users = User::where('role',Role::ADMIN)->where('name','!=','Admin')->paginate(10);
+        return view('users.index',['users'=>$users,'roles'=>1]);
     }
 
     /**
@@ -35,6 +40,7 @@ class UsersController extends Controller
     public function create()
     {
         //
+        return (view('users.create'));
     }
 
     /**
@@ -42,8 +48,32 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        //Create Admin
+        $source = DB::table('users')->where('email', $request->email)->first();
+
+        $formFields = $request->validate([
+            'name'=> 'required',
+            'email'=> 'required',
+            'gmail'=> 'required',
+            'password'=> 'required',
+            'phone'=> 'required',
+        ]);
+
         //
-    }
+   
+        User::create([
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'gmail'=>$request->gmail,
+            'profile_photo'=>"jjjjjjj",
+            'phone'=>$request->phone,
+            'password'=> $request->password,
+            'role'=>Role::ADMIN,
+            'remember_token' => Str::random(10),
+         ]);        
+         
+         return Redirect::route('users.index')->with('status', 'Created Successfully');
+        }
 
     /**
      * Display the specified resource.
@@ -67,9 +97,31 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
         //
+        $formFields = $request->validate([
+
+            'name'=> 'required',
+            'email'=> 'required',
+            'gmail'=> 'required',
+            'password'=> 'required',
+            'phone'=> 'required',
+        ]);
+        //update image
+    $role = $request->role;
+   
+        $user->update([
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'gmail'=>$request->gmail,
+            'profile_photo'=>Auth::user()->profile_photo,
+            'phone'=>$request->phone,
+            'password'=> $request->password,
+         ]);        
+         
+        return Redirect::route('users.show',$user->id)->with('status', 'Update Successfully');
+
     }
 
     /**
@@ -81,26 +133,10 @@ class UsersController extends Controller
         $orders = Orders::where('user_id', $user->id)->get()->value('id');
         $interesteds = Interesteds::where('user_id',$user->id)->get()->value('id');
         //delete all
-      /*  if(isset($interesteds)){
-            if(isset($orders)){
-                $interesteds->delete();
-                $orders->delete();
-                $user->delete();
-             }
-             else{
-        $interesteds->delete();}}
-        else{
-            if(isset($orders)){
-               $orders->delete();
-               $user->delete();
-            }
-        }
-        */
-        if(isset($interesteds)){$interesteds->delete();}else{
-            dd('okay');
-        }
+        $user->delete();
+
         if ($orders||$interesteds) {
-            return Redirect::route('users.index')->with('status', 'Deleted Successfully, And Delete All Orders & Interesteds for this user.');
+            return Redirect::route('users.index')->with('status', 'Deleted Successfully, Orders & Interesteds Cant delete.');
         } else {
             return Redirect::route('users.index')->with('status', 'Deleted Successfully.');
         }
@@ -131,12 +167,11 @@ class UsersController extends Controller
             'email' => 'required|email',
             'password' => 'required|alphaNum|min:3'
         ]);
-       $source = DB::table('users')->where('email', $request->email)->first();
+       $source = auth()->user(); //DB::table('users')->where('email', $request->email)->first();
         $user_data = array(
             'email' => $request->get('email'),
             'password' => $request->get('password')
-        );
-
+        ); 
 
         if (!(Auth::attempt($user_data))) {
             return back()->with('error', 'Wrong Login Details');
@@ -176,7 +211,7 @@ class UsersController extends Controller
              $search=$request->search;
              $users = User::where('name',$search)->paginate(12);
      
-             return view('users.index', ['users'=>$users]);
+             return view('users.index', ['users'=>$users,'roles'=>1]);
                         
          } 
      }

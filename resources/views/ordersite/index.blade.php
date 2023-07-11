@@ -63,6 +63,7 @@
     <br><br>
     @foreach ($orders as $order)
     <a href="{{route('ordersite.show',$order->id)}}" class="inside-page__btn inside-page__btn--beach">
+       
         {{$order->id}}-{{$order->name}}
         <br>
         {{$order->user->name}}
@@ -78,15 +79,15 @@
         @csrf
 <input style="width: 0%;height: 0%;background-color:white;border: rgb(255, 255, 255) " name="id" type="text"value="{{$order->id}}">
         @if(session('favourite')==$order->id)
-        <button  name="favourite" class="btn btn-lg"><i class="fa fa-heart" style="color: red;" type="submit"></i></button> 
+        <button  name="favourite" class="btn btn-lg" type="submit"><i class="fa fa-heart" style="color: red;" ></i></button> 
         @else
-        <button  name="favourite" class="btn btn-lg"><i class="fa fa-heart" style="color: gold;" type="submit"></i></button> 
+        <button  name="favourite" class="btn btn-lg" type="submit"><i class="fa fa-heart" style="color: gold;" ></i></button> 
 
         @isset($interesteds)
         @foreach ($interesteds as $interested)
         @if(($interested->user_id==$userid)&($interested->order_id==$order->id))
         <div style="margin-left: 8.5px;margin-top: -48px">
-        <button  name="favourite" class="btn btn-lg"><i class="fa fa-heart" style="color: red; " type="submit"></i></button> 
+        <button  name="favourite" class="btn btn-lg" type="submit"><i class="fa fa-heart" style="color: red;" ></i></button> 
         </div>
         @endif
         @endforeach

@@ -7,6 +7,7 @@ use App\Http\Controllers\postsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Middleware\CheckCustomerRole;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\OrdersSiteController;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\InterestedsController;
@@ -24,14 +25,17 @@ use App\Http\Controllers\InterestedsController;
     
     Route::get('/', function () {
         return redirect('/logout');
-    });
+        });
     
-    //Login
-    Route::get('/login', [UsersController::class, 'loginIndex']);
-    Route::post('/login/checklogin', [UsersController::class, 'checklogin']);
-    Route::get('/login/checklogin',function (){redirect(route('logout'));});
-    Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
-    
+        //Login
+        Route::get('/login', [UsersController::class, 'loginIndex']);
+        Route::post('/login/checklogin', [UsersController::class, 'checklogin']);
+        Route::get('/login/checklogin',function (){redirect(route('logout'));});
+        Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
+        // Sinup 
+        Route::resource('/registration', RegisterController::class);
+
+
     //Auth Middleware
     Route::middleware(CheckAuth::class)->group(function () {
 
@@ -48,33 +52,37 @@ use App\Http\Controllers\InterestedsController;
 
         //home-page 
         Route::get('/Home_Page', [UsersController::class, 'homepage'])->name('homepage');
+
+        
         });
 
     //Admin Middleware
-    //Route::middleware(CheckAdminRole::class)->group(function () {
+    Route::middleware(CheckAdminRole::class)->group(function () {
         // controller with rescource
         Route::resource('/departments', DepartmentsController::class);
         Route::resource('/users', UsersController::class);
-        //restore departments
+        //users-Admin
+        Route::get('/users-admin', [UsersController::class, 'admin'])->name('users.admin');
+        //restore-departments
         Route::get('/departments-restore', [DepartmentsController::class, 'restore_index'])->name('departments.restore.index');
         Route::get('/departments/restore/do', [DepartmentsController::class, 'restore'])->name('departments.restore');
-        //restore orders
+        //restore-orders
         Route::get('/orders-restore', [OrdersController::class, 'restore_index'])->name('orders.restore.index');
         Route::get('/orders/restore/do', [OrdersController::class, 'restore'])->name('orders.restore');
-        //autocompleteSearch
+        //autocompleteSearch-departments
         Route::get('/autocomplete-search-departments', [DepartmentsController::class, 'autocompleteSearch']);
-        //search
+        //search-departments
         Route::POST('/search-departments', [DepartmentsController::class, 'search_departments'])->name('departments.search');
-       
-        //autocompleteSearch
+        //autocompleteSearch-departments-restore
         Route::get('/autocomplete-search-users', [UsersController::class, 'autocompleteSearch']);
         Route::get('/autocomplete-search-users-restore', [UsersController::class, 'autocompleteSearch_restore']);
-      
-      
-        //search
+        //autocompleteSearch-users-restore
+        Route::get('/autocomplete-search-users', [UsersController::class, 'autocompleteSearch']);
+        Route::get('/autocomplete-search-users-restore', [UsersController::class, 'autocompleteSearch_restore']);
+        //search-users
         Route::POST('/search-users', [UsersController::class, 'search_users'])->name('users.search');
         
-       // });
+       });
     
     //Customer Middleware
     Route::middleware(CheckCustomerRole::class)->group(function () {

@@ -39,11 +39,14 @@
         <br><br>
         
     @endforeach
-    <form action="{{route('interesteds.destroy',$user_id)}}" method="POST" >
+    @foreach ($interesteds as $interested)
+    <form action="{{route('interesteds.destroy',$interested->id)}}" method="POST" >
         @csrf
         @method('DELETE')
         <button class="btn btn-dark"name="deleteall"style="margin-top: -165px;margin-left: 600px;">RemoveAll</button>
+        @break
     </form>
+    @endforeach
     <br>
     {{ $interesteds->links() }}
     <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>

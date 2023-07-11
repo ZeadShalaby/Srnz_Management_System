@@ -17,7 +17,7 @@ class InterestedsController extends Controller
     {
         //
         $interesteds = Interesteds::where('user_id',Auth::user()->id)->paginate(5);
-        return view('interesteds.index',['interesteds' => $interesteds,'user_id'=>auth()->user()->id]);
+        return view('interesteds.index',['interesteds' => $interesteds,'user_id'=>auth()->user()]);
     }
 
     /**
