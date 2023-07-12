@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Traits\ImgTrait;
+use App\Models\Departments;
 use App\Models\Interesteds;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +41,8 @@ class OrdersSiteController extends Controller
     public function create()
     {
         //
-        return view('ordersite.create');
+        $departments = Departments::get();
+        return view('ordersite.create',['departments'=>$departments]);
 
     }
 
@@ -94,7 +96,8 @@ class OrdersSiteController extends Controller
     public function show(Orders $ordersite)
     {
         //
-            return view('ordersite.show',['orders'=>$ordersite]);
+            
+            return view('ordersite.show',['orders'=>$ordersite,'interesteds'=>Interesteds::get(),'userid'=>auth()->user()->id]);
        
     }
 
@@ -104,8 +107,8 @@ class OrdersSiteController extends Controller
     public function edit(Orders $ordersite)
     {
         //
-       
-        return view('ordersite.edit', ['orders' => $ordersite]);
+        $departments = Departments::get();
+        return view('ordersite.edit', ['orders' => $ordersite,'departments'=>$departments]);
 
     }
 
@@ -127,7 +130,7 @@ class OrdersSiteController extends Controller
         //update image
         $folder = 'image/orders';
         $file_name = $this->saveImage($request->path,$folder);
-       
+        //update
         $ordersite->update([
             'name'=> $request->name,
             'department_id'=> $request->department_id,
@@ -185,7 +188,7 @@ class OrdersSiteController extends Controller
     public function restore_index_site()
     {
       
-        $orders_restore = Orders::where('user_id',auth()->user()->id)->onlyTrashed()->get();
+        $orders_restore = Orders::where('user_id',auth()->user()->id)->onlyTrashed()->paginate(1);
         return view('trash.orders_restore_site', ['orders' => $orders_restore]);
     }
     

@@ -167,7 +167,7 @@ class UsersController extends Controller
             'email' => 'required|email',
             'password' => 'required|alphaNum|min:3'
         ]);
-       $source = auth()->user(); //DB::table('users')->where('email', $request->email)->first();
+       $source = DB::table('users')->where('email', $request->email)->first();
         $user_data = array(
             'email' => $request->get('email'),
             'password' => $request->get('password')
@@ -215,4 +215,6 @@ class UsersController extends Controller
                         
          } 
      }
+
+    
 }

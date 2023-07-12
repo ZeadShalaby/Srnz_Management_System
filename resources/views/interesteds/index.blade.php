@@ -28,7 +28,7 @@
     <br><br>
     @foreach ($interesteds as $interested)
     <a href="{{route('interesteds.show',$interested->id)}}" class="inside-page__btn inside-page__btn--beach">
-        {{$interested->id}}-{{$interested->user->name}}-{{$interested->order->department->name}}
+        {{$interested->id}}-@isset($interested->user->name){{$interested->user->name}}@else{{'null'}}@endisset-@isset($interested->order->name){{$interested->order->name}}@else{{'null ordername'}}@endisset--@isset($interested->order->department->name){{$interested->order->department->name}}@else{{'null'}}@endisset-
     </a>
         <br>
         <form action="{{route('interesteds.destroy',$interested->id)}}" method="POST" >

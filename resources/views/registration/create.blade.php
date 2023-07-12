@@ -9,6 +9,12 @@
 <body>
     @extends('extends')
     @section('content')
+    @if ($message = Session::get('error'))
+    <div class="alert alert-danger alert-block">
+        <strong>{{ $message }}</strong>
+    </div>
+    @endif
+
     <h1>Create CUSTOMER</h1>
     <br>
     <form action="{{route('registration.store')}}" method="post" enctype="multipart/form-data" style="margin-top:10%;margin-left: 20%;position: absolute; background-color: black ;border: 2px solid rgb(64, 64, 64) ;border-radius: 20px;width: 50%">

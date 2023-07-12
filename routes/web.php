@@ -39,23 +39,21 @@ use App\Http\Controllers\InterestedsController;
     //Auth Middleware
     Route::middleware(CheckAuth::class)->group(function () {
 
-        //autocompleteSearch
+        //autocompleteSearch-orders
         Route::get('/autocomplete-search-orders', [OrdersController::class, 'autocompleteSearch']);
-        Route::get('/autocomplete-search-orders-restore', [OrdersController::class, 'autocompleteSearch_restore']);
 
         // controller with resource
         Route::resource('/orders', OrdersController::class);
 
-        //search
+        //search-orders
         Route::POST('/search-orders', [OrdersController::class, 'search_orders'])->name('orders.search');
-        Route::POST('/search-orders_restore', [OrdersController::class, 'search_orders_restore'])->name('orders.search.restore');
 
         //home-page 
         Route::get('/Home_Page', [UsersController::class, 'homepage'])->name('homepage');
-
         
         });
 
+        
     //Admin Middleware
     Route::middleware(CheckAdminRole::class)->group(function () {
         // controller with rescource
@@ -73,12 +71,8 @@ use App\Http\Controllers\InterestedsController;
         Route::get('/autocomplete-search-departments', [DepartmentsController::class, 'autocompleteSearch']);
         //search-departments
         Route::POST('/search-departments', [DepartmentsController::class, 'search_departments'])->name('departments.search');
-        //autocompleteSearch-departments-restore
+        //autocompleteSearch-users
         Route::get('/autocomplete-search-users', [UsersController::class, 'autocompleteSearch']);
-        Route::get('/autocomplete-search-users-restore', [UsersController::class, 'autocompleteSearch_restore']);
-        //autocompleteSearch-users-restore
-        Route::get('/autocomplete-search-users', [UsersController::class, 'autocompleteSearch']);
-        Route::get('/autocomplete-search-users-restore', [UsersController::class, 'autocompleteSearch_restore']);
         //search-users
         Route::POST('/search-users', [UsersController::class, 'search_users'])->name('users.search');
         
@@ -94,7 +88,8 @@ use App\Http\Controllers\InterestedsController;
         //restore orders
         Route::get('/orders-restore-site', [OrdersSiteController::class, 'restore_index_site'])->name('orders.restore.site.index');
         Route::get('/orders/restore/site/do', [OrdersSiteController::class, 'restore_site'])->name('orders.restore.site');
-            
+        //delete account
+        Route::delete('/accounnt/deleted',[UsersController::class,'delete_account'])->name('users.delete');    
         });
    
         

@@ -54,7 +54,10 @@
     <a href="{{route('orders.show',$order->id)}}" class="inside-page__btn inside-page__btn--beach">
         {{$order->id}}-{{$order->name}}
         <br>
+        @isset($order->user->name)
         {{$order->user->name}}
+        @else{{"users deleted"}}
+        @endisset
         <br>
         {{$order->description}}
         <br>

@@ -141,7 +141,7 @@ class DepartmentsController extends Controller
     //view restore
     public function restore_index()
     {
-        return view('trash.departments_restore', ['departments' => Departments::onlyTrashed()->get()]);
+        return view('trash.departments_restore', ['departments' => Departments::onlyTrashed()->paginate(10)]);
     }
     
     //restore
@@ -165,7 +165,7 @@ class DepartmentsController extends Controller
      {
          if (isset($_POST['search'])) {
              $search=$request->search;
-             $deoartments = Departments::where('name',$search)->paginate(12);
+             $deoartments = Departments::where('name',$search)->get();
      
              return view('departments.index', ['departments'=>$deoartments]);
                         

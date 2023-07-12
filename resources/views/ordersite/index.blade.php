@@ -74,7 +74,9 @@
     </a>
 
 
-
+@isset($sefav)
+    
+    @else
     <form action="{{route('ordersite.favourite',$order->id)}}" method="POST">
         @csrf
 <input style="width: 0%;height: 0%;background-color:white;border: rgb(255, 255, 255) " name="id" type="text"value="{{$order->id}}">
@@ -97,6 +99,7 @@
 
         @endif
     </form>
+    @endisset
 
         <br><br>
         @isset($orders_user)

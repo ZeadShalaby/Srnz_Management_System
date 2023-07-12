@@ -25,31 +25,7 @@
     @endif
     <h1>Orders</h1>
 <br>
- <div class="container mt-5">
-        <div classs="form-group">
-            <form action="{{route('orders.search.restore')}}" method="POST">
-            @csrf
-            <button type="submit" name="searchs_restore"> <i class='bx bx-search' ></i></button>
-            <input type="text" id="search" name="search" placeholder="Search" class="form-control" />
-            </form>
-
-        </div>
-    </div>
-    
-    <script type="text/javascript">
-        var route = "{{ url('autocomplete-search-orders-restore') }}";
-        $('#search').typeahead({
-            source: function (query, process) {
-                return $.get(route, {
-                    query: query
-                }, function (data) {
-                    return process(data);
-                });
-            }
-        });
-    </script>
-
-    <br><br>
+ 
     @foreach ($orders as $order)
     <a href="#" class="inside-page__btn inside-page__btn--beach">
         {{$order->id}}-{{$order->name}}
@@ -70,6 +46,7 @@
 
     @endforeach
     <br>
+    {{ $orders->links() }}
 
     <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
     <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>

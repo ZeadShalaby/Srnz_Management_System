@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
@@ -45,8 +46,16 @@ class RegisterController extends Controller
             'phone'=> 'required',
         ]);
 
-        //
-   
+        //check before create
+        $checkemail = User::where('email',$request->email)->get()->value('id');
+        $checkname = DB::table('users')->where('name',$request->name)->get()->value('id');
+        if($checkemail>0){
+            return back()->with('error','Email Alredy Exist');
+        }
+        elseif($checkname>0){
+            return back()->with('error','Name Alredy Exist');
+        }
+        else{
         User::create([
             'name'=> $request->name,
             'email'=> $request->email,
@@ -59,7 +68,7 @@ class RegisterController extends Controller
          ]);        
          
         return Redirect('login')->with('status','create sucessfuly');
-
+        }
     }
 
     /**
@@ -89,8 +98,15 @@ class RegisterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $registration)
     {
         //
+        if(Auth::user()){
+           $registration->delete();
+           return Redirect('login')->with('status', 'Delete Successfully');
+        }
+        else{
+            return view('errors.403');
+        }
     }
 }
