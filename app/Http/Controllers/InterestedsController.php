@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Interesteds;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -17,7 +18,7 @@ class InterestedsController extends Controller
     {
         //
         $interesteds = Interesteds::where('user_id',Auth::user()->id)->paginate(5);
-        return view('interesteds.index',['interesteds' => $interesteds,'user_id'=>auth()->user()->id]);
+        return view('interesteds.index',['interesteds' => $interesteds,'user_id'=>auth()->user()]);
     }
 
     /**
@@ -39,9 +40,11 @@ class InterestedsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Interesteds $interested)
     {
         //
+       // $orders = DB::table('orders')->where('id',$interested->order_id)->get();
+        return Redirect::route('ordersite.show',$interested->order_id);
     }
 
     /**

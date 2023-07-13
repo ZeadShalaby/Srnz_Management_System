@@ -20,10 +20,16 @@
         </div>
     @endif
    <h1> Customer Page</h1>
+   <form action="{{route('registration.destroy',$SeCustomer->id)}}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button class="btn btn-danger" style="margin-left: 900px;margin-top: -65px;">DELETE</button>
+</form>
    <br>
     <a href="{{ route('ordersite.index',$SeCustomer->id) }}" class="btn btn-dark">Orders</a>
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
     <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">OR-restore</a>
+    <a href="{{route('logout')}}"class="btn btn-success">Logout</a>
 
     <br>
     @endsection

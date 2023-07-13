@@ -16,6 +16,7 @@
     @endif
     <h1>Restore Departments</h1>
     <br><br>
+
     @foreach ($departments as $department)
         {{$department->id}}-{{$department->name}}-{{$department->code}}
 <br>
@@ -31,6 +32,7 @@
 
     @endforeach
     <br>
+    {{ $departments->links() }}
 
     <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
     <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>

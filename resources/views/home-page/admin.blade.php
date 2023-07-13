@@ -27,6 +27,7 @@
      <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
      <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
     <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
+    <a href="{{route('logout')}}"class="btn btn-success">Logout</a>
 
 
     <br>

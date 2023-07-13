@@ -11,18 +11,15 @@
     @extends('extends')
     @section('content')
     
-    @if (session('status'))
-    <div class="alert alert-success">  
-        {{session('status')}}
-    </div>
-    @endif
-    
     @if (session('error'))
     <div class="alert alert-danger">
         
         {{session('error')}}
     </div>
     @endif
+    <div class="alert alert-success" id="success_msg" style="display: none;">
+        Delete Sucessfuly .
+    </div>
     <h1>Orders</h1>
 <br>
  <div class="container mt-5">
@@ -35,46 +32,40 @@
 
         </div>
     </div>
-    
-    <script type="text/javascript">
-        var route = "{{ url('autocomplete-search-orders') }}";
-        $('#search').typeahead({
-            source: function (query, process) {
-                return $.get(route, {
-                    query: query
-                }, function (data) {
-                    return process(data);
-                });
-            }
-        });
-    </script>
 
     <br><br>
     @foreach ($orders as $order)
+    <div class="OrderRow{{$order->id}}">
     <a href="{{route('orders.show',$order->id)}}" class="inside-page__btn inside-page__btn--beach">
         {{$order->id}}-{{$order->name}}
         <br>
+        @isset($order->user->name)
         {{$order->user->name}}
+        @else{{"users deleted"}}
+        @endisset
         <br>
         {{$order->description}}
         <br>
         {{$order->price}}
     </a>
+    <div>
+        <br>
+    @isset($order->view)
+     <img src="{{url('image\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
+    @else
+    <img src="{{url('image\nview.png')}}" alt="vieweer" style="width: 30px">
+    @endisset</div>
 
-   @if($userid==$check)
-    <form action="{{route('orders.destroy',$order->id)}}" method="POST" >
-        @csrf
-        @method('DELETE')
-        <button class="btn btn-danger"  style="margin-left: 150px;">DELETE</button>
-    </form>
+  
+    
+        <button order_id={{$order->id}} class="delete_btn btn btn-danger"  style="margin-left: 150px;margin-top: -50px">DELETE</button>
    
         
-    @else
-        
-    @endif
+  
         <br><br>
-
+    </div>
     @endforeach
+
     <br>
     {{ $orders->links() }}
 
@@ -85,7 +76,48 @@
     <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
     <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
     <br>
-    @endsection
-    
+
+    <script>
+
+        $(document).on('click', '.delete_btn', function (e) {
+            e.preventDefault();
+        
+              var order_id =  $(this).attr('order_id');
+             
+            $.ajax({
+                type: 'DELETE',
+                 url: "{{route('orders.destroy',10)}}",
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'id' :order_id
+                },
+                success: function (data) {
+        
+                    if(data.status == true){
+                        $('#success_msg').show();
+                    }
+                    $('.OrderRow'+data.id).remove();
+                }, error: function (reject) {
+        
+                }
+            });
+        });
+          
+        </script>
+
+        <script type="text/javascript">
+            var route = "{{ url('autocomplete-search-orders') }}";
+            $('#search').typeahead({
+                source: function (query, process) {
+                    return $.get(route, {
+                        query: query
+                    }, function (data) {
+                        return process(data);
+                    });
+                }
+            });
+        </script>
+            @endsection
+
 </body>
 </html>

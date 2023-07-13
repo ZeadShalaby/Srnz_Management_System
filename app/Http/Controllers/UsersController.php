@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
-
-
+use App\Models\Orders;
+use App\Models\Interesteds;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,8 +23,15 @@ class UsersController extends Controller
     public function index()
     {
         //
-        $users = User::paginate(10);
-        return view('users.index',['users'=>$users]);
+        $users = User::where('role',Role::CUSTOMER)->paginate(10);
+        
+        return view('users.index',['users'=>$users,'roles'=>1]);
+
+    }
+
+    public function admin(){
+        $users = User::where('role',Role::ADMIN)->where('name','!=','Admin')->paginate(10);
+        return view('users.index',['users'=>$users,'roles'=>1]);
     }
 
     /**
@@ -33,6 +40,7 @@ class UsersController extends Controller
     public function create()
     {
         //
+        return (view('users.create'));
     }
 
     /**
@@ -40,8 +48,32 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        //Create Admin
+        $source = DB::table('users')->where('email', $request->email)->first();
+
+        $formFields = $request->validate([
+            'name'=> 'required',
+            'email'=> 'required',
+            'gmail'=> 'required',
+            'password'=> 'required',
+            'phone'=> 'required',
+        ]);
+
         //
-    }
+   
+        User::create([
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'gmail'=>$request->gmail,
+            'profile_photo'=>"jjjjjjj",
+            'phone'=>$request->phone,
+            'password'=> $request->password,
+            'role'=>Role::ADMIN,
+            'remember_token' => Str::random(10),
+         ]);        
+         
+         return Redirect::route('users.index')->with('status', 'Created Successfully');
+        }
 
     /**
      * Display the specified resource.
@@ -56,25 +88,58 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
         //
+        return view('users.edit',['users'=>$user]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
         //
+        $formFields = $request->validate([
+
+            'name'=> 'required',
+            'email'=> 'required',
+            'gmail'=> 'required',
+            'password'=> 'required',
+            'phone'=> 'required',
+        ]);
+        //update image
+    $role = $request->role;
+   
+        $user->update([
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'gmail'=>$request->gmail,
+            'profile_photo'=>Auth::user()->profile_photo,
+            'phone'=>$request->phone,
+            'password'=> $request->password,
+         ]);        
+         
+        return Redirect::route('users.show',$user->id)->with('status', 'Update Successfully');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
         //
+        $orders = Orders::where('user_id', $user->id)->get()->value('id');
+        $interesteds = Interesteds::where('user_id',$user->id)->get()->value('id');
+        //delete all
+        $user->delete();
+
+        if ($orders||$interesteds) {
+            return Redirect::route('users.index')->with('status', 'Deleted Successfully, Orders & Interesteds Cant delete.');
+        } else {
+            return Redirect::route('users.index')->with('status', 'Deleted Successfully.');
+        }
     }
 
 
@@ -106,9 +171,7 @@ class UsersController extends Controller
         $user_data = array(
             'email' => $request->get('email'),
             'password' => $request->get('password')
-        );
-
-
+        ); 
 
         if (!(Auth::attempt($user_data))) {
             return back()->with('error', 'Wrong Login Details');
@@ -132,4 +195,26 @@ class UsersController extends Controller
         return redirect('login');
     }
 
+    //autocompleteSearch
+    public function autocompleteSearch(Request $request)
+    {
+          $query = $request->get('query');
+          $filterResult = User::where('name', 'LIKE', '%'. $query. '%')->get();
+          return response()->json($filterResult);
+    } 
+    
+    //search
+    public function search_users (Request $request)
+     {
+         if (isset($_POST['search'])) {
+             //$_post['search']
+             $search=$request->search;
+             $users = User::where('name',$search)->paginate(12);
+     
+             return view('users.index', ['users'=>$users,'roles'=>1]);
+                        
+         } 
+     }
+
+    
 }

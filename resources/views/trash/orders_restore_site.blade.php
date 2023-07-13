@@ -11,46 +11,22 @@
     @extends('extends')
     @section('content')
     
-    @if (session('status'))
-    <div class="alert alert-success">  
-        {{session('status')}}
-    </div>
-    @endif
-    
     @if (session('error'))
     <div class="alert alert-danger">
         
         {{session('error')}}
     </div>
     @endif
-    <h1>Orders</h1>
-<br>
- <div class="container mt-5">
-        <div classs="form-group">
-            <form action="{{route('orders.search.restore')}}" method="POST">
-            @csrf
-            <button type="submit" name="searchs_restore"> <i class='bx bx-search' ></i></button>
-            <input type="text" id="search" name="search" placeholder="Search" class="form-control" />
-            </form>
-
-        </div>
+    
+    <div class="alert alert-success" id="success_msg" style="display: none;">
+        Orders Restore successfully .
     </div>
     
-    <script type="text/javascript">
-        var route = "{{ url('autocomplete-search-orders-restore') }}";
-        $('#search').typeahead({
-            source: function (query, process) {
-                return $.get(route, {
-                    query: query
-                }, function (data) {
-                    return process(data);
-                });
-            }
-        });
-    </script>
-
-    <br><br>
+    <h1>Orders</h1>
+<br>
+ 
     @foreach ($orders as $order)
+    <div class="OrderRow{{$order->id}}">
     <a href="#" class="inside-page__btn inside-page__btn--beach">
         {{$order->id}}-{{$order->name}}
         <br>
@@ -63,13 +39,12 @@
 
 
    <br><br>
-    <a href="{{ route('orders.restore.site', [ 'id'=> $order->id]) }}">
-        <button class="btn btn-danger" style="margin-left: 900px;margin-top: -65px;">restore</button>
-   </a>
+        <button order_id={{$order->id}} class="restore_btn btn btn-danger" style="margin-left: 900px;margin-top: -65px;">restore</button>
         <br><br>
-
+   </div>
     @endforeach
     <br>
+    {{ $orders->links() }}
 
     <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
     <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
@@ -77,6 +52,32 @@
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
 
     <br>
+    <script>
+
+        $(document).on('click', '.restore_btn', function (e) {
+            e.preventDefault();
+        
+              var order_id =  $(this).attr('order_id');
+             
+            $.ajax({
+                type: 'get',
+                 url: "{{route('orders.restore.site')}}",
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'id' :order_id
+                },
+                success: function (data) {
+        
+                    if(data.status == true){
+                        $('#success_msg').show();
+                    }
+                    $('.OrderRow'+data.id).remove();
+                }, error: function (reject) {
+        
+                }
+            });
+        }); 
+        </script>
     @endsection
     
 </body>

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\Users;
 use App\Models\Orders;
 use App\Models\Departments;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +13,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Orders extends Model
 {
     use HasFactory,SoftDeletes;
-
        /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +27,7 @@ class Orders extends Model
         'description',
         'price',
         'path',
+        'view',
     ];
    
     protected $dates =['delete_at'];

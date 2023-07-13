@@ -9,6 +9,7 @@ use App\Models\Interesteds;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class OrdersController extends Controller
@@ -30,8 +31,6 @@ class OrdersController extends Controller
         }
 
     }
-
-  
 
     /**
      * Show the form for creating a new resource.
@@ -85,49 +84,50 @@ class OrdersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Orders $order)
+    public function destroy(Request $request)
     {
         //
         if(auth()->user()->role==Role::ADMIN){
-        $dep_orders = Interesteds::where('order_id', $order->id)->get()->value('order_id');
+        $order = Orders::find($request->id);    
+        $dep_orders = Interesteds::where('order_id', $request->id)->get()->value('order_id');
         $order->delete();
         if ($dep_orders) {
-            $deleted = DB::table('interesteds')->where('order_id', $order->id)->delete();
-            return Redirect::route('orders.index')->with('status', 'Deleted Successfully, but there were interesteds in this Orders.');
+            $deleted = DB::table('interesteds')->where('order_id', $request->id)->delete();
+            return response()->json([
+                'status' => true,
+                'msg'=>'Deleted Successfully.',
+                'id'=>$request->id,
+            ]);
         } else {
-            return Redirect::route('orders.index')->with('status', 'Deleted Successfully.');
-        }}
+            return response()->json([
+                'status' => true,
+                'msg'=>'Deleted Successfully.',
+                'id'=>$request->id,
+            ]);       
+         }}
 
-       
+        
     }
     
     //view restore
     public function restore_index()
     {
-        return view('trash.orders_restore', ['orders' => Orders::onlyTrashed()->get()]);
+        return view('trash.orders_restore', ['orders' => Orders::onlyTrashed()->paginate(10)]);
      }
     
     // restore
-    public function restore()
+    public function restore(Request $request)
     {
-       $id = Request()->id;
-       Orders::withTrashed()->find($id)->restore();;
-       return back()->with('status', 'Orders Restore successfully');
+       $id = $request->id;
+       Orders::withTrashed()->find($id)->restore();
+
+       return response()->json([
+        'status' => true,
+        'msg'=>'Orders Restore successfully .',
+        'id'=>$request->id,
+   ]);
     }
                                                                              
-     //autocompleteSearch restore
-     public function autocompleteSearch_restore(Request $request)
-     {
-        $query = $request->get('query');
-        if(auth()->user()->role==Role::ADMIN){
-        $filterResult = Orders::where('name', 'LIKE', '%'. $query. '%')->onlyTrashed()->get();}
-        else{
-            $filterResult = Orders::where('name', 'LIKE', '%'. $query. '%')->where('user_id',auth()->user()->id)->onlyTrashed()->get();
-            
-        }
-        return response()->json($filterResult);
-           
-     }
 
     //autocompleteSearch orders
     public function autocompleteSearch(Request $request)
@@ -148,64 +148,17 @@ class OrdersController extends Controller
             $search=$request->search;
             $orders = Orders::where('name',$search)->paginate(12);
             $interested = interesteds::get();
+            $orders_user = Orders::where('user_id', Auth::user()->id)->get();
+
             $check=Role::ADMIN;
-            return view('orders.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'check'=>$check]);
-                       
-        } 
-
-        if (isset($_POST['favourite'])) {
-            //$_POST['id']
-            $order_id=$request->id;
-            $check_order = interesteds::where('order_id', $order_id)->where('user_id',auth()->user()->id)->get();
-            if($check_order){
-            foreach ($check_order as $check) {
-            if(($check->user_id == auth()->user()->id)&($check->order_id == $order_id)){
-                //delete
-            return back()->with('faverror',"Alredy Aded Favourite");}}}
-                $formFields = interesteds::create([
-                'user_id' => auth()->user()->id,
-                'order_id' => $order_id,
-            ]);
-            return back()->with('favourite',$order_id); 
-}
-    }
-
-    //search restore
-    public function search_orders_restore (Request $request)
-    {
-        if (isset($_POST['searchs_restore'])) {
-            //$_POST['search']
-            $search=$request->search;
             if(auth()->user()->role==Role::ADMIN){
-
-            $orders = Orders::where('name',$search)->onlyTrashed()->get();
-            $interested = interesteds::get();
-
-            return view('trash.orders_restore',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id]);
-            }    
+            return view('orders.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'check'=>$check,'orders_user'=>$orders_user]);
+            }
             else{
-                $orders = Orders::where('name',$search)->where('user_id',autH()->user()->id)->onlyTrashed()->get();
-                $interested = interesteds::get();
-    
-                return view('trash.orders_restore_site',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id]);
-    
-            }  
-        } 
+                return view('ordersite.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'check'=>$check,'orders_user'=>$orders_user,'sefav'=>1]);
 
-        if (isset($_POST['favourite_restore'])) {
-            //$_POST['id']
-            $order_id=$request->id;
-            $check_order = interesteds::where('order_id', $order_id)->where('user_id',auth()->user()->id)->get();
-            if($check_order){
-            foreach ($check_order as $check) {
-            if(($check->user_id == auth()->user()->id)&($check->order_id == $order_id)){
-                //delete
-            return back()->with('faverror',"Alredy Aded Favourite");}}}
-                $formFields = interesteds::create([
-                'user_id' => auth()->user()->id,
-                'order_id' => $order_id,
-            ]);
-            return back()->with('favourite',$order_id); 
-}
+            }         
+        } 
     }
+
 }

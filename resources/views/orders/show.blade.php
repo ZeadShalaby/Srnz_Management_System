@@ -17,8 +17,8 @@
    <h1>SHOW Orders</h1>
    <br>
   <span><h1 style="color: blue">Name : </h1>  <h2 style="color: coral">        {{$orders->name}} </h2>  </span>
-  <span><h1 style="color: blue">User : </h1>  <h2 style="color: coral">        {{$orders->user_id}} </h2>  </span>
-  <span><h1 style="color: blue">Department : </h1>  <h2 style="color: coral">  {{$orders->department_id}} </h2>  </span>
+  <span><h1 style="color: blue">User : </h1>  <h2 style="color: coral">       @isset($orders->user->name) {{$orders->user->name}} @else{{'null user name'}}@endisset</h2>  </span>
+  <span><h1 style="color: blue">Department : </h1>  <h2 style="color: coral"> @isset($orders->department->name) {{$orders->department->name}} @else{{'null department name'}}@endisset</h2>  </span>
   <span><h1 style="color: blue">gmail : </h1>  <h2 style="color: coral">       {{$orders->gmail}} </h2>  </span>
   <span><h1 style="color: blue">phone : </h1>  <h2 style="color: coral">       {{$orders->phone}} </h2>  </span>
   <span><h1 style="color: blue">description : </h1>  <h2 style="color: coral"> {{$orders->description}} </h2>  </span>

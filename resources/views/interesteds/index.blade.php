@@ -28,7 +28,7 @@
     <br><br>
     @foreach ($interesteds as $interested)
     <a href="{{route('interesteds.show',$interested->id)}}" class="inside-page__btn inside-page__btn--beach">
-        {{$interested->id}}-{{$interested->user->name}}-{{$interested->order->department->name}}
+        {{$interested->id}}-@isset($interested->user->name){{$interested->user->name}}@else{{'null'}}@endisset-@isset($interested->order->name){{$interested->order->name}}@else{{'null ordername'}}@endisset--@isset($interested->order->department->name){{$interested->order->department->name}}@else{{'null'}}@endisset-
     </a>
         <br>
         <form action="{{route('interesteds.destroy',$interested->id)}}" method="POST" >
@@ -39,11 +39,14 @@
         <br><br>
         
     @endforeach
-    <form action="{{route('interesteds.destroy',$user_id)}}" method="POST" >
+    @foreach ($interesteds as $interested)
+    <form action="{{route('interesteds.destroy',$interested->id)}}" method="POST" >
         @csrf
         @method('DELETE')
         <button class="btn btn-dark"name="deleteall"style="margin-top: -165px;margin-left: 600px;">RemoveAll</button>
+        @break
     </form>
+    @endforeach
     <br>
     {{ $interesteds->links() }}
     <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>

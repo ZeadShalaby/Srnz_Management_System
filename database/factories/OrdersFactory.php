@@ -30,6 +30,7 @@ class OrdersFactory extends Factory
             'description'=>fake()->text(),
             'price'=>fake()->numberBetween($min = 1000, $max = 100000),
             'path'=>fake()->imageUrl($width=400, $height=400),
+            'view'=>null,
         ];
     }
 }

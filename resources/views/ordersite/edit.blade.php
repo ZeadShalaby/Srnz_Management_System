@@ -27,13 +27,20 @@
 
         <div>
             <label style="color: aliceblue">department_id</label>
-            <input class="form-control" type="text" placeholder="code" name="department_id" value="{{ $orders->department_id }}">
+            <select class="form-control" name="department_id">
+                <option value="{{$orders->id}}">{{$orders->department->name}}</option>
+                @foreach ($departments as $department)
+                    <option value=" {{$department ->id}} ">{{$department ->name}}</option>
+                @endforeach
+            </select>
             @error('department_id')
             <div class="alert alert-danger">
                 {{ $message }}
             </div>
             @enderror
+
         </div>
+
         <div>
             <label style="color: aliceblue">description</label>
             <input class="form-control" type="text" placeholder="code" name="description" value="{{ $orders->description }}">
@@ -57,6 +64,7 @@
         <div>
             <label style="color: aliceblue">path</label>
             <input class="form-control" type="file" placeholder="Img" name="path" value="{{ $orders->path }}">
+            
             @error('path')
             <div class="alert alert-danger">
                 {{ $message }}

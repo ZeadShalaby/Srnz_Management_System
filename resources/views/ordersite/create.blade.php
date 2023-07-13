@@ -36,12 +36,18 @@
 
         <div>
             <label style="color: aliceblue">department_id</label>
-            <input class="form-control" type="text" placeholder="code" name="department_id" value="{{ old('department_id') }}">
+            <select class="form-control" name="department_id">
+                <option value="  ">Departments</option>
+                @foreach ($departments as $department)
+                    <option value=" {{$department ->id}} ">{{$department ->name}}</option>
+                @endforeach
+            </select>
             @error('department_id')
             <div class="alert alert-danger">
                 {{ $message }}
             </div>
             @enderror
+
         </div>
         <div>
             <label style="color: aliceblue">description</label>
@@ -78,7 +84,7 @@
         </div>
     </form>
     <br><br>
-<div style="margin-top: 450px">
+<div style="margin-top: 550px">
 
     <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
     <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
