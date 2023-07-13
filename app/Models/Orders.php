@@ -27,6 +27,7 @@ class Orders extends Model
         'description',
         'price',
         'path',
+        'view',
     ];
    
     protected $dates =['delete_at'];

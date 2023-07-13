@@ -84,20 +84,29 @@ class OrdersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Orders $order)
+    public function destroy(Request $request)
     {
         //
         if(auth()->user()->role==Role::ADMIN){
-        $dep_orders = Interesteds::where('order_id', $order->id)->get()->value('order_id');
+        $order = Orders::find($request->id);    
+        $dep_orders = Interesteds::where('order_id', $request->id)->get()->value('order_id');
         $order->delete();
         if ($dep_orders) {
-            $deleted = DB::table('interesteds')->where('order_id', $order->id)->delete();
-            return Redirect::route('orders.index')->with('status', 'Deleted Successfully, but there were interesteds in this Orders.');
+            $deleted = DB::table('interesteds')->where('order_id', $request->id)->delete();
+            return response()->json([
+                'status' => true,
+                'msg'=>'Deleted Successfully.',
+                'id'=>$request->id,
+            ]);
         } else {
-            return Redirect::route('orders.index')->with('status', 'Deleted Successfully.');
-        }}
+            return response()->json([
+                'status' => true,
+                'msg'=>'Deleted Successfully.',
+                'id'=>$request->id,
+            ]);       
+         }}
 
-       
+        
     }
     
     //view restore
@@ -107,11 +116,16 @@ class OrdersController extends Controller
      }
     
     // restore
-    public function restore()
+    public function restore(Request $request)
     {
-       $id = Request()->id;
-       Orders::withTrashed()->find($id)->restore();;
-       return back()->with('status', 'Orders Restore successfully');
+       $id = $request->id;
+       Orders::withTrashed()->find($id)->restore();
+
+       return response()->json([
+        'status' => true,
+        'msg'=>'Orders Restore successfully .',
+        'id'=>$request->id,
+   ]);
     }
                                                                              
 

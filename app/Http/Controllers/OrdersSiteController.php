@@ -6,6 +6,7 @@ use App\Models\Orders;
 use App\Traits\ImgTrait;
 use App\Models\Departments;
 use App\Models\Interesteds;
+use App\Events\OrderVieweer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -95,8 +96,10 @@ class OrdersSiteController extends Controller
      */
     public function show(Orders $ordersite)
     {
-        //
-            
+            // view eyes
+            $view = $ordersite;//Orders::first();
+            event(new OrderVieweer($view));
+            //show
             return view('ordersite.show',['orders'=>$ordersite,'interesteds'=>Interesteds::get(),'userid'=>auth()->user()->id]);
        
     }
@@ -149,18 +152,26 @@ class OrdersSiteController extends Controller
      * Remove the specified resource from storage.
      */
   
-    public function destroy(Orders $ordersite)
+    public function destroy(Request $request)
     {
         //
-        $dep_orders = Interesteds::where('order_id', $ordersite)->where('user_id',auth()->user()->id)->get()->value('order_id');
-        $ordersite->delete();
-        if ($dep_orders) {
+        $order = Orders::find($request->id);
+        $dep_orders = Interesteds::where('order_id', $request->id)->where('user_id',auth()->user()->id)->get()->value('order_id');
+        $deleted = DB::table('interesteds')->where('order_id', $request->id)->delete();
+        $order->delete();
+        return response()->json([
+            'status' => true,
+            'msg'=>'Deleted Successfully.',
+            'id'=>$request->id,
+        ]);
+       
+        /*if ($dep_orders) {
             $dep_orders ->delete();
-            return Redirect::route('ordersite.index')->with('status', 'Deleted Successfully, but there were courses in this orders.');
+            return Redirect::route('ordersite.index')->with('status', 'Deleted Successfully, but there were interesteds in this orders.');
         } else {
             return Redirect::route('ordersite.index')->with('status', 'Deleted Successfully.');
         }
-
+*/
        
 
     }
@@ -188,16 +199,23 @@ class OrdersSiteController extends Controller
     public function restore_index_site()
     {
       
-        $orders_restore = Orders::where('user_id',auth()->user()->id)->onlyTrashed()->paginate(1);
+        $orders_restore = Orders::where('user_id',auth()->user()->id)->onlyTrashed()->paginate(10);
         return view('trash.orders_restore_site', ['orders' => $orders_restore]);
     }
     
     // restore
-    public function restore_site()
+    public function restore_site(Request $request)
     {
-       $id = Request()->id;
-       Orders::withTrashed()->find($id)->restore();;
-       return back()->with('status', 'Orders Restore successfully');
+       $id = $request->id;
+       Orders::withTrashed()->find($id)->restore();
+       
+       return response()->json([
+            'status' => true,
+            'msg'=>'Orders Restore successfully .',
+            'id'=>$request->id,
+       ]);
+
     }
 
+   
 }

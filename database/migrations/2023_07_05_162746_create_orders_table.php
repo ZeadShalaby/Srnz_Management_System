@@ -23,6 +23,7 @@ return new class extends Migration
             $table->bigInteger('price')->unsigned()->nullable();
             $table->string('description');
             $table->string('path');
+            $table->bigInteger('view')->unsigned()->nullable();
             $table->timestamps();
         });
     }
