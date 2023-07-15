@@ -7,6 +7,12 @@
     <title>Departments Information</title>
 </head>
 <body>
+    @extends('layout.message')
+    @section('message')
+    <div style="margin-left: 900px;margin-top: -30px;">
+        <button id="btn3" class="delete_account btn btn-danger">DELETE</button>
+        </div>
+    @endsection
     @extends('extends')
     @section('content')
     @if (session('status'))
@@ -20,11 +26,9 @@
         </div>
     @endif
    <h1> Customer Page</h1>
-   <form action="{{route('registration.destroy',$SeCustomer->id)}}" method="POST">
-    @csrf
-    @method('DELETE')
-    <button class="btn btn-danger" style="margin-left: 900px;margin-top: -65px;">DELETE</button>
-</form>
+  
+
+
    <br>
     <a href="{{ route('ordersite.index',$SeCustomer->id) }}" class="btn btn-dark">Orders</a>
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
@@ -32,6 +36,8 @@
     <a href="{{route('logout')}}"class="btn btn-success">Logout</a>
 
     <br>
+   
     @endsection
+   
 </body>
 </html>

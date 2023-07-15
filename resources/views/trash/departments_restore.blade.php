@@ -9,15 +9,15 @@
 <body>
     @extends('extends')
     @section('content')
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
+    <div class="alert alert-success" id="success_msg" style="display: none;">
+       Department Restore Sucessfuly .
+    </div>
+
     <h1>Restore Departments</h1>
     <br><br>
 
     @foreach ($departments as $department)
+    <div class="DepartmentRow{{$department->id}}">
         {{$department->id}}-{{$department->name}}-{{$department->code}}
 <br>
 {{$department->img}}
@@ -25,11 +25,9 @@
  <div style="margin-top: -30px">
     
 
-   <a href="{{ route('departments.restore', [ 'id'=> $department->id]) }}">
-        <button class="btn btn-danger" style="margin-left: 900px;margin-top: -65px;">restore</button>
-   </a>
+        <button  department_id={{$department->id}} class="restore_btn btn btn-danger" style="margin-left: 900px;margin-top: -65px;">restore</button>
 </div>
-
+    </div>
     @endforeach
     <br>
     {{ $departments->links() }}
@@ -41,6 +39,34 @@
     <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
 
     <br>
+
+    <script>
+
+        $(document).on('click', '.restore_btn', function (e) {
+            e.preventDefault();
+        
+              var department_id =  $(this).attr('department_id');
+             
+            $.ajax({
+                type: 'get',
+                 url: "{{route('departments.restore')}}",
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'id' :department_id
+                },
+                success: function (data) {
+        
+                    if(data.status == true){
+                        $('#success_msg').show();
+                    }
+                    $('.DepartmentRow'+data.id).remove();
+                }, error: function (reject) {
+        
+                }
+            });
+        }); 
+        </script>
+
     @endsection
 </body>
 </html>

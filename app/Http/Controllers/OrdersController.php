@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Orders;
+use App\Traits\ImgTrait;
 use App\Models\Interesteds;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,8 @@ class OrdersController extends Controller
     /**
      * Display a listing of the resource.
      */
+    use ImgTrait;
+
     public function index()
     {
         //
@@ -93,6 +96,7 @@ class OrdersController extends Controller
         $order->delete();
         if ($dep_orders) {
             $deleted = DB::table('interesteds')->where('order_id', $request->id)->delete();
+            //response to Ajax With Json
             return response()->json([
                 'status' => true,
                 'msg'=>'Deleted Successfully.',
@@ -142,23 +146,11 @@ class OrdersController extends Controller
     public function search_orders (Request $request)
     {
         // 
+            $output = $this->OrSearch($request);
 
-        if (isset($_POST['searchs'])) {
-            //$_POST['search']
-            $search=$request->search;
-            $orders = Orders::where('name',$search)->paginate(12);
-            $interested = interesteds::get();
-            $orders_user = Orders::where('user_id', Auth::user()->id)->get();
-
-            $check=Role::ADMIN;
-            if(auth()->user()->role==Role::ADMIN){
-            return view('orders.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'check'=>$check,'orders_user'=>$orders_user]);
-            }
-            else{
-                return view('ordersite.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'check'=>$check,'orders_user'=>$orders_user,'sefav'=>1]);
-
-            }         
-        } 
+            
+            return response($output);     
+        
     }
 
 }

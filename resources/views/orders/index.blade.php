@@ -24,16 +24,16 @@
 <br>
  <div class="container mt-5">
         <div classs="form-group">
-            <form action="{{route('orders.search')}}" method="POST">
-            @csrf
-            <button type="submit" name="searchs"> <i class='bx bx-search' ></i></button>
+            
+            <button id="searchs" class=" btn btn-danger" name="searchs"> <i class='bx bx-search' ></i></button>
             <input type="text" id="search" name="search" placeholder="Search" class="form-control" />
-            </form>
 
         </div>
     </div>
 
     <br><br>
+
+    <div class="AllData">
     @foreach ($orders as $order)
     <div class="OrderRow{{$order->id}}">
     <a href="{{route('orders.show',$order->id)}}" class="inside-page__btn inside-page__btn--beach">
@@ -47,6 +47,8 @@
         {{$order->description}}
         <br>
         {{$order->price}}
+        {{$order->path}}
+
     </a>
     <div>
         <br>
@@ -57,14 +59,19 @@
     @endisset</div>
 
   
-    
-        <button order_id={{$order->id}} class="delete_btn btn btn-danger"  style="margin-left: 150px;margin-top: -50px">DELETE</button>
+<!-- Delete Orders -->    
+<button order_id={{$order->id}} class="delete_btn btn btn-danger"  style="margin-left: 150px;margin-top: -50px">DELETE</button>
    
         
   
         <br><br>
     </div>
     @endforeach
+</div>
+
+<!-- return search -->
+<div id="conte" class="searchdata">
+</div>
 
     <br>
     {{ $orders->links() }}
@@ -102,9 +109,10 @@
                 }
             });
         });
-          
+
         </script>
 
+<!--- Auto Comblete Search --->
         <script type="text/javascript">
             var route = "{{ url('autocomplete-search-orders') }}";
             $('#search').typeahead({
@@ -117,7 +125,48 @@
                 }
             });
         </script>
-            @endsection
 
+
+<!-- Search Data --> 
+
+<script type="text/javascript">
+    $('body').on('keyup','#search',function(){
+      //  alert('hello');
+        var SearchOrders = $(this).val();
+
+        if(SearchOrders)
+        {
+           $('.AllData').hide();
+           $('.searchdata').show();
+
+        }
+        else
+        {
+            $('.AllData').show();
+            $('.searchdata').hide();
+        }
+
+        $.ajax({
+                type: 'POST',
+                 url: "{{route('orders.search')}}",
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'info' :SearchOrders
+                },
+                success: function (data) {
+                      
+                $('#conte').html(data);
+
+                }, error: function (reject) {
+        
+                }
+            });
+
+
+           
+    });
+    </script>
+
+@endsection
 </body>
 </html>

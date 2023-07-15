@@ -156,23 +156,17 @@ class OrdersSiteController extends Controller
     {
         //
         $order = Orders::find($request->id);
-        $dep_orders = Interesteds::where('order_id', $request->id)->where('user_id',auth()->user()->id)->get()->value('order_id');
-        $deleted = DB::table('interesteds')->where('order_id', $request->id)->delete();
+        $dep_interesteds = Interesteds::where('order_id', $request->id)->where('user_id',auth()->user()->id)->get();
         $order->delete();
+        if(isset($dep_interesteds)){
+        foreach ($dep_interesteds as $interested) {
+            $interested->delete();
+       }}
         return response()->json([
             'status' => true,
             'msg'=>'Deleted Successfully.',
             'id'=>$request->id,
-        ]);
-       
-        /*if ($dep_orders) {
-            $dep_orders ->delete();
-            return Redirect::route('ordersite.index')->with('status', 'Deleted Successfully, but there were interesteds in this orders.');
-        } else {
-            return Redirect::route('ordersite.index')->with('status', 'Deleted Successfully.');
-        }
-*/
-       
+        ]);     
 
     }
 

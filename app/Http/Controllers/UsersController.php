@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Orders;
+use App\Traits\ImgTrait;
+use App\Traits\LoginTrait;
 use App\Models\Interesteds;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -20,6 +22,8 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      */
+    use ImgTrait;
+    use LoginTrait;
     public function index()
     {
         //
@@ -127,19 +131,27 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Request $request)
     {
         //
-        $orders = Orders::where('user_id', $user->id)->get()->value('id');
-        $interesteds = Interesteds::where('user_id',$user->id)->get()->value('id');
+        $orders = Orders::where('user_id', $request->id)->get();
+        $interesteds = Interesteds::where('user_id',$request->id)->get();
+        $user = User::find($request->id);
         //delete all
         $user->delete();
-
-        if ($orders||$interesteds) {
-            return Redirect::route('users.index')->with('status', 'Deleted Successfully, Orders & Interesteds Cant delete.');
-        } else {
-            return Redirect::route('users.index')->with('status', 'Deleted Successfully.');
-        }
+        if(isset($orders)){
+        foreach ($interesteds as $interested) {
+           $interested->delete();
+        }}
+        if(isset($interesteds)){
+        foreach ($orders as $order) {
+              $order->delete();
+        }}
+        return response()->json([
+            'status'=>true,
+            'msg'=>'Deleted Successfully',
+            'id'=>$request->id,
+        ]);
     }
 
 
@@ -162,26 +174,17 @@ class UsersController extends Controller
      * @throws ValidationException
      */
     function checklogin(Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|alphaNum|min:3'
-        ]);
-       $source = DB::table('users')->where('email', $request->email)->first();
-        $user_data = array(
-            'email' => $request->get('email'),
-            'password' => $request->get('password')
-        ); 
-
-        if (!(Auth::attempt($user_data))) {
+    {   
+        $result = $this->Check($request);
+        if (!(Auth::attempt($result->user_data))) {
             return back()->with('error', 'Wrong Login Details');
         }
         if (Auth::user()->role == Role::ADMIN) {
-            return view('home-page.admin',['SeAdmin'=>$source]);
+            return view('home-page.admin',['SeAdmin'=>$result->source]);
         }
         if (Auth::user()->role == Role::CUSTOMER) {
 
-            return view('home-page.customer',['SeCustomer'=>$source]);
+            return view('home-page.customer',['SeCustomer'=>$result->source]);
 
         }
         
@@ -206,14 +209,12 @@ class UsersController extends Controller
     //search
     public function search_users (Request $request)
      {
-         if (isset($_POST['search'])) {
-             //$_post['search']
-             $search=$request->search;
-             $users = User::where('name',$search)->paginate(12);
-     
-             return view('users.index', ['users'=>$users,'roles'=>1]);
-                        
-         } 
+
+        $output = $this->UserSearch($request);
+        
+       return response($output);
+            
+         
      }
 
     
