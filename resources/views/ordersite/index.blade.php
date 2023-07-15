@@ -26,6 +26,12 @@
         {{session('error')}}
     </div>
     @endif
+    @if (session('status'))
+    <div class="alert alert-success">
+        
+        {{session('status')}}
+    </div>
+    @endif
    
     <div class="alert alert-success" id="success_msg" style="display: none;">
         Delete Sucessfuly .

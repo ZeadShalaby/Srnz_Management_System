@@ -108,8 +108,9 @@
     <form method="post" action="{{ url('/login/checklogin') }}">
         {{ csrf_field() }}
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" class="form-control" value="{{old('email')}}"/>
+            <label for="identify">Email or Phone-Number</label>
+
+            <input  type="text" id="email" name="email" class="form-control" value="{{old('email')}}"/>
             
         </div>
         <div class="form-group">

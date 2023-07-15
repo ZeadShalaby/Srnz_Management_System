@@ -126,16 +126,17 @@ class DepartmentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Departments $department)
+    public function destroy(Request $request)
     {
         //
-        $dep_orders = Orders::where('department_id', $department->id)->get()->value('department_id');
+        $dep_orders = Orders::where('department_id', $request->id)->get()->value('department_id');
+        $department = Departments::find($request->id);
         $department->delete();
-        if ($dep_orders) {
-            return Redirect::route('departments.index')->with('status', 'Deleted Successfully, but there were courses in this department.');
-        } else {
-            return Redirect::route('departments.index')->with('status', 'Deleted Successfully.');
-        }
+        return response()->json([
+            'status' => true,
+            'msg'=>'Delete successfully .',
+            'id'=>$request->id,
+        ]);
     }
     
     //view restore
@@ -145,11 +146,16 @@ class DepartmentsController extends Controller
     }
     
     //restore
-    public function restore()
+    public function restore(Request $request)
     {
-       $id = Request()->id;
-       Departments::withTrashed()->find($id)->restore();;
-       return back()->with('status', 'Departments Restore successfully');
+       $id = $request->id;
+       Departments::withTrashed()->find($id)->restore();
+       return response()->json([
+        'status' => true,
+        'msg'=>'Departments Restore successfully .',
+        'id'=>$request->id,
+       ]);
+
     }
      
     //autocompleteSearch
@@ -163,13 +169,9 @@ class DepartmentsController extends Controller
     //search
     public function search_departments (Request $request)
      {
-         if (isset($_POST['search'])) {
-             $search=$request->search;
-             $deoartments = Departments::where('name',$search)->get();
-     
-             return view('departments.index', ['departments'=>$deoartments]);
-                        
-         } 
+        $output = $this->DepSearch($request);
+        
+        return response($output);
      }
    
 }

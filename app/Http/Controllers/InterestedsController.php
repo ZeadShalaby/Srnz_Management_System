@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Orders;
 use App\Models\Interesteds;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -66,24 +67,39 @@ class InterestedsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Interesteds $interested)
+    public function destroy(Request $request)
     {
         //
-        if(isset($_POST['deleteall']))
+        $interested = Interesteds::find($request->id);
+        if(isset($request->removeall_btn))
         {
-            $user_interested = Interesteds::where('user_id',Auth::user()->id)->value('user_id');
-            if($user_interested){
-          $deleteall = Interesteds::where('user_id',Auth::user()->id)->get();
-          foreach($deleteall as $delete){
+
+            $user_interested = Interesteds::where('user_id',Auth::user()->id)->get();
+            if(isset($user_interested)){
+          foreach($user_interested as $delete){
           $delete->delete();}
-          return Redirect::route('interesteds.index')->with('deleteall', 'Remove AllFavourite Successfully.');
-          }
+           return response()->json([
+            'status'=>true,
+            'msg'=>'Remove AllFavourite Successfully .',
+            'done'=>true,
+           ]);
+        }
           else{
-            return Redirect::route('interesteds.index')->with('error', 'Error Nothing to remove it.');
+            return response()->json([
+                'status'=>true,
+                'msg'=>'Error Nothing to remove it .',
+                'done'=>true,
+               ]);
 
           }
         }
+
         $interested->delete();
-        return Redirect::route('interesteds.index')->with('status', 'Remove Favourite Successfully.');
+        return response()->json([
+            'status'=>true,
+            'msg'=>'Favourite Remove successfully .',
+            'id'=>$request->id,
+            'name'=>$interested->order->name,
+        ]);
     }
 }
