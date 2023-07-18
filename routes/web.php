@@ -6,7 +6,9 @@ use App\Http\Middleware\CheckAdminRole;
 use App\Http\Controllers\postsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\SocialController;
 use App\Http\Middleware\CheckCustomerRole;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\OrdersSiteController;
 use App\Http\Controllers\DepartmentsController;
@@ -34,6 +36,13 @@ use App\Http\Controllers\InterestedsController;
         Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
         // Sinup 
         Route::resource('/registration', RegisterController::class);
+        // login with social
+        Route::get('/redirect/{service}',[ServiceController::class,'redirect']);
+        // callback google
+        Route::get('/auth/google/callback',[ServiceController::class,'callback'])->name('/auth/google/callback');
+        // callback githup 
+        Route::get('/auth/github/callback',[ServiceController::class,'githubcallback'])->name('/auth/github/callback');
+       
 
 
     //Auth Middleware

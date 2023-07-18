@@ -172,7 +172,7 @@ class UsersController extends Controller
 
     /**
      * @throws ValidationException
-     */
+     *///check login 
     function checklogin(Request $request)
     {   
         $result = $this->Check($request);
@@ -191,7 +191,7 @@ class UsersController extends Controller
         return redirect('/login');
     }
 
-
+    //logout
     function logout()
     {
         Auth::logout();

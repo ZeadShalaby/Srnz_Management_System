@@ -9,7 +9,7 @@ use App\Models\Departments;
 
 trait ImgTrait
 
-{
+{   // save image 
     protected function saveImage($img,$folder){
     
         //save photo in folder
@@ -23,7 +23,7 @@ trait ImgTrait
      }
 
 
- //order search    
+     //order search    
      protected function OrSearch($request){
         $output='';
         $img='';
@@ -71,47 +71,7 @@ trait ImgTrait
                         }
                         
 
-    /* order search customer */
-    if(auth()->user()->role==Role::ADMIN){
-
-    /**   <img class="card-img-top" src="'.$product->path.'" alt="Card image cap"> */
-                    foreach($order_search as $product) {
-    
-                       if(isset($product->user->name)){
-                        $product->user->name;}
-                        else{"users deleted";}
-                       if(isset($product->view)){
-                        $img=' <img src="'.url('image\view.png').'" alt="vieweer" style="width: 30px"> '.$product->view.'';
-                       }else{$img=' <img src="'.url('image\nview.png').'" alt="vieweer" style="width: 30px"> ';}
-    
-                        $output .=
-                        '<div class="OrderRow'.$product->id.'">
-                        <a href="'.route('orders.show',$product->id).'" class="inside-page__btn inside-page__btn--beach">
-                        '.$product->id.'-'.$product->name.'
-                        
-                        '.$change_user.'
-                        <br>
-                        '.$product->description.'
-                        <br>
-                        '.$product->price.'
-                        <br>
-                        '.$product->path.'" 
-                        </a>
-                        <div>
-                        <br>
-                       '.$img.'
-                        </div>
-
-
-                        <br><br>
-                         </div>
-                        ';
-         
-                    }
-    
-                    return $output;
-                }
-
+    /* ordersite search  */
     if(auth()->user()->role==Role::CUSTOMER){
     return $request;
 
@@ -120,7 +80,7 @@ trait ImgTrait
     }
 
 
-// search users
+   // search users get response
    protected function UserSearch($request){
 
 
@@ -175,7 +135,7 @@ trait ImgTrait
    
    
 
-
+   // search department get response
    protected function DepSearch($request){
     $output = '';
     $dep_search = Departments::where('name', 'LIKE', '%'. $request->info. '%')
