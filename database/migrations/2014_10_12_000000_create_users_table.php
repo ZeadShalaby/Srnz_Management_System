@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('gmail')->unique();
-            $table->bigInteger('phone')->unsigned()->unique();
+            $table->bigInteger('phone')->unique()->nullable();
             $table->string('role');
             $table->string('profile_photo');
+            $table->string('social_id')->nullable();
+            $table->string('social_type')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
