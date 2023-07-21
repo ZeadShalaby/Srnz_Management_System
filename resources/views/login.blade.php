@@ -121,8 +121,9 @@
             <input type="submit" name="login" class="btn btn-primary" value="Login"/>
         </div>
     </form>
-    <a href="{{ url('/redirect/google') }}">Login with google</a>
-    <a href="{{ url('/redirect/github') }}" style="margin-left: 50px;">Login with githup</a>
+    <a href="{{ url('/redirect/google') }}">google</a>
+    <a href="{{ url('/redirect/github') }}" style="margin-left: 50px;"> githup</a>
+
 
     <br>
 

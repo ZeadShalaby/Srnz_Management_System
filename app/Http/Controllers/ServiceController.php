@@ -24,13 +24,13 @@ class ServiceController extends Controller
         return Socialite::driver($service)->redirect();
         else return 'null';
     }
-   // google 
+    // google 
     public function callback(){
          $user =  Socialite::driver('google')->user();
          $users=$user;
          $finduser = User::where('social_id',$users->id)->get()->value('social_id');
          if($finduser>0){
-            $checkuser = $this->checkgoogle($users);
+            $checkuser = $this->checkservice($users);
             if($checkuser==true){return Redirect::route('homepage');}
             else{return back()->with('error', 'Wrong Login Details');}
         }
@@ -48,7 +48,7 @@ class ServiceController extends Controller
                 'social_type'=>'google',
              ]);        
              
-             $checkuser = $this->checkgoogle($users);
+             $checkuser = $this->checkservice($users);
              if($checkuser==true){return Redirect::route('homepage');}
              else{return back()->with('error', 'Wrong Login Details');}
              
@@ -62,7 +62,7 @@ class ServiceController extends Controller
         $users=$user;
         $finduser = User::where('social_id',$users->id)->get()->value('social_id');
         if($finduser>0){
-           $checkuser = $this->checkgoogle($users);
+           $checkuser = $this->checkservice($users);
            if($checkuser==true){return Redirect::route('homepage');}
            else{return back()->with('error', 'Wrong Login Details');}
        }
@@ -80,11 +80,42 @@ class ServiceController extends Controller
                'social_type'=>'githup',
             ]);        
             
-            $checkuser = $this->checkgoogle($users);
+            $checkuser = $this->checkservice($users);
             if($checkuser==true){return Redirect::route('homepage');}
             else{return back()->with('error', 'Wrong Login Details');}
             
        }   
 
    }
+
+   public function facebookcallback(){
+
+    $user =  Socialite::driver('facebook')->user();
+        $users=$user;
+        $finduser = User::where('social_id',$users->id)->get()->value('social_id');
+        if($finduser>0){
+           $checkuser = $this->checkservice($users);
+           if($checkuser==true){return Redirect::route('homepage');}
+           else{return back()->with('error', 'Wrong Login Details');}
+       }
+        else{
+           User::create([
+               'name'=> $users->name,
+               'email'=> $users->email,
+               'gmail'=>$users->email,
+               'profile_photo'=>$users->avatar,
+               'phone',
+               'password'=> $users->id,
+               'role'=>Role::CUSTOMER,
+               'remember_token' => $users->token,
+               'social_id'=>$users->id,
+               'social_type'=>'facebook',
+            ]);        
+            
+            $checkuser = $this->checkservice($users);
+            if($checkuser==true){return Redirect::route('homepage');}
+            else{return back()->with('error', 'Wrong Login Details');}
+            
+       }   
+    }
 }

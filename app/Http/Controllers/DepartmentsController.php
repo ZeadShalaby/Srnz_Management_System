@@ -42,9 +42,10 @@ class DepartmentsController extends Controller
 
         $formFields = $request->validate([
 
-            'name' => 'required',
-            'code' => 'required',
             'img'  => 'required|image|mimes:jpg,png,gif|max:2048',
+            'code' => 'required',
+            'name' => 'required',
+
 
         ]);
 
@@ -59,20 +60,34 @@ class DepartmentsController extends Controller
         $secode = DB::table('departments')->where('code', $code)->value('id');  
 
         if($sename>0){
-            return back()->with('danger', 'Name Oreday Exist');
+            $msg='Name Oreday Exist';
+            return response()->json([
+                'status' => false,
+                'type' => 'name',
+                'error' => $msg,
+            ]);
         }
         if($secode>0){
-            return back()->with('danger', 'Code Oreday Exist');
-
+            $msg = 'Code Oreday Exist';
+            return response()->json([
+                'status' => false,
+                'type' => 'code',
+                'error' => $msg,
+            ]);
         }
        else{
-             Departments::create([
+            $department = Departments::create([
             'name' => $request->name,
             'code' => $request->code,
             'img'  => $file_name ,
-             ]);}
+             ]);
+      if($department){
+        return response()->json([
+            'status' => true,
+            'msg' => 'Created Successfully',
+        ]);}
+            }
         
-        return Redirect::route('departments.index')->with('status', 'Created Successfully');
     }
 
     /**

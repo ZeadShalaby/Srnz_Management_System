@@ -41,8 +41,10 @@ use App\Http\Controllers\InterestedsController;
         // callback google
         Route::get('/auth/google/callback',[ServiceController::class,'callback'])->name('/auth/google/callback');
         // callback githup 
-        Route::get('/auth/github/callback',[ServiceController::class,'githubcallback'])->name('/auth/github/callback');
-       
+        Route::get('/auth/github/callback',[ServiceController::class,'githubcallback'])->name('/auth/github/callback'); 
+        // callback Facebook 
+        Route::get('/auth/facebook/callback',[ServiceController::class,'facebookcallback'])->name('/auth/facebook/callback');
+    
 
 
     //Auth Middleware

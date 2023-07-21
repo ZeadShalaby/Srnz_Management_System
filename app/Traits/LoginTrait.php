@@ -42,7 +42,7 @@ protected function Check($request)
     
 }
 
-protected function checkgoogle($users){
+protected function checkservice($users){
     $user_data = array(
         'email' => $users->email,
         'password' => $users->id
