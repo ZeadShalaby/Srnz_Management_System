@@ -53,9 +53,6 @@ use App\Http\Controllers\InterestedsController;
         //autocompleteSearch-orders
         Route::get('/autocomplete-search-orders', [OrdersController::class, 'autocompleteSearch']);
 
-        // controller with resource
-        Route::resource('/orders', OrdersController::class);
-
         //search-orders
         Route::POST('/search-orders', [OrdersController::class, 'search_orders'])->name('orders.search');
 
@@ -69,6 +66,7 @@ use App\Http\Controllers\InterestedsController;
     Route::middleware(CheckAdminRole::class)->group(function () {
         // controller with rescource
         Route::resource('/departments', DepartmentsController::class);
+        Route::resource('/orders', OrdersController::class);
         Route::resource('/users', UsersController::class);
         //users-Admin
         Route::get('/users-admin', [UsersController::class, 'admin'])->name('users.admin');

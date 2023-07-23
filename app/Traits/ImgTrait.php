@@ -73,9 +73,49 @@ trait ImgTrait
 
     /* ordersite search  */
     if(auth()->user()->role==Role::CUSTOMER){
-    return $request;
 
-            }
+        /**   <img class="card-img-top" src="'.$product->path.'" alt="Card image cap"> */
+        foreach($order_search as $product) {
+            
+            if(isset($product->user->name)){
+             $product->user->name;}
+             else{"users deleted";}
+            if(isset($product->view)){
+             $img=' <img src="'.url('image\view.png').'" alt="vieweer" style="width: 30px"> '.$product->view.'';
+            }else{$img=' <img src="'.url('image\nview.png').'" alt="vieweer" style="width: 30px"> ';}
+
+             $output .=
+             '<div class="OrderRow'.$product->id.'">
+             <a href="'.route('ordersite.show',$product->id).'" class="inside-page__btn inside-page__btn--beach">
+             '.$product->id.'-'.$product->name.'
+             
+             '.$change_user.'
+             <br>
+             '.$product->description.'
+             <br>
+             '.$product->price.'
+             <br>
+             '.$product->path.'" 
+             </a>
+             <div>
+             <br>
+            '.$img.'
+
+             ';
+
+
+             
+             
+     
+          
+     
+
+      
+
+         }
+
+         return $output;        
+    }
 
     }
 
