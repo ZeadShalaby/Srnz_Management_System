@@ -9,13 +9,18 @@
 <body>
     @extends('extends')
     @section('content')
-    <div class="alert alert-success" id="success_msg" style="display: none;">
-        Create Sucessfuly .
+@if(session('status'))
+    <div class="alert alert-success">
+        {{session('status')}}
      </div>
-     <div class="alert alert-danger" id="name_error_msg" style="display: none;">
-        Name Oreday Exist .
+@endif
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{session('error')}}
      </div>
-     <div id='error' class="alert alert-danger error-text code_error" style="display: none"></div>
+
+@endif
+    
 
     <h1>CREATE ORDERS</h1>
     
@@ -24,7 +29,11 @@
         <div>
             <label style="color: aliceblue">Name</label>
             <input class="form-control" type="text" placeholder="Name" name="name" value="{{ old('name') }}">
-            
+            @error('name')
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
        
 
@@ -36,25 +45,42 @@
                     <option value=" {{$department ->id}} ">{{$department ->name}}</option>
                 @endforeach
             </select>
+            @error('department_id')
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+            @enderror
            
 
         </div>
         <div>
             <label style="color: aliceblue">description</label>
             <input class="form-control" type="text" placeholder="code" name="description" value="{{ old('description') }}">
-            
+            @error('description')
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
         <div>
             <label style="color: aliceblue">price</label>
             <input class="form-control" type="text" placeholder="code" name="price" value="{{ old('price') }}">
-            
+            @error('price')
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
         
 
         <div>
             <label style="color: aliceblue">path</label>
             <input class="form-control" type="file" placeholder="Img" name="path" value="{{ old('path') }}">
-        
+            @error('path')
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
 
         <div>
@@ -71,47 +97,7 @@
 
 </div>
 
-<script>
 
-    $(document).on('click', '#save', function (e) {
-        e.preventDefault();
-
-        var formData = new FormData($('#ordersForm')[0]);
-
-        $.ajax({
-            type: 'post',
-            enctype: 'multipart/form-data',
-            url: "{{route('ordersite.store')}}",
-            data: formData,
-            processData: false,
-            contentType: false,
-            cache: false,
-            success: function (data) {
-
-                if (data.status == true) {
-                    $('#error').hide();
-                    $('#success_msg').show();
-                }
-            
-                if (data.type == 'name') {
-                    $('#error').hide();
-                    $('#success_msg').hide();
-                    $('#name_error_msg').show();
-
-                }
-               
-
-            }, error: function (reject) {
-                var response = $.parseJSON(reject.responseText);
-               
-                $.each(response.errors, function (key, val) {
-                    $("#error").text(val[0]).show();
-                });}
-               
-        });
-    });
-
-</script>
 
     @endsection
 </body>

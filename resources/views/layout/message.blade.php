@@ -263,7 +263,7 @@ message--danger
     <form action="{{route('registration.destroy',$SeCustomer->id)}}" method="POST">
         @csrf
         @method('DELETE')
-        <button  name={{$SeCustomer->name}} class="delete_account  " ><i class="fa fa-trash" style="color: rgb(248, 0, 0);margin-top: -5px"></i></button>
+        <button  account_name={{$SeCustomer->id}} class="delete_account  " ><i class="fa fa-trash" style="color: rgb(248, 0, 0);margin-top: -5px"></i></button>
     </form>
 </div>
 
@@ -278,6 +278,7 @@ message--danger
     
     btn3.addEventListener('click', () => {
         var h = 1;
+       // var account_name =  $(this).attr('account_name');
 
 
     // utility function returning a random item from the input array

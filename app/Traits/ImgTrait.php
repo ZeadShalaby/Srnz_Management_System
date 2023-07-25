@@ -23,7 +23,7 @@ trait ImgTrait
      }
 
 
-     //order search    
+     //orders search    
      protected function OrSearch($request){
         $output='';
         $img='';
@@ -70,11 +70,10 @@ trait ImgTrait
                             return $output;
                         }
                         
-
     /* ordersite search  */
     if(auth()->user()->role==Role::CUSTOMER){
 
-        /**   <img class="card-img-top" src="'.$product->path.'" alt="Card image cap"> */
+        /**<img class="card-img-top" src="'.$product->path.'" alt="Card image cap"> */
         foreach($order_search as $product) {
             
             if(isset($product->user->name)){
@@ -102,15 +101,6 @@ trait ImgTrait
             '.$img.'
 
              ';
-
-
-             
-             
-     
-          
-     
-
-      
 
          }
 

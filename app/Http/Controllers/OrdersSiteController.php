@@ -55,7 +55,6 @@ class OrdersSiteController extends Controller
         //
         $formFields = $request->validate([
 
-            
             'path'=> 'required|image|mimes:jpg,png,gif|max:2048',
             'price'=> 'required',
             'description'=> 'required',
@@ -73,11 +72,7 @@ class OrdersSiteController extends Controller
 
         if($sename>0){
             $msg= 'Name Oredy Eists .';
-            return response()->json([
-                'status'=>true,
-                'type'=>'name' ,
-                'msg'=>$msg,
-            ]);
+           return back()->with('error',$msg);
         }
        else{
             $order = Orders::create([
@@ -94,10 +89,8 @@ class OrdersSiteController extends Controller
             if($order){
                 $msg= 'Create successfuly .';
 
-                return response()->json([
-                    'status'=>true,
-                    'msg'=>$msg,
-                ]);
+                return back()->with('status',$msg);
+
             }
             }
         

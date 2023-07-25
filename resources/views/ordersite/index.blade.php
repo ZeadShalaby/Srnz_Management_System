@@ -12,7 +12,7 @@
     @section('content')
     <div class="alert alert-success" id="success_msg" style="display: none;">Add your favourite .</div>
     <div class="alert alert-danger" id="error_msg" style="display: none;">Alredy Aded Favourite .</div>
-    <div class="alert alert-success" id="success_msg" style="display: none;">Delete Sucessfuly .</div>
+    <div class="alert alert-success" id="delete_msg" style="display: none;">Delete Sucessfuly .</div>
 
     <h1>Orders <a href="{{route('ordersite.create')}}"> <img width="50px" height="50px" src="{{URL('image/addgallery.png')}}"  alt="add" ></i>
     </a></h1>
@@ -147,7 +147,7 @@
                 success: function (data) {
         
                     if(data.status == true){
-                        $('#success_msg').show();
+                        $('#delete_msg').show();
                     }
                     $('.OrderRow'+data.id).remove();
                 }, error: function (reject) {
