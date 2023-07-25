@@ -53,31 +53,55 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         //Create Admin
-        $source = DB::table('users')->where('email', $request->email)->first();
+        $sourcename = DB::table('users')->where('name', $request->name)->value('name');
+        $sourceemail = DB::table('users')->where('email', $request->email)->value('email');
 
         $formFields = $request->validate([
-            'name'=> 'required',
-            'email'=> 'required',
-            'gmail'=> 'required',
-            'password'=> 'required',
+            
             'phone'=> 'required',
+            'password'=> 'required',
+            'gmail'=> 'required',
+            'email'=> 'required',
+            'name'=> 'required',
         ]);
 
-        //
-   
-        User::create([
-            'name'=> $request->name,
-            'email'=> $request->email,
-            'gmail'=>$request->gmail,
-            'profile_photo'=>"jjjjjjj",
-            'phone'=>$request->phone,
-            'password'=> $request->password,
-            'role'=>Role::ADMIN,
-            'remember_token' => Str::random(10),
-         ]);        
-         
-         return Redirect::route('users.index')->with('status', 'Created Successfully');
-        }
+        //     
+
+
+            if($sourcename==$request->name){
+                $msg='Name Oreday Exist';
+                return response()->json([
+                    'status' => false,
+                    'type' => 'name',
+                    'error' => $msg,
+                ]);
+            }
+            elseif($sourceemail==$request->email){
+                $msg = 'Email Oreday Exist';
+                return response()->json([
+                    'status' => false,
+                    'type' => 'email',
+                    'error' => $msg,
+                ]);
+            }
+            else{
+                $user = User::create([
+                    'name'=> $request->name,
+                    'email'=> $request->email,
+                    'gmail'=>$request->gmail,
+                    'profile_photo'=>"jjjjjjj",
+                    'phone'=>$request->phone,
+                    'password'=> $request->password,
+                    'role'=>Role::ADMIN,
+                    'remember_token' => Str::random(10),
+                 ]);  
+                 
+                if($user){
+                return response()->json([
+                    'status' => true,
+                    'msg' => 'Created Successfully',
+                ]);}}
+           }
 
     /**
      * Display the specified resource.
@@ -115,7 +139,7 @@ class UsersController extends Controller
         //update image
     $role = $request->role;
    
-        $user->update([
+       $edit = $user->update([
             'name'=> $request->name,
             'email'=> $request->email,
             'gmail'=>$request->gmail,
@@ -172,7 +196,7 @@ class UsersController extends Controller
 
     /**
      * @throws ValidationException
-     */
+     *///check login 
     function checklogin(Request $request)
     {   
         $result = $this->Check($request);
@@ -191,7 +215,7 @@ class UsersController extends Controller
         return redirect('/login');
     }
 
-
+    //logout
     function logout()
     {
         Auth::logout();

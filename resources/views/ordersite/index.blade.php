@@ -7,52 +7,28 @@
     <title>Orders</title>
 </head>
 <body>
-
+ 
     @extends('extends')
     @section('content')
-    @if (session('favourite'))
-    <div class="alert alert-success">  
-        {{"Add your favourite"}}
-    </div>
-    @endif
-    @if (session('faverror'))
-    <div class="alert alert-danger">  
-        {{session('faverror')}}
-    </div>
-    @endif
-    @if (session('error'))
-    <div class="alert alert-danger">
-        
-        {{session('error')}}
-    </div>
-    @endif
-    @if (session('status'))
-    <div class="alert alert-success">
-        
-        {{session('status')}}
-    </div>
-    @endif
-   
-    <div class="alert alert-success" id="success_msg" style="display: none;">
-        Delete Sucessfuly .
-    </div>
+    <div class="alert alert-success" id="success_msg" style="display: none;">Add your favourite .</div>
+    <div class="alert alert-danger" id="error_msg" style="display: none;">Alredy Aded Favourite .</div>
+    <div class="alert alert-success" id="delete_msg" style="display: none;">Delete Sucessfuly .</div>
+
     <h1>Orders <a href="{{route('ordersite.create')}}"> <img width="50px" height="50px" src="{{URL('image/addgallery.png')}}"  alt="add" ></i>
     </a></h1>
    
-<br>
- <div class="container mt-5">
-        <div classs="form-group">
-            <form action="{{route('orders.search')}}" method="POST">
-            @csrf
-            <button type="submit" name="searchs"> <i class='bx bx-search' ></i></button>
-            <input type="text" id="search" name="search" placeholder="Search" class="form-control" />
-            </form>
-
-        </div>
-    </div>
-    
-
-    <br><br>
+    <br>
+    <div class="container mt-5">
+           <div classs="form-group">
+               
+               <button id="searchs" class=" btn btn-danger" name="searchs"> <i class='bx bx-search' ></i></button>
+               <input type="text" id="search" name="search" placeholder="Search" class="form-control" />
+   
+           </div>
+       </div>
+   
+       <br><br>
+     <div class="AllData">  
     @foreach ($orders as $order)
     <div class="OrderRow{{$order->id}}">
     <a href="{{route('ordersite.show',$order->id)}}" class="inside-page__btn inside-page__btn--beach">
@@ -69,40 +45,29 @@
 @isset($sefav)
     
     @else
-    <form action="{{route('ordersite.favourite',$order->id)}}" method="POST">
-        @csrf
-<input style="width: 0%;height: 0%;background-color:white;border: rgb(255, 255, 255) " name="id" type="text"value="{{$order->id}}">
-        @if(session('favourite')==$order->id)
+        
         <div>
-        <button  name="favourite" class="btn btn-lg" type="submit"><i class="fa fa-heart" style="color: red;" ></i></button> 
         @isset($order->view)
         <img src="{{url('image\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
         @else
         <img src="{{url('image\nview.png')}}" alt="vieweer" style="width: 30px">
-        @endisset</div>       
-        @else
-        <div >
-        <button  name="favourite" class="btn btn-lg" type="submit"><i class="fa fa-heart" style="color: gold;" ></i></button> 
-        @isset($order->view)
-         <img src="{{url('image\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
-        @else
-        <img src="{{url('image\nview.png')}}" alt="vieweer" style="width: 30px">
-        @endisset</div>
+        @endisset
+        </div>    
+
+        <button  orders_id = {{$order->id}} name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" id ="fav{{$order->id}}" style="color: gold;" ></i></button> 
         @isset($interesteds)
         @foreach ($interesteds as $interested)
         @if(($interested->user_id==$userid)&($interested->order_id==$order->id))
-        <div style="margin-top: -48px">
-        <button  name="favourite" class="btn btn-lg" type="submit"><i class="fa fa-heart" style="color: red;" ></i></button> 
-        </div>
+       <div style="margin-top: -48px">
+        <button orders_id = {{$order->id}}  name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" style="color: red;" ></i></button> 
+       </div>
         @endif
         @endforeach
-        @else
-         
+        
+
         @endisset 
 
         @endif
-    </form>
-    @endisset
 
         <br><br>
         @isset($orders_user)
@@ -116,14 +81,57 @@
             <button order_id={{$order->id}} class="delete_btn btn btn-danger"  style="margin-top: -200px;margin-left: 400px;">DELETE</button>
       
         @else
-       
         @endif
         @endforeach 
         @endisset 
        </div>
     @endforeach
-    <script>
+     </div>
+<!-- return search -->
+<div id="conte" class="searchdata">
+</div>
 
+    <script>
+ // AddFavourite with ajax
+
+        $(document).on('click', '.AddFav', function (e) {
+            e.preventDefault();
+        
+              var order_id =  $(this).attr('orders_id');
+             
+            $.ajax({
+                type: 'post',
+                 url: "{{route('ordersite.favourite')}}",
+                data: {
+                     '_token': "{{csrf_token()}}",
+                     'id' :order_id
+                },
+                success: function (data) {
+        
+                    if(data.status == true){
+                        $('#success_msg').show();
+                        $('#error_msg').hide();
+                        var id ='fav'+data.id;
+                        const btn = document.getElementById(id);
+                        btn.style.color = 'red';
+
+                    }
+                    else{
+                        $('#error_msg').show();
+                        $('#success_msg').hide();
+                    }
+
+                }, error: function (reject) {
+        
+                }
+            });
+        });
+          
+        </script>
+
+
+    <script>
+ // delete with ajax
         $(document).on('click', '.delete_btn', function (e) {
             e.preventDefault();
         
@@ -139,7 +147,7 @@
                 success: function (data) {
         
                     if(data.status == true){
-                        $('#success_msg').show();
+                        $('#delete_msg').show();
                     }
                     $('.OrderRow'+data.id).remove();
                 }, error: function (reject) {
@@ -151,6 +159,7 @@
         </script>
 
         <script type="text/javascript">
+        // auto complete search 
             var route = "{{ url('autocomplete-search-orders') }}";
             $('#search').typeahead({
                 source: function (query, process) {
@@ -162,6 +171,45 @@
                 }
             });
       </script>
+<!-- Search Data --> 
+
+<script type="text/javascript">
+    $('body').on('keyup','#search',function(){
+      //  alert('hello');
+        var SearchOrders = $(this).val();
+
+        if(SearchOrders)
+        {
+           $('.AllData').hide();
+           $('.searchdata').show();
+
+        }
+        else
+        {
+            $('.AllData').show();
+            $('.searchdata').hide();
+        }
+
+        $.ajax({
+                type: 'POST',
+                 url: "{{route('orders.search')}}",
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'info' :SearchOrders
+                },
+                success: function (data) {
+                      
+                $('#conte').html(data);
+
+                }, error: function (reject) {
+        
+                }
+            });
+
+
+           
+    });
+    </script>
 
     <br>
     {{ $orders->links() }}

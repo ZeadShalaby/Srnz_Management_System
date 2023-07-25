@@ -9,19 +9,22 @@
 <body>
     @extends('extends')
     @section('content')
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-    @if (session('danger'))
-        <div class="alert alert-danger">
-            {{ session('danger') }}
-        </div>
-    @endif
+@if(session('status'))
+    <div class="alert alert-success">
+        {{session('status')}}
+     </div>
+@endif
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{session('error')}}
+     </div>
+
+@endif
+    
+
     <h1>CREATE ORDERS</h1>
     
-    <form action="{{route('ordersite.store')}}" method="post" enctype="multipart/form-data" style="margin-top:10%;margin-left: 20%;position: absolute; background-color: black ;border: 2px solid rgb(64, 64, 64) ;border-radius: 20px;width: 50%">
+    <form action="{{route('ordersite.store')}}" id="ordersForm" method="post" enctype="multipart/form-data" style="margin-top:10%;margin-left: 20%;position: absolute; background-color: black ;border: 2px solid rgb(64, 64, 64) ;border-radius: 20px;width: 50%">
         @csrf
         <div>
             <label style="color: aliceblue">Name</label>
@@ -47,6 +50,7 @@
                 {{ $message }}
             </div>
             @enderror
+           
 
         </div>
         <div>
@@ -80,7 +84,7 @@
         </div>
 
         <div>
-            <button class="btn btn-success" style="margin-left: 46%;margin-top: 5%"type="submit">Save</button>
+            <button class="btn btn-success" style="margin-left: 46%;margin-top: 5%" id="save" >Save</button>
         </div>
     </form>
     <br><br>
@@ -92,6 +96,9 @@
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
 
 </div>
+
+
+
     @endsection
 </body>
 </html>

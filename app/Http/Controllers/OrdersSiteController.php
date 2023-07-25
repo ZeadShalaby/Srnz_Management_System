@@ -55,11 +55,11 @@ class OrdersSiteController extends Controller
         //
         $formFields = $request->validate([
 
-            'name'=> 'required',
-            'department_id'=> 'required',
-            'description'=> 'required',
-            'price'=> 'required',
             'path'=> 'required|image|mimes:jpg,png,gif|max:2048',
+            'price'=> 'required',
+            'description'=> 'required',
+            'department_id'=> 'required',
+            'name'=> 'required',
 
         ]);
 
@@ -71,10 +71,11 @@ class OrdersSiteController extends Controller
         $sename = DB::table('orders')->where('name', $name)->value('id');  
 
         if($sename>0){
-            return back()->with('danger', 'Name Order Oreday Exist');
+            $msg= 'Name Oredy Eists .';
+           return back()->with('error',$msg);
         }
        else{
-             Orders::create([
+            $order = Orders::create([
                 'name'=> $request->name,
                 'department_id'=> $request->department_id,
                 'user_id'=>Auth::user()->id,
@@ -84,10 +85,14 @@ class OrdersSiteController extends Controller
                 'price'=> $request->price,
                 'path'=> $file_name,
     
-             ]);}
-        
-        return Redirect::route('ordersite.index')->with('status', 'Created Successfully');
+             ]);
+            if($order){
+                $msg= 'Create successfuly .';
 
+                return back()->with('status',$msg);
+
+            }
+            }
         
     }
 
@@ -173,21 +178,32 @@ class OrdersSiteController extends Controller
     //favourite
     public function favoruite(Request $request){
 
-        if (isset($_POST['favourite'])) {
-            //$_POST['id']
+           //$_POST['id']
             $order_id=$request->id;
             $check_order = interesteds::where('order_id', $order_id)->where('user_id',auth()->user()->id)->get();
-            if($check_order){
-            foreach ($check_order as $check) {
-            if(($check->user_id == auth()->user()->id)&($check->order_id == $order_id)){
-                //            $favdelete = $check->id->delete();}}}
-            return back()->with('faverror',"Alredy Aded Favourite");}}}
+            if($check_order)
+            foreach ($check_order as $check) 
+            if(($check->user_id == auth()->user()->id)&($check->order_id == $order_id))
+                //$favdelete = $check->id->delete();}}}
+            return response()->json([
+                'staus'=>false,
+                'msg'=>"Alredy Aded Favourite",
+                'type'=>'red',
+            ]);
+           
                 $formFields = interesteds::create([
                 'user_id' => auth()->user()->id,
                 'order_id' => $order_id,
             ]);
-            return back()->with('favourite',$order_id); 
-    }}
+
+            return response()->json([
+                'status'=>true,
+                'msg'=>'Added successfully',
+                'id'=>$order_id,
+                'type'=>'red',
+            ]);
+
+        }
 
     //view restore
     public function restore_index_site()
@@ -210,6 +226,8 @@ class OrdersSiteController extends Controller
        ]);
 
     }
+
+    
 
    
 }

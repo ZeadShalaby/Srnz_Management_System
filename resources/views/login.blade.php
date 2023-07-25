@@ -121,6 +121,13 @@
             <input type="submit" name="login" class="btn btn-primary" value="Login"/>
         </div>
     </form>
+    <a href="{{ url('/redirect/google') }}">google</a>
+    <a href="{{ url('/redirect/github') }}" style="margin-left: 50px;"> githup</a>
+
+
+    <br>
+
+
 </div>
 <a href="{{route('registration.create')}}"> <img width="50px" height="50px" src="{{URL('image/add1.png')}}"  alt="add" > Singup</i>
 </a>

@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Orders;
 use App\Models\Departments;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Tests\Database\Fixtures\Models\Money\Price;
 
 trait LoginTrait
@@ -40,6 +42,30 @@ protected function Check($request)
     
 }
 
+protected function checkservice($users){
+    $user_data = array(
+        'email' => $users->email,
+        'password' => $users->id
+    ); 
+
+    if (!(Auth::attempt($user_data))) {
+        return false;
+        //return back()->with('error', 'Wrong Login Details');
+    }
+    if (Auth::user()->role == Role::ADMIN) {
+        return true ;
+        return Redirect::route('homepage');
+
+       // return view('home-page.admin',['SeAdmin'=>$source]);
+    }
+    if (Auth::user()->role == Role::CUSTOMER) {
+        return true ;
+         return Redirect::route('homepage');
+       //  return view('home-page.customer',['SeCustomer'=>$source]);
+
+    }
+    
+}
 
 
 

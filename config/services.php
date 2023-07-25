@@ -31,4 +31,21 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'client_id' => env ( 'FB_CLIENT_ID' ),
+        'client_secret' => env ( 'FB_CLIENT_SECRET' ),
+        'redirect' => 'http://localhost:8000/auth/facebook/callback' 
+    ],
+    
+    'google' => [
+        'client_id' => env ( 'Google_CLIENT_ID' ),
+        'client_secret' => env ( 'Google_CLIENT_SECRET' ),
+        'redirect' => 'http://127.0.0.1:8000/auth/google/callback' 
+    ],
+
+    'github' => [
+        'client_id' => env ( 'Github_CLIENT_ID' ),
+        'client_secret' => env ( 'Github_CLIENT_SECRET' ),
+        'redirect' => 'http://127.0.0.1:8000/auth/github/callback' 
+    ],
 ];

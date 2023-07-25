@@ -112,6 +112,8 @@
 <!-- Search Data --> 
 
 <script type="text/javascript">
+
+
     $('body').on('keyup','#search_dep',function(){
       //  alert('hello');
         var search_dep = $(this).val();
@@ -144,7 +146,7 @@
                 }
             });   
     });
-    </script>
+</script>
 
     @endsection
 </body>

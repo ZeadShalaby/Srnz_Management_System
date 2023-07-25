@@ -133,6 +133,7 @@ class OrdersController extends Controller
     }
                                                                              
 
+
     //autocompleteSearch orders
     public function autocompleteSearch(Request $request)
     {
@@ -152,5 +153,4 @@ class OrdersController extends Controller
             return response($output);     
         
     }
-
 }

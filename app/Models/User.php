@@ -25,6 +25,8 @@ class User extends Authenticatable
         'gmail',
         'phone',
         'role',
+        'social_id',
+        'social_type',
         'profile_photo',
         'remember_token',
     ];
