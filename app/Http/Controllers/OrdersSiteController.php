@@ -62,7 +62,11 @@ class OrdersSiteController extends Controller
             'name'=> 'required',
 
         ]);
-
+         
+        if (!isset(auth()->user()->phone)) {
+            $msg= 'please update setting first (add your phone to show your orders and connect  with other people) .';
+            return back()->with('important',$msg);}
+        else{
 
         //save image (Departments) in folder 
         $folder = 'image/orders';
@@ -92,7 +96,7 @@ class OrdersSiteController extends Controller
                 return back()->with('status',$msg);
 
             }
-            }
+            }}
         
     }
 

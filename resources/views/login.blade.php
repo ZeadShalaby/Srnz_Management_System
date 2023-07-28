@@ -123,6 +123,8 @@
     </form>
     <a href="{{ url('/redirect/google') }}">google</a>
     <a href="{{ url('/redirect/github') }}" style="margin-left: 50px;"> githup</a>
+    <a href="{{ url('/redirect/linkedin') }}" style="margin-left: 100px;"> linkedin</a>
+
 
 
     <br>

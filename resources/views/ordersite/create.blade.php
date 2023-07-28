@@ -20,6 +20,12 @@
      </div>
 
 @endif
+@if(session('important'))
+    <div class="alert alert-danger">
+        {{session('important')}}
+     </div>
+
+@endif
     
 
     <h1>CREATE ORDERS</h1>
