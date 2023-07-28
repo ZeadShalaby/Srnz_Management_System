@@ -16,6 +16,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class ServiceController extends Controller
 {
+    CONST LINKEDIN_TYPE = 'linkedin' ;
     //social login 
     use LoginTrait;
     // social service
@@ -88,6 +89,42 @@ class ServiceController extends Controller
 
    }
 
+   // linkedin
+   public function linkedincallback(){
+           
+    $user =  Socialite::driver(static::LINKEDIN_TYPE)->user();
+    $users=$user;
+    dd($users);
+    $finduser = User::where('social_id',$users->id)->get()->value('social_id');
+    if($finduser>0){
+       $checkuser = $this->checkservice($users);
+       if($checkuser==true){return Redirect::route('homepage');}
+       else{return back()->with('error', 'Wrong Login Details');}
+   }
+    else{
+       User::create([
+           'name'=> $users->name,
+           'email'=> $users->email,
+           'gmail'=>$users->email,
+           'profile_photo'=>$users->avatar,
+           'phone',
+           'password'=> $users->id,
+           'role'=>Role::CUSTOMER,
+           'remember_token' => $users->token,
+           'social_id'=>$users->id,
+           'social_type'=>'linkedin',
+        ]);        
+        
+        $checkuser = $this->checkservice($users);
+        if($checkuser==true){return Redirect::route('homepage');}
+        else{return back()->with('error', 'Wrong Login Details');}
+        
+   } 
+
+   }
+
+
+   //facebook
    public function facebookcallback(){
 
     $user =  Socialite::driver('facebook')->user();

@@ -48,4 +48,10 @@ return [
         'client_secret' => env ( 'Github_CLIENT_SECRET' ),
         'redirect' => 'http://127.0.0.1:8000/auth/github/callback' 
     ],
+    
+    'linkedin' => [
+        'client_id' => env ( 'linkedin_CLIENT_ID' ),
+        'client_secret' => env ( 'linkedin_CLIENT_SECRET' ),
+        'redirect' => 'http://127.0.0.1:8000/auth/linkedin/callback' 
+    ],
 ];

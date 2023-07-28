@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'name'=> $request->name,
             'email'=> $request->email,
             'gmail'=>$request->gmail,
-            'profile_photo'=>"jjjjjjj",
+            'profile_photo'=>"",
             'phone'=>$request->phone,
             'password'=> $request->password,
             'role'=>Role::CUSTOMER,
