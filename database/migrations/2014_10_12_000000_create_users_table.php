@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('gmail')->unique();
-            $table->bigInteger('phone')->unsigned()->unique();
+            $table->string('phone')->unsigned()->unique();
             $table->string('role');
             $table->string('profile_photo');
             $table->timestamp('email_verified_at')->nullable();
