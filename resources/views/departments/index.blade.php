@@ -13,7 +13,7 @@
         Delete Sucessfuly .
      </div>
     <h1>Departments
-        <a href="{{route('departments.create')}}"> <img width="50px" height="50px" src="{{URL('image/add1.png')}}"  alt="add" ></i>
+        <a href="{{route('departments.create')}}"> <img width="50px" height="50px" src="{{URL('image/all/add1.png')}}"  alt="add" ></i>
         </a>
     </h1>
     <div class="container mt-5">

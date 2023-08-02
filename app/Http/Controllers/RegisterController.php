@@ -48,13 +48,46 @@ class RegisterController extends Controller
 
         //check before create
         $checkemail = User::where('email',$request->email)->get()->value('id');
-        $checkname = DB::table('users')->where('name',$request->name)->get()->value('id');
+        $checkname = User::where('name',$request->name)->get()->value('id');
+        $checkgmail = User::where('gmail',$request->gmail)->get()->value('id');
+        $checkphone = User::where('phone',$request->phone)->get()->value('id');
+
         if($checkemail>0){
-            return back()->with('error','Email Alredy Exist');
+            $msg = 'Email Alredy Exists .';
+            return response()->json([
+                'status'=>0,
+                'error'=>0,
+                'type'=>'error_email',
+                'error'=>$msg,
+            ]);
         }
         elseif($checkname>0){
-            return back()->with('error','Name Alredy Exist');
-        }
+            $msg = 'Name Alredy Exists .';
+            return response()->json([
+                'status'=>1,
+                'error'=>1,
+                'type'=>'error_name',
+                'error_name'=>$msg,
+
+            ]);}
+        elseif($checkgmail>0){
+            $msg = 'Gmail Alredy Exists .';
+            return response()->json([
+                'status'=>2,
+                'error'=>2,
+                'type'=>'error_gmail',
+                'error_name'=>$msg,
+
+            ]);}
+            elseif($checkphone>0){
+                $msg = 'Phone Alredy Exists .';
+                return response()->json([
+                    'status'=>3,
+                    'error'=>3,
+                    'type'=>'error_phone',
+                    'error_name'=>$msg,
+    
+                ]);}
         else{
         User::create([
             'name'=> $request->name,
@@ -66,8 +99,11 @@ class RegisterController extends Controller
             'role'=>Role::CUSTOMER,
             'remember_token' => Str::random(10),
          ]);        
-         
-        return Redirect('login')->with('status','create sucessfuly');
+         $msg = 'create sucessfuly .';
+         return response()->json([
+             'status'=>true,
+             'sucess'=>$msg,
+         ]);
         }
     }
 

@@ -14,7 +14,7 @@
     <div class="alert alert-danger" id="error_msg" style="display: none;">Alredy Aded Favourite .</div>
     <div class="alert alert-success" id="delete_msg" style="display: none;">Delete Sucessfuly .</div>
 
-    <h1>Orders <a href="{{route('ordersite.create')}}"> <img width="50px" height="50px" src="{{URL('image/addgallery.png')}}"  alt="add" ></i>
+    <h1>Orders <a href="{{route('ordersite.create')}}"> <img width="50px" height="50px" src="{{URL('image/all/addgallery.png')}}"  alt="add" ></i>
     </a></h1>
    
     <br>
@@ -48,9 +48,9 @@
         
         <div>
         @isset($order->view)
-        <img src="{{url('image\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
+        <img src="{{url('image\all\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
         @else
-        <img src="{{url('image\nview.png')}}" alt="vieweer" style="width: 30px">
+        <img src="{{url('image\all\nview.png')}}" alt="vieweer" style="width: 30px">
         @endisset
         </div>    
 

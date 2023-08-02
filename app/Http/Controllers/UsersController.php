@@ -178,6 +178,13 @@ class UsersController extends Controller
         ]);
     }
 
+   // Start_Pages
+
+   public function Home_SRNZ(){
+    
+     return view('home-page.Home');
+
+   }
 
     public function homepage()
     {
@@ -191,7 +198,7 @@ class UsersController extends Controller
     //login
     function loginindex()
     {
-        return view('login');
+        return view('login.login');
     }
 
     /**
@@ -219,7 +226,7 @@ class UsersController extends Controller
     function logout()
     {
         Auth::logout();
-        return redirect('login');
+        return redirect('Home_SRNZ');
     }
 
     //autocompleteSearch

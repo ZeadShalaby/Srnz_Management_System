@@ -40,8 +40,8 @@ trait ImgTrait
                                 $product->user->name;}
                                 else{"users deleted";}
                                if(isset($product->view)){
-                                $img=' <img src="'.url('image\view.png').'" alt="vieweer" style="width: 30px"> '.$product->view.'';
-                               }else{$img=' <img src="'.url('image\nview.png').'" alt="vieweer" style="width: 30px"> ';}
+                                $img=' <img src="'.url('image\all\view.png').'" alt="vieweer" style="width: 30px"> '.$product->view.'';
+                               }else{$img=' <img src="'.url('image\all\nview.png').'" alt="vieweer" style="width: 30px"> ';}
             
                                 $output .=
                                 '<div class="OrderRow'.$product->id.'">
@@ -80,8 +80,8 @@ trait ImgTrait
              $product->user->name;}
              else{"users deleted";}
             if(isset($product->view)){
-             $img=' <img src="'.url('image\view.png').'" alt="vieweer" style="width: 30px"> '.$product->view.'';
-            }else{$img=' <img src="'.url('image\nview.png').'" alt="vieweer" style="width: 30px"> ';}
+             $img=' <img src="'.url('image\all\view.png').'" alt="vieweer" style="width: 30px"> '.$product->view.'';
+            }else{$img=' <img src="'.url('image\all\nview.png').'" alt="vieweer" style="width: 30px"> ';}
 
              $output .=
              '<div class="OrderRow'.$product->id.'">

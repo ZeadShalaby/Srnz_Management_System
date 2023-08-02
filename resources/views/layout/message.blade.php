@@ -20,9 +20,7 @@
       margin: 0;
     }
     body {
-      min-height: 100vh;
-      background: hsl(0, 0%, 100%);
-      font-family: "Noto Sans JP", sans-serif;
+    
     }
     /* display the wrapping container in the top right corner of the viewport */
     .notification {
@@ -254,18 +252,10 @@ message--danger
             </g>
         </svg>
     </button>
+   
 
 
-<!------>
 
-
-<div >
-    <form action="{{route('registration.destroy',$SeCustomer->id)}}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button  account_name={{$SeCustomer->id}} class="delete_account  " ><i class="fa fa-trash" style="color: rgb(248, 0, 0);margin-top: -5px"></i></button>
-    </form>
-</div>
 
 </div>
 </div>

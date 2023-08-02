@@ -28,9 +28,11 @@ use App\Http\Controllers\InterestedsController;
     Route::get('/', function () {
         return redirect('/logout');
         });
-    
+        //Home SRNZ
+        Route::get('/Home_SRNZ', [UsersController::class, 'Home_SRNZ'])->name('Home_SRNZ');
+
         //Login
-        Route::get('/login', [UsersController::class, 'loginIndex']);
+        Route::get('/login', [UsersController::class, 'loginIndex'])->name('loginindex');
         Route::post('/login/checklogin', [UsersController::class, 'checklogin']);
         Route::get('/login/checklogin',function (){redirect(route('logout'));});
         Route::get('/logout', [UsersController::class, 'logout'])->name('logout');

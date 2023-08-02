@@ -4,40 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{asset('css/restore.css')}}">
     <title>Restore Departments</title>
 </head>
-<body>
+<body id="body">
     @extends('extends')
     @section('content')
     <div class="alert alert-success" id="success_msg" style="display: none;">
        Department Restore Sucessfuly .
     </div>
 
-    <h1>Restore Departments</h1>
+    <h1 id="h1">Restore Departments</h1>
     <br><br>
 
     @foreach ($departments as $department)
+    <div class="container">
+        <div class="box">     
     <div class="DepartmentRow{{$department->id}}">
-        {{$department->id}}-{{$department->name}}-{{$department->code}}
-<br>
-{{$department->img}}
- <br><br>
- <div style="margin-top: -30px">
-    
+        <a href="#restore" id="href"  department_id={{$department->id}} class="restore_btn " ><img class="restore"src="{{URL('image/all/restore.png')}}" alt="folder"></a>
+        <img class="img" src="{{URL('image/all/folders.png')}}" alt="folder">
+        <p style="text-align: center;font-size: 15px;color: blue">
+            {{$department->name}}-{{$department->code}}
+        </p>
+        <img class="photo" src="image/departments/{{$department->img}}" alt="folder">
 
-        <button  department_id={{$department->id}} class="restore_btn btn btn-danger" style="margin-left: 900px;margin-top: -65px;">restore</button>
+    </div>
 </div>
     </div>
     @endforeach
     <br>
     {{ $departments->links() }}
-
+<div style="margin-top: 500px">
     <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
     <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
     <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
     <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
     <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
-
+</div>
     <br>
 
     <script>

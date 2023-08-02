@@ -53,9 +53,9 @@
     <div>
         <br>
     @isset($order->view)
-     <img src="{{url('image\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
+     <img src="{{url('image\all\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
     @else
-    <img src="{{url('image\nview.png')}}" alt="vieweer" style="width: 30px">
+    <img src="{{url('image\all\nview.png')}}" alt="vieweer" style="width: 30px">
     @endisset</div>
 
   
