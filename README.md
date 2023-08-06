@@ -31,7 +31,6 @@
 ## About The Project
 
 
-
 It is a site for displaying antique products, pictures and picturesque artifacts, for artists and how to communicate with each other to sell or display them anywhere through it
 
 ## Built With
@@ -65,7 +64,7 @@ composer global require laravel/installer
 
 Make sure that either **MySQL** or **MariaDB** are installed either manually or via **phpMyAdmin**
 
-### Installation
+### Instllation
 
 Clone the project
 
