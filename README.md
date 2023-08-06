@@ -64,7 +64,7 @@ composer global require laravel/installer
 
 Make sure that either **MySQL** or **MariaDB** are installed either manually or via **phpMyAdmin**
 
-### Instllation
+### Installation
 
 Clone the project
 
