@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2? family-Poppins:wght@300;400; 500; 600; 700; 800; 900& display-swap');
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box; 
+font-family: 'Poppins', sans-serif;
+
+}
+
+body {
+display: flex;
+justify-content: center; 
+align-items: center;
+min-height: 100vh; 
+background: #1f1f47;
+overflow: hidden;
+}
+.wrapper
+{
+position: relative;
+width: 400px; 
+height: 450px;
+background: rgba(255, 255, 255, .15); 
+box-shadow: 5px 10px rgba(32, 39, 135, 0.37);
+border: 1px solid rgba(255, 255, 255, .18);
+border-radius: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+h2{   
+font-size: 2em;
+color: #fff; 
+text-align: center;
+}
+.input-box
+{
+position: relative;
+width: 320px;
+margin: 30px 0; 
+}
+.input-box label 
+{ 
+position: absolute;  
+top: 50%;
+left: 5px;
+transform: translateY(-50%); 
+font-size: 1em; 
+pointer-events: none;
+color: #fff;
+transition: .5s;
+}
+.input-box input:focus
+{
+border-bottom: 2px solid #fa709a;}
+.input-box input:valid{
+    color: aquamarine;
+}
+.input-box input
+{
+width: 100%;
+height: 50px;
+background: transparent; 
+border: none;
+outline: none;
+font-size: 1em; color: #fff;
+color: #000000; 
+border-bottom: 2px solid #fff;
+
+padding: 0 3px 0 5px;
+}
+.input-box .icon
+{
+position:absolute;
+right: 8px;
+color: #fff;
+font-size: 1.2em;
+line-height: 57px;
+}
+
+button
+{
+width: 100%;
+height: 45px;
+background: #fa709a; 
+border: none;
+outline: none; 
+border-radius: 40px;
+cursor: pointer;
+font-size: 1em;
+color: #fff; 
+font-weight: 500;
+}
+
+.bold {
+position: absolute;
+width: 500px; 
+height: 500px;
+border:1px solid #1f1f47;
+background: linear-gradient(180deg, rgba(47, 184, 255, .42) 31.77%, #5c9df1 100%); 
+border-radius: 24% 76% 35% 65% / 27% 36% 64% 73%; 
+transform: translate(-100px, -50px) rotate(-90deg); transition: 1s;
+transform: translate(-100px,-50px) rotate(-90deg);
+transition: 1s cubic-bezier(.07, .8, .16, 1); 
+animation: animateBlob 15s infinite alternate;
+}
+.bold:hover
+{
+width: 520px;
+height: 520px;
+filter: blur(30px);
+box-shadow:
+inset 0 0 0 5px rgba(255, 255, 255, .6), 
+inset 100px 100px 0 0 #fa709a,
+inset 200px 200px 0 0 #784ba8, 
+inset 300px 300px 0 0 #2b86c5;
+}
+ @keyframes animateBlob {
+    
+    0% {
+        transform: rotate(0deg); 
+        border-radius: 76% 24% 33% 67% / 68% 55% 45% 32%;
+        top: 15%;
+        left: 10%;
+      }
+    
+      25% {
+        transform: rotate(50deg); 
+        border-radius: 84% 16% 89% 11% / 42% 34% 66% 58%;
+
+        top: 30%;
+        left: 30%;
+      }
+      50% {
+        transform:  rotate(100deg); 
+        border-radius: 61% 39% 23% 77% / 25% 48% 52% 75% ;
+        
+        top: 15%;
+        left: 10%;
+      }
+      100% {
+        transform:  rotate(150deg); 
+        border-radius: 76% 24% 33% 67% / 68% 55% 45% 32%;
+        top: 10%;
+        left: -10%;
+        }
+    }
+
+    
+      
+    

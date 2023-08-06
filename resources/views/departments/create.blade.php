@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{asset('css/department_create.css')}}">
     <title>ADD Departments </title>
 </head>
-<body>
+<body style="background-color: rgb(27, 26, 26)">
     @extends('extends')
     @section('content')
     <div class="alert alert-success" id="success_msg" style="display: none;">
@@ -18,38 +19,49 @@
      <div class="alert alert-danger" id="code_error_msg" style="display: none;">
         Code Oreday Exist .
      </div>
-    <h1>CREATE DEPARTMENTS</h1>
+    <h1 id="h1">CREATE DEPARTMENTS</h1>
     <div id='error' class="alert alert-danger error-text code_error" style="display: none">
         
     </div>
 
-    <form id = 'departmentsForm' action="{{route('departments.store')}}" method="post" enctype="multipart/form-data" style="margin-top:10%;margin-left: 20%;position: absolute; background-color: black ;border: 2px solid rgb(64, 64, 64) ;border-radius: 20px;width: 50%;display:none">
-        @csrf
-        <div>
-            <label style="color: aliceblue">Name</label>
-            <input class="form-control" type="text" placeholder="Name" name="name" value="{{ old('name') }}">
 
+    <div class="login">
+        <div class="login__content">
+            
+          
+            <div class="login__img">
+               
+                <img src="{{URL('image\all\img-login.svg')}}" alt="background_departments">
+                
+            </div>
+
+            <div class="login__forms">
+                <form  class="login__registre" id = 'departmentsForm' action="{{route('departments.store')}}" method="post" enctype="multipart/form-data" >
+                    @csrf
+                    <h1 class="login__title">Create Departments</h1>
+
+                    <div class="login__box">
+                        <i class='bx bx-user login__icon'></i>
+                        <input type="text" placeholder="Department_Name" class="login__input" name="name" value="{{ old('name') }}">
+                    </div>
+
+                    <div class="login__box">
+                        <i class='bx bx-lock-alt login__icon'></i>
+                        <input type="text" placeholder="DEpartment_Code" class="login__input" name="code" value="{{ old('code') }}">
+                    </div>
+
+                   
+                        <input  type="file" id="file" name="img" value="{{ old('img') }}" />
+                        <label for="file" class="btn-2"><img id="upload" src="{{URL('image\all\upload_black.png')}}" alt="upload"></label>
+
+                    <a href="#"  id="save" class="login__button">Create</a>
+   
+                </form>
+             
+            </div>
         </div>
+    </div>
 
-        <div>
-            <label style="color: aliceblue">Code</label>
-            <input class="form-control" type="text" placeholder="code" name="code" value="{{ old('code') }}">
-        </div>
-
-        <div>
-            <label style="color: aliceblue">Img</label>
-            <input class="form-control" type="file" placeholder="Img" name="img" value="{{ old('img') }}">
-
-        </div>
-
-        <div>
-            <button id="save" class="btn btn-success" style="margin-left: 46%;margin-top: 5%">Save</button>
-        </div>
-    </form>
-    <br><br>
-    <button id="create" class="btn btn-success" style="margin-left: 46%;margin-top: 5%">Save</button>
-
-<div style="margin-top: 450px">
 
     <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
     <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
@@ -58,19 +70,8 @@
     <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
     <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
 
-</div>
 
-<script>
 
-    const create = document.getElementById('create');
-        
-        create.addEventListener('click', () => {
-            $('#departmentsForm').show();
-
-        });
-    
-       
-    </script>
 
 <script>
 

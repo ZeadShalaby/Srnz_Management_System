@@ -91,11 +91,12 @@
 
         <label for = "password" name="password">Password</label>
         <input type="password" id="password" name="password" class="input" value="{{old('password')}}"/>
-
+        <br>
+        <a href="{{route('forgetindex')}}" style="text-decoration: none;color: rgb(0, 183, 255)"> forget passsword ..?</a>
 
         <input type="submit" name="login" class ="login" value="Login"/>
 
-        <div class="social-media">
+        <div class="social-media" style="margin-top: 10px">
           <a href="{{ url('/redirect/google') }}"><i class="fab fa-facebook"></i></a>
           <a href="#"><i class="fab fa-instagram"></i></a>
           <a href="{{ url('/redirect/google') }}"><i class="fab fa-google"></i></a>

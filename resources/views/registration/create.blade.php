@@ -12,19 +12,40 @@
 
     <title>Create CUSTOMER</title>
 </head>
-<body style=" background-image:url({{URL('image/all/background.png')}});">
+<style>
+section{
+  width: 100%;
+  background-position: center;
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  background-image:url({{URL('image/all/background.png')}});
+  background-size:cover;
+  animation-name: animateBg ;
+  animation: animateBg 10s infinite;
+}
+  @keyframes animateBg {
+  100%{
+   filter: hue-rotate(360deg);
+  }
+  } 
+</style>
+<body >
     @extends('layout.regist')
     @section('register')
-        
     <div class="alert alert-success" id="success_msg" style="display: none; color:blue">
-        Create Sucessfuly .
-     </div>
+      Create Sucessfuly .
+   </div>
      
- 
+     <section>    
+      
     <div class="container">
         <form  id="form" class="form">
             @csrf
-
+         <img src="{{URL('image\all\logo_srnz.png')}}" alt="LogoSrnz" id="logo_srnz">
             <h2>Register SRNZ</h2>
           <div class="form-control" id="Name">
             <label for="username">Username</label>
@@ -54,8 +75,8 @@
           <button id="create" type="submit" class="nn btn btn-success" >Create</button>
         </form>
       </div>
+    </section>
 
-     
       @endsection
 
       

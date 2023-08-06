@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\ValidationExceptio;
@@ -55,7 +56,7 @@ class UsersController extends Controller
         //Create Admin
         $sourcename = DB::table('users')->where('name', $request->name)->value('name');
         $sourceemail = DB::table('users')->where('email', $request->email)->value('email');
-
+          
         $formFields = $request->validate([
             
             'phone'=> 'required',
@@ -85,13 +86,15 @@ class UsersController extends Controller
                 ]);
             }
             else{
+                
+                $pass = $encrypted = Crypt::encryptString($request->password);
                 $user = User::create([
                     'name'=> $request->name,
                     'email'=> $request->email,
                     'gmail'=>$request->gmail,
                     'profile_photo'=>"jjjjjjj",
                     'phone'=>$request->phone,
-                    'password'=> $request->password,
+                    'password'=> $pass,
                     'role'=>Role::ADMIN,
                     'remember_token' => Str::random(10),
                  ]);  
@@ -227,6 +230,16 @@ class UsersController extends Controller
     {
         Auth::logout();
         return redirect('Home_SRNZ');
+    }
+
+    // return page forget 
+    public function forgetindex(){
+            return view('login.forget');
+    }
+
+      // forget password
+      public function forget(){
+        
     }
 
     //autocompleteSearch

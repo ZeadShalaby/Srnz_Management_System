@@ -14,7 +14,7 @@
 </div>
 
     <h1>Users
-    <a href="{{route('users.create')}}"> <img width="50px" height="50px" src="{{URL('image/add1.png')}}"  alt="add" > Create New Admin</i>
+    <a href="{{route('users.create')}}"> <img width="50px" height="50px" src="{{URL('image/all/add1.png')}}"  alt="add" > Create New Admin</i>
     </a>
     </h1>
     <br>

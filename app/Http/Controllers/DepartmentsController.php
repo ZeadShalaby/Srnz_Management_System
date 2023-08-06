@@ -118,15 +118,19 @@ class DepartmentsController extends Controller
 
             'name' => 'required',
             'code' => 'required',
-            'img'  => 'required|image|mimes:jpg,png,gif|max:2048',
+            //'img'  => 'required|image|mimes:jpg,png,gif|max:2048',
 
         ]);
 
         //update img
         //update image
         $folder = 'image/departments';
+        if(!isset($request->img)){
+            $file_name = $department->img;
+        }
+       else{
         $file_name = $this->saveImage($request->img,$folder);
-        
+       }
         
 
         $department->update([

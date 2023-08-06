@@ -28,10 +28,10 @@ use App\Http\Controllers\InterestedsController;
     Route::get('/', function () {
         return redirect('/logout');
         });
-        //Home SRNZ
+        // Home SRNZ
         Route::get('/Home_SRNZ', [UsersController::class, 'Home_SRNZ'])->name('Home_SRNZ');
 
-        //Login
+        // Login
         Route::get('/login', [UsersController::class, 'loginIndex'])->name('loginindex');
         Route::post('/login/checklogin', [UsersController::class, 'checklogin']);
         Route::get('/login/checklogin',function (){redirect(route('logout'));});
@@ -48,7 +48,9 @@ use App\Http\Controllers\InterestedsController;
         Route::get('/auth/linkedin/callback',[ServiceController::class,'linkedincallback'])->name('/auth/linkedin/callback'); 
         // callback Facebook 
         Route::get('/auth/facebook/callback',[ServiceController::class,'facebookcallback'])->name('/auth/facebook/callback');
-    
+        // forget
+        Route::get('/forget', [UsersController::class, 'forgetindex'])->name('forgetindex');
+        Route::post('/forget/users', [UsersController::class, 'forget'])->name('forget.password');
 
 
     //Auth Middleware

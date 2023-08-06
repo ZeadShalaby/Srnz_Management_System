@@ -253,8 +253,14 @@ message--danger
         </svg>
     </button>
    
-
-
+<!-- Delete Account -->
+    <div >
+      <form action="{{route('registration.destroy',$SeCustomer->id)}}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button  account_name={{$SeCustomer->id}} class="delete_account  " ><i class="fa fa-trash" style="color: rgb(248, 0, 0);margin-top: -5px"></i></button>
+      </form>
+  </div>
 
 
 </div>
