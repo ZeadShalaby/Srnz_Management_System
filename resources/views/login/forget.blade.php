@@ -25,10 +25,12 @@
       <div class="container">
         <div class="wrapper">
           <header>Forgot password</header>
-          <form action="#" method="post">
+          <form method="" action="" id="forgetform">
+            {{ csrf_field() }}            
             <div class="field email">
               <div class="input-area">
-                <input type="text" placeholder="Email Address">
+                <input type="text" placeholder="Email Address" name="email">
+
                 <i class="icon fa fa-envelope" id="icon1"></i>
                 <i class="error error-icon fa fa-exclamation-circle"></i>
               </div>
@@ -36,18 +38,25 @@
             </div>
             <div class="field password">
               <div class="input-area">
-                <input type="password" placeholder="Last Password">
+                <input type="password" placeholder="Last Password" name="password">
                 <i class="icon fa fa-lock" id="icon1"></i>
                 <i class="error error-icon fa fa-exclamation-circle"></i>
               </div>
               <div class="error error-txt">Password can't be blank</div>
             </div>
-            <input type="submit" value="Login">
+            <button id="forget" >Login</button>
+
           </form>
           <div class="sign-txt">Not yet member? <a href="#">Send_Admin</a></div>
         </div>             
       </div>
     </div>
+
+
+  
+  
+
+
     @endsection
 </body>
 

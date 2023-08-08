@@ -9,6 +9,10 @@
 <body>
     @extends('extends')
     @section('content')
+        
+    @endsection
+    
+
     <div class="alert alert-success" id="success_msg" style="display: none;">
         Delete Sucessfuly .
      </div>
@@ -148,6 +152,5 @@
     });
 </script>
 
-    @endsection
 </body>
 </html>

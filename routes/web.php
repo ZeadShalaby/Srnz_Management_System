@@ -50,7 +50,7 @@ use App\Http\Controllers\InterestedsController;
         Route::get('/auth/facebook/callback',[ServiceController::class,'facebookcallback'])->name('/auth/facebook/callback');
         // forget
         Route::get('/forget', [UsersController::class, 'forgetindex'])->name('forgetindex');
-        Route::post('/forget/users', [UsersController::class, 'forget'])->name('forget.password');
+        Route::post('/forget/users', [UsersController::class, 'forget'])->name('forget');
 
 
     //Auth Middleware

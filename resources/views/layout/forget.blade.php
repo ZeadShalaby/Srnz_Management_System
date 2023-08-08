@@ -40,7 +40,7 @@ form.onsubmit = (e)=>{
   eInput.onkeyup = ()=>{checkEmail();} //calling checkEmail function on email input keyup
   pInput.onkeyup = ()=>{checkPass();} //calling checkPassword function on pass input keyup
   function checkEmail(){ //checkEmail function
-    let pattern = /^[^ ]+@[^ ]+\.[a-z]{3,3}$/; //pattern for validate email
+    let pattern = /^[^ ]+@[^ ]+\.[a-z]{3,4}$/; //pattern for validate email
     if(!eInput.value.match(pattern)){ //if pattern not matched then add error and remove valid class
       eField.classList.add("error");
       eField.classList.remove("valid");
@@ -63,8 +63,46 @@ form.onsubmit = (e)=>{
   }
   //if eField and pField doesn't contains error class that mean user filled details properly
   if(!eField.classList.contains("error") && !pField.classList.contains("error")){
-    window.location.href = form.getAttribute("action"); //redirecting user to the specified url which is inside action attribute of form tag
+
+
+$.ajax({
+    type: 'post',
+    url: "{{ url('/forget/users') }}",
+    data: eField,
+    processData: false,
+    contentType: false,
+    cache: false,
+    success: function (data) {
+
+        if (data.status == true) {
+            $('#error').hide();
+            $('#name_error_msg').hide();
+            $('#code_error_msg').hide();
+            $('#success_msg').show();
+        }
+        if (data.type == 'code') {
+            $('#error').hide();
+            $('#name_error_msg').hide();
+            $('#code_error_msg').show();
+        }
+        if (data.type == 'name') {
+            $('#error').hide();
+            $('#code_error_msg').hide();
+            $('#name_error_msg').show();
+        }
+
+    }, error: function (reject) {
+        var response = $.parseJSON(reject.responseText);
+       
+        $.each(response.errors, function (key, val) {
+            $("#error").text(val[0]).show();
+        });}
+       
+});
+    //redirecting user to the specified url which is inside action attribute of form tag
   }
+
+  
 }
 </script>
 </body>

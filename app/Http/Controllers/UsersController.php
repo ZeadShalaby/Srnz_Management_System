@@ -238,8 +238,11 @@ class UsersController extends Controller
     }
 
       // forget password
-      public function forget(){
+      public function forget(Request $request){
         
+       dd($request);
+        
+    
     }
 
     //autocompleteSearch

@@ -141,7 +141,13 @@ class OrdersSiteController extends Controller
 
         //update image
         $folder = 'image/orders';
+        if(!isset($request->path)){
+            $file_name = $ordersite->path;
+        }
+       else{
         $file_name = $this->saveImage($request->path,$folder);
+       }
+        
         //update
         $ordersite->update([
             'name'=> $request->name,
