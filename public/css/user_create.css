@@ -17,10 +17,9 @@
   position: relative;
   height: 670px;
   display: flex;
-  margin-top: -350px;
   justify-content: center; 
   align-items: center;
-  margin-left: 300px;
+  margin-left: 400px;
   }
   .square i{
   position: absolute;
@@ -149,8 +148,8 @@
   .bg-div {
       height: 205px;
       width: 205px;
-      margin-left: 1150px;
-      margin-top: -700px;
+      margin-left: 1240px;
+      margin-top: -120px;
       background: url('http://s2.music.126.net/style/web2/img/coverall.png?e8cb94d884e56897e524dec54b947d6e') no-repeat;
       background-position: -140px -580px;
       > img {

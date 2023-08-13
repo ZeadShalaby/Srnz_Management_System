@@ -36,7 +36,7 @@ use App\Http\Controllers\InterestedsController;
         Route::post('/login/checklogin', [UsersController::class, 'checklogin']);
         Route::get('/login/checklogin',function (){redirect(route('logout'));});
         Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
-        // Sinup 
+        // Sinup //section departments
         Route::resource('/registration', RegisterController::class);
         // login with social
         Route::get('/redirect/{service}',[ServiceController::class,'redirect']);
@@ -90,9 +90,9 @@ use App\Http\Controllers\InterestedsController;
         Route::get('/autocomplete-search-users', [UsersController::class, 'autocompleteSearch']);
         //search-users
         Route::POST('/search-users', [UsersController::class, 'search_users'])->name('users.search');
-        
-       });
     
+       });
+       
     //Customer Middleware
     Route::middleware(CheckCustomerRole::class)->group(function () {
         // controller with rescource

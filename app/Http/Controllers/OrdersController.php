@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Orders;
 use App\Traits\ImgTrait;
+use App\Models\Departments;
 use App\Models\Interesteds;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,17 +24,23 @@ class OrdersController extends Controller
     public function index()
     {
         //
+        $useres = auth()->user();
         $orders = Orders::paginate(10);
         $interested = Interesteds::get();
         $check=Role::ADMIN;
+        $departments = Departments::get();
         if($interested){
-        return view('orders.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'check'=>$check]);
+        return view('orders.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'check'=>$check,'SeAdmin'=>$useres,'Departments'=>$departments]);
         }
         else{
-            return view('orders.index',['orders'=>$orders,'interesteds'=>$interested,'check'=>$check]);
+            return view('orders.index',['orders'=>$orders,'interesteds'=>$interested,'check'=>$check,'SeAdmin'=>$useres,'Departments'=>$departments]);
         }
 
     }
+
+   
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -58,10 +65,12 @@ class OrdersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Orders $order)
+    public function show(orders $order)
     {
         //
-    return view('orders.show',['orders'=>$order]);
+        $useres = auth()->user();
+
+    return view('orders.show',['orders'=>$order,'SeAdmin'=>$useres]);
 
 
     }
@@ -116,7 +125,8 @@ class OrdersController extends Controller
     //view restore
     public function restore_index()
     {
-        return view('trash.orders_restore', ['orders' => Orders::onlyTrashed()->paginate(10)]);
+        $useres = auth()->user();
+        return view('trash.orders_restore', ['orders' => Orders::onlyTrashed()->paginate(10),'SeAdmin'=>$useres]);
      }
     
     // restore

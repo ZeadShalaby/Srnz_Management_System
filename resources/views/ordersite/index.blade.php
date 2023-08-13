@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+    <link href="{{asset('css/orders-img.css')}}" rel="stylesheet">
+    <link href="{{asset('css/card-orders.css')}}" rel="stylesheet">
+
     <title>Orders</title>
 </head>
 <body>
@@ -18,29 +22,50 @@
     </a></h1>
    
     <br>
-    <div class="container mt-5">
-           <div classs="form-group">
+    <div class="departments">
+        @foreach ($Departments as $department)
+        <a href="{{route('registration.show',$department->id)}}" class="inside-page__btn inside-page__btn--beach">
+            
+                <img src="{{asset('image/departments/'.$department->img)}}" alt="{{$department->name}}" class="hoverZoomLink" id="img" >
+              
+        </a>
                
-               <button id="searchs" class=" btn btn-danger" name="searchs"> <i class='bx bx-search' ></i></button>
-               <input type="text" id="search" name="search" placeholder="Search" class="form-control" />
-   
-           </div>
-       </div>
-   
-       <br><br>
-     <div class="AllData">  
-    @foreach ($orders as $order)
-    <div class="OrderRow{{$order->id}}">
-    <a href="{{route('ordersite.show',$order->id)}}" class="inside-page__btn inside-page__btn--beach">
-       
-        {{$order->id}}-{{$order->name}}
-        <br>
-        {{$order->user->name}}
-        <br>
-        {{$order->description}}
-        <br>
-        {{$order->price}}
-    </a>
+        
+        <span style="color: red">-</span>
+        @endforeach
+    </div>
+    <br><br>
+    <div class="AllData">  
+        @foreach ($orders as $order)
+        <div class="OrderRow{{$order->id}}">
+            <div class="container">
+                <div class="box">
+   <a href="{{route('ordersite.show',$order->id)}}" style="text-decoration: none">
+    
+           <span style="color: aquamarine" >{{$order->user->name}}</span>
+<br><br>
+                <article class="card">
+                    <img
+                    class="card__background"
+                    src="{{asset('image/orders/try.png')}}"
+                    alt="{{$order->name}}"
+                    width="1920"
+                    height="2193"
+                    />
+                    <div class="card__content | flow">
+                    <div class="card__content--container | flow">
+                        <h2 class="card__title">{{$order->name}}</h2>
+                        <p class="card__description">
+                            {{$order->description}}
+                        </p>
+                        <p>COST :{{$order->price}}</p>
+
+                    </div>
+                        
+                    </div>
+                </article>
+     
+</a>
 
 @isset($sefav)
     
@@ -53,12 +78,14 @@
         <img src="{{url('image\all\nview.png')}}" alt="vieweer" style="width: 30px">
         @endisset
         </div>    
+        <div class="under_img">
 
+<div style="margin-left: 200px;margin-top: -35px">
         <button  orders_id = {{$order->id}} name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" id ="fav{{$order->id}}" style="color: gold;" ></i></button> 
         @isset($interesteds)
         @foreach ($interesteds as $interested)
         @if(($interested->user_id==$userid)&($interested->order_id==$order->id))
-       <div style="margin-top: -48px">
+       <div style="margin-top: -20px">
         <button orders_id = {{$order->id}}  name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" style="color: red;" ></i></button> 
        </div>
         @endif
@@ -66,7 +93,8 @@
         
 
         @endisset 
-
+</div>
+        </div>
         @endif
 
         <br><br>
@@ -85,8 +113,14 @@
         @endforeach 
         @endisset 
        </div>
+       </div>
+</div>
     @endforeach
      </div>
+     <div style="margin-left: 1000px">
+        {{$orders->links()}}
+    </div>
+    
 <!-- return search -->
 <div id="conte" class="searchdata">
 </div>
@@ -211,13 +245,8 @@
     });
     </script>
 
-    <br>
-    {{ $orders->links() }}
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">OR-restore</a>
-    <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-    <br>
+
+
    
     @endsection
     

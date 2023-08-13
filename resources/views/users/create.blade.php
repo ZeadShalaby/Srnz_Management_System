@@ -5,20 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/user_create.css')}}">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+
     <title>Create Admin</title>
 </head>
 <body>
+    
     @extends('extends')
     @section('content')
-    <div class="alert alert-success" id="success_msg" style="display: none; margin-top:-200px">
-        Create Sucessfuly .
-     </div>
-     <div class="alert alert-danger" id="name_error_msg" style="display: none;">
-        Name Oreday Exist .
-     </div>
-     <div class="alert alert-danger" id="email_error_msg" style="display: none;">
-        email Oreday Exist .
-     </div>
+        @extends('layout.message-create')
+        @section('messages_create')
+        @endsection 
+
+        @extends('layout.messageerror')
+        @section('message_danger')
+        @endsection 
+    
      <div id='error' class="alert alert-danger error-text code_error" style="display: none;"></div>
 
     <br>
@@ -105,6 +107,8 @@
                     if (data.status == true) {
                         $('#error').hide();
                         $('#success_msg').show();
+                        document.getElementById("usersForm").reset();  
+
                     }
                     if (data.type == 'email') {
                         $('#error').hide();

@@ -61,7 +61,6 @@
     min-width: 50px;
     font-size: 28px;
     text-align: center;
-    margin-left: -33px;
     line-height: 60px;
   }
   .sidebar .nav-list{
@@ -146,7 +145,7 @@
     background: #11101D;
   }
   .sidebar li a:hover{
-    background: #d7d6d6;
+    background: #FFF;
   }
   .sidebar li a .links_name{
     color: #fff;

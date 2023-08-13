@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/restore.css')}}">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+
     <title>Restore Departments</title>
 </head>
 <body id="body">
     @extends('extends')
     @section('content')
-    <div class="alert alert-success" id="success_msg" style="display: none;">
-       Department Restore Sucessfuly .
-    </div>
+    @extends('layout.message-trash-dep')
+    @section('trash_dep')
+        
+    @endsection
 
     <h1 id="h1">Restore Departments</h1>
     <br><br>
@@ -32,16 +35,9 @@
 </div>
     </div>
     @endforeach
-    <br>
-    {{ $departments->links() }}
-<div style="margin-top: 500px">
-    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
-    <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-    <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
-    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
-</div>
-    <br>
+
+    
+         
 
     <script>
 

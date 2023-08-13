@@ -4,18 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
     <title>Departments</title>
 </head>
 <body>
+   
+
     @extends('extends')
     @section('content')
         
     @endsection
     
 
-    <div class="alert alert-success" id="success_msg" style="display: none;">
-        Delete Sucessfuly .
-     </div>
+    @extends('layout.message-department')
+    @section('messages_dep')
+    @endsection
+    
     <h1>Departments
         <a href="{{route('departments.create')}}"> <img width="50px" height="50px" src="{{URL('image/all/add1.png')}}"  alt="add" ></i>
         </a>
@@ -24,7 +30,7 @@
         <div classs="form-group">
             
                 <button type="submit" name="search"> <i class='bx bx-search' ></i></button>
-                <input type="text" id="search_dep" name="search" placeholder="Search" class="form-control" />
+                <input type="text" id="search" name="search" placeholder="Search" class="form-control" />
                 
         </div>
     </div>
@@ -58,14 +64,7 @@
 <div id="conte" class="searchdata">
 </div>
 
-    {{ $departments->links() }}
-
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
-    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
-    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
-
+    
 
     <br>
  
@@ -101,7 +100,7 @@
 <!-- Auto Complite Search -->
     <script type="text/javascript">
         var route = "{{ url('autocomplete-search-departments') }}";
-        $('#search_dep').typeahead({
+        $('#search').typeahead({
             source: function (query, process) {
                 return $.get(route, {
                     query: query
@@ -118,7 +117,7 @@
 <script type="text/javascript">
 
 
-    $('body').on('keyup','#search_dep',function(){
+    $('body').on('keyup','#search',function(){
       //  alert('hello');
         var search_dep = $(this).val();
 

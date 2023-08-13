@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/restore.css')}}">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+
     <title>Orders</title>
 </head>
 <body id="body">
@@ -19,9 +21,10 @@
     </div>
     @endif
     
-    <div class="alert alert-success" id="success_msg" style="display: none;">
-        Orders Restore successfully .
-    </div>
+    @extends('layout.message-trash-ord')
+    @section('trash_ord')
+        
+    @endsection
     
     <h1 id="h1">Orders Restore</h1>
 <br>
@@ -47,16 +50,6 @@
 
      
     @endforeach
-    <br>
-    {{ $orders->links() }}
-    <div style="margin-top: 500px">
-
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">Or-restore</a>
-    <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-    </div>
-    <br>
     <script>
 
         $(document).on('click', '.restore_btn', function (e) {

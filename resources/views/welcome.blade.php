@@ -1,3 +1,39 @@
+
+<!--- setting page --->
+@if (session('status'))
+        @extends('layout.messages-success')
+        @section('messages_success')
+        @endsection
+        
+    @endif
+
+<!--extends after do css generate design -->
+@if(isset($orders))
+<div class="paginator" style="margin-left: 1200px; margin-top:-1000px">
+  {{ $orders->links() }}
+</div>
+@else
+@if(isset($departments))
+<div class="paginator" style="margin-left: 1200px; margin-top:-1000px">
+  {{ $departments->links() }}
+</div>
+@else   
+@if (isset($users))
+<div class="paginator" style="margin-left: 1200px; margin-top:-1000px">
+  {{ $users->links() }}
+</div>
+@else
+@endif @endif @endif    
+
+<!---  image users card  --->
+<img src="{{asset('image/users/'.$users->profile_photo)}}" style="width: 90px;margin-top: -10px;" alt="users" >
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>

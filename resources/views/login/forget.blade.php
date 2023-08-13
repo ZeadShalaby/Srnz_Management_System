@@ -9,12 +9,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/forget.css')}}">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
 
-    <title>Home_Hotel_Fox</title>
+    <title>Forget Account</title>
 </head>
 <body>
-    @extends('layout.forget')
-    @section('forget')
+  @extends('layout.forget')
+  @section('forget')
+      
   <div class="background3">
       
     <div class="shape3"><div class="project"><a href="{{route('loginindex')}}" class="team_project" ><img src="{{URL('image/all/back.png')}}" alt="Back" class="img"></a></div></div>
@@ -25,7 +27,7 @@
       <div class="container">
         <div class="wrapper">
           <header>Forgot password</header>
-          <form method="" action="" id="forgetform">
+          <form method="" action="{{route('forget')}}" >
             {{ csrf_field() }}            
             <div class="field email">
               <div class="input-area">
@@ -44,7 +46,7 @@
               </div>
               <div class="error error-txt">Password can't be blank</div>
             </div>
-            <button id="forget" >Login</button>
+            <input type="submit" value="Login">
 
           </form>
           <div class="sign-txt">Not yet member? <a href="#">Send_Admin</a></div>
@@ -53,11 +55,10 @@
     </div>
 
 
-  
-  
-
-
     @endsection
+
+
+    
 </body>
 
 

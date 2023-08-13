@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{asset('css/orders.show.css')}}" rel="stylesheet">
+    <link href="{{asset('css/orders.css')}}" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
     <title>Orders Information</title>
 </head>
 <body>
@@ -12,7 +15,7 @@
     @section('content')
     
     <div class="alert alert-success" id="success_msg" style="display: none;">Add your favourite .</div>
-    <div class="alert alert-danger" id="error_msg" style="display: none;">Alredy Aded Favourite .</div>
+    <div class="alert alert-danger" id="error_msg" style="display: none; color:rebeccapurple">Alredy Aded Favourite .</div>
     <div class="alert alert-success" id="success_msg" style="display: none;">Delete Sucessfuly .</div>
 
    <h1>SHOW Orders</h1>
@@ -30,7 +33,7 @@
           @isset($interesteds)
           @foreach ($interesteds as $interested)
           @if(($interested->user_id==$userid)&($interested->order_id==$orders->id))
-          <div style="margin-top: -48px">
+          <div style="margin-top: -48px;margin-left: 158px">
           <button orders_id = {{$orders->id}}  name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" style="color: red;" ></i></button> 
           </div>
           @endif
@@ -109,12 +112,6 @@
            });
              
            </script>
-  
-  <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-  <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
-  <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">OR-restore</a>
-  <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-
 
 
     <br>

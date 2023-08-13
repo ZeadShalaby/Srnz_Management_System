@@ -7,10 +7,48 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="{{asset('css/order.css')}}">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+
     <title>ADD Orders </title>
 </head>
 <body>
+   @extends('extends')
+   @section('cintent')
+       
+   @endsection
+@if(session('status'))
+    @extends('layout.message-create')
+    @section('messages_create')
+    @endsection
    
+@endif
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{session('error')}}
+     </div>
+
+@endif
+@if(session('important'))
+    <div class="alert alert-danger">
+        {{session('important')}}
+     </div>
+
+@endif
+    
+
+
+@if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+
 
     <div class="bold"></div>
 
@@ -69,7 +107,7 @@
           
          
 
-           <button class="create" type="submit" id="save" >Save</button>
+           <button class="create"  id="save" >Save</button>
 
 </form>
     </div>
@@ -83,35 +121,6 @@
 </div>
 
 
-@if(session('status'))
-    <div class="alert alert-success">
-        {{session('status')}}
-     </div>
-@endif
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{session('error')}}
-     </div>
-
-@endif
-@if(session('important'))
-    <div class="alert alert-danger">
-        {{session('important')}}
-     </div>
-
-@endif
-    
-
-
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
 </body>
 </html>

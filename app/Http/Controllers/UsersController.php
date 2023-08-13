@@ -28,15 +28,20 @@ class UsersController extends Controller
     public function index()
     {
         //
+        $user = auth()->user();
+
         $users = User::where('role',Role::CUSTOMER)->paginate(10);
         
-        return view('users.index',['users'=>$users,'roles'=>1]);
+        return view('users.index',['users'=>$users,'roles'=>1,'SeAdmin'=>$user]);
 
     }
 
     public function admin(){
+        $user = auth()->user();
+
         $users = User::where('role',Role::ADMIN)->where('name','!=','Admin')->paginate(10);
-        return view('users.index',['users'=>$users,'roles'=>1]);
+        
+        return view('users.index',['users'=>$users,'roles'=>1,'SeAdmin'=>$user]);
     }
 
     /**
@@ -45,7 +50,9 @@ class UsersController extends Controller
     public function create()
     {
         //
-        return (view('users.create'));
+        $user = auth()->user();
+        
+        return (view('users.create',['SeAdmin'=>$user]));
     }
 
     /**
@@ -112,7 +119,9 @@ class UsersController extends Controller
     public function show(User $user)
     {
         //
-        return view('users.show',['users'=>$user]);
+        $useres = auth()->user();
+        
+        return view('users.show',['users'=>$user,'SeAdmin'=>$useres]);
 
     }
 
@@ -122,7 +131,9 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         //
-        return view('users.edit',['users'=>$user]);
+        $useres = auth()->user();
+        
+        return view('users.edit',['users'=>$user,'SeAdmin'=>$useres]);
     }
 
     /**
@@ -239,9 +250,21 @@ class UsersController extends Controller
 
       // forget password
       public function forget(Request $request){
+        dd($request);
+        $result = $this->forgetCheck($request);
+        if (!(Auth::attempt($result->user_data))) {
+            return back()->with('error', 'Wrong Login Details');
+        }
+        if (Auth::user()->role == Role::ADMIN) {
+            return view('home-page.admin',['SeAdmin'=>$result->source]);
+        }
+        if (Auth::user()->role == Role::CUSTOMER) {
+
+            return view('home-page.customer',['SeCustomer'=>$result->source]);
+
+        }
         
-       dd($request);
-        
+        return redirect('/login');        
     
     }
 

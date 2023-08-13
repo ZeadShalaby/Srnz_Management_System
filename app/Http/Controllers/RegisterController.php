@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Orders;
+use App\Models\Departments;
+use App\Models\Interesteds;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -110,9 +113,36 @@ class RegisterController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Departments $registration)
     {
         //
+        $check = auth()->user();
+        if(!$check){
+           $check = 0 ;
+           return view('errors.403');
+        }
+        else{
+        $useres = auth()->user();
+        $orders = Orders::where('department_id',$registration->id)->paginate(10);
+        $orders_user = Orders::where('user_id', Auth::user()->id)->get();
+        $interested = Interesteds::get();
+        $departments = Departments::get();
+        if($interested){
+            if(auth()->user()->role==Role::ADMIN)
+        return view('orders.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'check'=>Role::ADMIN,'SeAdmin'=>$useres,'Departments'=>$departments]);
+            else{
+                return view('ordersite.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'orders_user'=>$orders_user,'SeCustomer'=>$useres,'Departments'=>$departments]);
+            }
+        }
+        else{
+            if(auth()->user()->role==Role::ADMIN)
+            return view('orders.index',['orders'=>$orders,'interesteds'=>$interested,'check'=>Role::ADMIN,'SeAdmin'=>$useres,'Departments'=>$departments]);
+            else{
+                return view('ordersite.index',['orders'=>$orders,'interesteds'=>$interested,'orders_user'=>$orders_user,'SeCustomer'=>$useres,'Departments'=>$departments]);
+            }
+        }
+        }
+
     }
 
     /**

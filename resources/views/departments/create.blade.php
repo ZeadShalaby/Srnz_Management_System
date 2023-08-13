@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/department_create.css')}}">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+
     <title>ADD Departments </title>
 </head>
 <body style="background-color: rgb(27, 26, 26)">
+   
     @extends('extends')
     @section('content')
     <div class="alert alert-success" id="success_msg" style="display: none;">

@@ -7,7 +7,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js">
     </script>
- <link rel="stylesheet" href="{{asset('css/register.css')}}">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{asset('css/register.css')}}">
     
 
     <title>Create CUSTOMER</title>

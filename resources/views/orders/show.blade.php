@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{asset('css/orders.show.css')}}" rel="stylesheet">
-
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
     <title>Orders Information</title>
 </head>
 <body>
     @extends('extends')
     @section('content')
     @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
+        @extends('layout.message-update-success')
+        @section('messages_success')
+            
+        @endsection
     @endif
    <h1>SHOW Orders</h1>
    <br>
@@ -60,13 +61,6 @@
   
   
   
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
-    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
-    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
-    <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
-
 
     <br>
     @endsection
