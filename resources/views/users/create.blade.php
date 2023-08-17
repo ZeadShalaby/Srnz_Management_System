@@ -4,67 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{asset('css/user_create.css')}}">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+
     <title>Create Admin</title>
 </head>
 <body>
+    
     @extends('extends')
     @section('content')
-    <div class="alert alert-success" id="success_msg" style="display: none;">
-        Create Sucessfuly .
-     </div>
-     <div class="alert alert-danger" id="name_error_msg" style="display: none;">
-        Name Oreday Exist .
-     </div>
-     <div class="alert alert-danger" id="email_error_msg" style="display: none;">
-        email Oreday Exist .
-     </div>
-     <div id='error' class="alert alert-danger error-text code_error" style="display: none"></div>
-    <h1>Create Admin</h1>
+        @extends('layout.message-create')
+        @section('messages_create')
+        @endsection 
+
+        @extends('layout.messageerror')
+        @section('message_danger')
+        @endsection 
+    
+     <div id='error' class="alert alert-danger error-text code_error" style="display: none;"></div>
+
     <br>
-    <form action="{{route('users.store')}}" id="usersForm" method="post" enctype="multipart/form-data" style="margin-top:10%;margin-left: 20%;position: absolute; background-color: black ;border: 2px solid rgb(64, 64, 64) ;border-radius: 20px;width: 50%">
-        @csrf
-        <div>
-            <label style="color: aliceblue">Name</label>
-            <input class="form-control" type="text" placeholder="Name" name="name" value="{{ old('name') }}">
-            
-        </div>
-       
+    
+    <div class="square">
 
-        <div>
-            <label style="color: aliceblue">Email</label>
-            <input class="form-control" type="text" placeholder="email" name="email" value="{{ old('email') }}">
-            
-        </div>
-        <div>
-            <label style="color: aliceblue">password</label>
-            <input class="form-control" type="password" placeholder="password" name="password" value="{{ old('password') }}">
+        <i style="--clr:#fffd44;"></i>
+        
+        <i style="--clr:#ff0057;"></i>
+        
+        <i style="--clr:#f20de6; "></i>
+        
+        <div class="login">
+        <form class="login" action="{{route('users.store')}}" id="usersForm" method="post" enctype="multipart/form-data">
+            @csrf
            
-        </div>
-        <div>
-            <label style="color: aliceblue">gmail</label>
-            <input class="form-control" type="text" placeholder="gmail" name="gmail" value="{{ old('gmail') }}">
-            
+            <h2>Create Admin</h2>
+        
+        <div class="inputBx" id="username">
+           
+        <input  type="text" placeholder="Username" name="name" value="{{ old('name') }}">
+                
         </div>
         
+        <div class="inputBx" id="email"> 
+        
+            <input  type="text" placeholder="Enter Email" name="email" value="{{ old('email') }}">
 
-        <div>
-            <label style="color: aliceblue">phone</label>
-            <input class="form-control" type="text" placeholder="phone" id="phone" name="phone" value="{{ old('phone') }}">
-            
+        </div>
+        
+        <div class="inputBx" id="password"> 
+        
+            <input  type="password" placeholder="password" name="password" value="{{ old('password') }}">
+        
+        </div>
+        <div class="inputBx" id="gmail"> 
+        
+            <input  type="text" placeholder="gmail" name="gmail" value="{{ old('gmail') }}">
+        
+        </div>
+        <div class="inputBx" id="phone"> 
+        
+            <input  type="text" placeholder="phone" id="phone" name="phone" value="{{ old('phone') }}">
+        
+        </div>
+        <div class="inputBx">
+      <button class="btn btn-success" type="submit" id="create_Admin"> 
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Create</button>
         </div>
 
         
-        
-<br>
+        </form>
+        </div> 
+    </div>
+    <div class="bg-div">
+        <img src="{{URL('image\all\logo_srnz.png')}}" alt="img" />
+    </div>
 
-        <div>
-            <button class="btn btn-success" id="save" style="margin-left: 46%;margin-top: -5%" >Create</button>
-        </div>
-    </form>
+
+
+
 
 <script>
 
-        $(document).on('click', '#save', function (e) {
+        $(document).on('click', '#create_Admin', function (e) {
             e.preventDefault();
     
             var formData = new FormData($('#usersForm')[0]);
@@ -82,6 +107,8 @@
                     if (data.status == true) {
                         $('#error').hide();
                         $('#success_msg').show();
+                        document.getElementById("usersForm").reset();  
+
                     }
                     if (data.type == 'email') {
                         $('#error').hide();

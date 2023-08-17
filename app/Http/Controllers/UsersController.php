@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\ValidationExceptio;
@@ -27,15 +28,20 @@ class UsersController extends Controller
     public function index()
     {
         //
+        $user = auth()->user();
+        $usersrole = Role::CUSTOMER;
         $users = User::where('role',Role::CUSTOMER)->paginate(10);
         
-        return view('users.index',['users'=>$users,'roles'=>1]);
+        return view('users.index',['users'=>$users,'roles'=>1,'SeAdmin'=>$user,'usersrole'=>$usersrole]);
 
     }
 
     public function admin(){
+        $user = auth()->user();
+        $usersrole = Role::CUSTOMER;
         $users = User::where('role',Role::ADMIN)->where('name','!=','Admin')->paginate(10);
-        return view('users.index',['users'=>$users,'roles'=>1]);
+        
+        return view('users.index',['users'=>$users,'roles'=>1,'SeAdmin'=>$user,'usersrole'=>$usersrole]);
     }
 
     /**
@@ -44,7 +50,9 @@ class UsersController extends Controller
     public function create()
     {
         //
-        return (view('users.create'));
+        $user = auth()->user();
+        
+        return (view('users.create',['SeAdmin'=>$user]));
     }
 
     /**
@@ -55,7 +63,7 @@ class UsersController extends Controller
         //Create Admin
         $sourcename = DB::table('users')->where('name', $request->name)->value('name');
         $sourceemail = DB::table('users')->where('email', $request->email)->value('email');
-
+          
         $formFields = $request->validate([
             
             'phone'=> 'required',
@@ -85,13 +93,15 @@ class UsersController extends Controller
                 ]);
             }
             else{
+                
+                $pass = $encrypted = Crypt::encryptString($request->password);
                 $user = User::create([
                     'name'=> $request->name,
                     'email'=> $request->email,
                     'gmail'=>$request->gmail,
                     'profile_photo'=>"jjjjjjj",
                     'phone'=>$request->phone,
-                    'password'=> $request->password,
+                    'password'=> $pass,
                     'role'=>Role::ADMIN,
                     'remember_token' => Str::random(10),
                  ]);  
@@ -109,7 +119,9 @@ class UsersController extends Controller
     public function show(User $user)
     {
         //
-        return view('users.show',['users'=>$user]);
+        $useres = auth()->user();
+        
+        return view('users.show',['users'=>$user,'SeAdmin'=>$useres]);
 
     }
 
@@ -119,7 +131,9 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         //
-        return view('users.edit',['users'=>$user]);
+        $useres = auth()->user();
+        
+        return view('users.edit',['users'=>$user,'SeAdmin'=>$useres]);
     }
 
     /**
@@ -178,6 +192,13 @@ class UsersController extends Controller
         ]);
     }
 
+   // Start_Pages
+
+   public function Home_SRNZ(){
+    
+     return view('home-page.Home');
+
+   }
 
     public function homepage()
     {
@@ -191,7 +212,7 @@ class UsersController extends Controller
     //login
     function loginindex()
     {
-        return view('login');
+        return view('login.login');
     }
 
     /**
@@ -219,7 +240,32 @@ class UsersController extends Controller
     function logout()
     {
         Auth::logout();
-        return redirect('login');
+        return redirect('Home_SRNZ');
+    }
+
+    // return page forget 
+    public function forgetindex(){
+            return view('login.forget');
+    }
+
+      // forget password
+      public function forget(Request $request){
+        dd($request);
+        $result = $this->forgetCheck($request);
+        if (!(Auth::attempt($result->user_data))) {
+            return back()->with('error', 'Wrong Login Details');
+        }
+        if (Auth::user()->role == Role::ADMIN) {
+            return view('home-page.admin',['SeAdmin'=>$result->source]);
+        }
+        if (Auth::user()->role == Role::CUSTOMER) {
+
+            return view('home-page.customer',['SeCustomer'=>$result->source]);
+
+        }
+        
+        return redirect('/login');        
+    
     }
 
     //autocompleteSearch

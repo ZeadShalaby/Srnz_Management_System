@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\Orders;
 use App\Traits\ImgTrait;
 use App\Models\Departments;
+use App\Models\Interesteds;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -19,10 +21,13 @@ class DepartmentsController extends Controller
     public function index(Request $request)
     {
         //
+        $useres = auth()->user();
+
         $departments=Departments::paginate(10);
-        return view('departments.index',['departments' => $departments]);
+        return view('departments.index',['departments' => $departments,'SeAdmin'=>$useres]);
 
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +35,8 @@ class DepartmentsController extends Controller
     public function create()
     {
         //
-        return view('departments.create');
+        $useres = auth()->user();
+        return view('departments.create',['SeAdmin'=>$useres]);
 
     }
 
@@ -96,7 +102,8 @@ class DepartmentsController extends Controller
     public function show(Departments $department)
     {
         //
-         return view('departments.show',['departments'=>$department]);
+        $useres = auth()->user();
+         return view('departments.show',['departments'=>$department,'SeAdmin'=>$useres]);
     }
 
     /**
@@ -104,7 +111,8 @@ class DepartmentsController extends Controller
      */
     public function edit(Departments $department)
     {
-        return view('departments.edit', ['departments' => $department]);
+        $useres = auth()->user();
+        return view('departments.edit', ['departments' => $department,'SeAdmin'=>$useres]);
 
     }
 
@@ -118,15 +126,19 @@ class DepartmentsController extends Controller
 
             'name' => 'required',
             'code' => 'required',
-            'img'  => 'required|image|mimes:jpg,png,gif|max:2048',
+            //'img'  => 'required|image|mimes:jpg,png,gif|max:2048',
 
         ]);
 
         //update img
         //update image
         $folder = 'image/departments';
+        if(!isset($request->img)){
+            $file_name = $department->img;
+        }
+       else{
         $file_name = $this->saveImage($request->img,$folder);
-        
+       }
         
 
         $department->update([
@@ -157,7 +169,8 @@ class DepartmentsController extends Controller
     //view restore
     public function restore_index()
     {
-        return view('trash.departments_restore', ['departments' => Departments::onlyTrashed()->paginate(10)]);
+        $useres = auth()->user();
+        return view('trash.departments_restore', ['departments' => Departments::onlyTrashed()->paginate(10),'SeAdmin'=>$useres]);
     }
     
     //restore

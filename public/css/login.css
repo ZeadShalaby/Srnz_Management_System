@@ -1,0 +1,230 @@
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #080710;
+}
+.background{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+.background .shape{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+
+
+.shape:first-child{
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    left: -80px;
+    top: -80px;
+}
+.shape:last-child{
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    right: -30px;
+    bottom: -80px;
+}
+
+
+
+.background3 .shape3{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.shape3:first-child{
+    background: linear-gradient(
+        to bottom,
+        #ff0099,
+        #bb00ff
+    );
+    left: 30px;
+    bottom: 20px;
+}
+.shape3:last-child{
+    background: linear-gradient(
+        to bottom,
+        #ff6b08,
+        #ff0099
+    );
+    right: 30px;
+    top: 15px;
+   
+}
+.project{
+    margin-top: 88px; 
+    margin-left: 18px;
+}
+.team_project{
+    text-decoration: none;
+    top: 130px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.forget{ margin-top: 88px; margin-left: 68px;}
+.forget-letter{
+    text-decoration: none;
+    top: 130px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color:wheat ;
+}
+form{
+    height: 520px;
+    width: 400px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+form *{
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.input{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    border-bottom: 2.5px solid #000000;
+
+}
+
+.ll{margin-left: 20px; margin-top: 13px;}
+.ll input{
+    text-align: center;
+    cursor: pointer;
+    color: #dedede;
+  }
+ .ll span{
+
+    margin: 7px;
+    cursor: pointer;
+    color: #dedede;
+ }
+
+::placeholder{
+    color: #e5e5e5;
+}
+.login{
+    margin-top: 18px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #dedede;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 7px;
+    cursor: pointer;
+    border-bottom: 2.5px solid #000000;
+    transition: 0.4s linear;
+
+  }
+
+
+.login:hover{
+    border-bottom: 2px solid #23a2f6;
+    box-shadow: #404140;
+    transition: 0.4s linear;
+}
+
+.social-media{
+
+    position: absolute;
+    width: 100%;
+    top: 440px;
+    left:31px;
+    z-index: 1;
+  }
+
+  .social-media i {
+    width: 50px;
+    height: 50px;
+    background: #565d5c;
+    border-radius: 50%;
+    color: #f1f1f1;
+    font-size: 30px;
+    line-height: 50px !important;
+    margin: 0px 7px;
+    padding-left: 11px;
+    position: relative;
+}
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+  .social-media i:after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #fff;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    border-radius: 50%;
+    z-index: -1;
+    transition: 0.4s linear;
+  }
+
+  .social-media i:hover:after{
+    transform: scale(1.4);
+    opacity: 0;
+  }
+

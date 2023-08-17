@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{asset('css/restore.css')}}">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+
     <title>Orders</title>
 </head>
-<body>
+<body id="body">
 
     @extends('extends')
     @section('content')
@@ -18,40 +21,35 @@
     </div>
     @endif
     
-    <div class="alert alert-success" id="success_msg" style="display: none;">
-        Orders Restore successfully .
-    </div>
+    @extends('layout.message-trash-ord')
+    @section('trash_ord')
+        
+    @endsection
     
-    <h1>Orders</h1>
+    <h1 id="h1">Orders Restore</h1>
 <br>
  
     @foreach ($orders as $order)
+    <div class="container">
+    <div class="box">
+
     <div class="OrderRow{{$order->id}}">
-    <a href="#" class="inside-page__btn inside-page__btn--beach">
-        {{$order->id}}-{{$order->name}}
-        <br>
-        {{$order->user->name}}
-        <br>
-        {{$order->description}}
-        <br>
-        {{$order->price}}
-    </a>
+    <a href="#restore" id="href"  order_id={{$order->id}} class="restore_btn " ><img class="restore"src="{{URL('image/all/restore.png')}}" alt="folder"></a>
+    <img class="img" src="{{URL('image/all/folders.png')}}" alt="folder">
 
+    <p style="text-align: center;font-size: 15px;color: blue">
+        {{$order->user->name}} : {{$order->name}}  
+        
+    </p>
 
-   <br><br>
-        <button order_id={{$order->id}} class="restore_btn btn btn-danger" style="margin-left: 900px;margin-top: -65px;">restore</button>
-        <br><br>
-   </div>
+        <img class="photo" src="image/orders/{{$order->path}}" alt="orders">
+
+    </div>
+</div>
+    </div>
+
+     
     @endforeach
-    <br>
-    {{ $orders->links() }}
-
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">Or-restore</a>
-    <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-
-    <br>
     <script>
 
         $(document).on('click', '.restore_btn', function (e) {

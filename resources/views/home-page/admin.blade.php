@@ -4,33 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+
     <title>ADMIN PAGE</title>
 </head>
 <body>
+    @if ($SeAdmin)
+        @extends('layout.messages-success')
+        @section('messages_success')
+        @endsection
+        
+    @endif
+    
     @extends('extends')
     @section('content')
     @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
+        {{session('status')}}
     @endif
-    @if ($SeAdmin)
-        <div class="alert alert-success">
-           {{'Welcome Back : '}}{{ $SeAdmin->name }}
-        </div>
-    @endif
+   
    <h1> Admin Page</h1>
-   <br>
-
-    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
-     <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
-     <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
-    <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
-    <a href="{{route('logout')}}"class="btn btn-success">Logout</a>
-
-
-    <br>
+   
+    
     @endsection
 </body>
 </html>

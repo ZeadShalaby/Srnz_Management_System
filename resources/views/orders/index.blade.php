@@ -4,67 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+    <link href="{{asset('css/orders-img.css')}}" rel="stylesheet">
+    <link href="{{asset('css/card-orders.css')}}" rel="stylesheet">
+
     <title>Orders</title>
 </head>
 <body>
-
+   
     @extends('extends')
     @section('content')
     
     @if (session('error'))
-    <div class="alert alert-danger">
-        
-        {{session('error')}}
-    </div>
+    @extends('layout.message-warning')
+    @section('messages_Warning')
+    @endsection
+    
     @endif
-    <div class="alert alert-success" id="success_msg" style="display: none;">
-        Delete Sucessfuly .
-    </div>
+    
+    @extends('layout.message-danger')
+    @section('message_danger')
+
+    @endsection
+
     <h1>Orders</h1>
-<br>
- <div class="container mt-5">
-        <div classs="form-group">
+ 
+
+    <div class="departments">
+        @foreach ($Departments as $department)
+        <a href="{{route('registration.show',$department->id)}}" class="inside-page__btn inside-page__btn--beach">
             
-            <button id="searchs" class=" btn btn-danger" name="searchs"> <i class='bx bx-search' ></i></button>
-            <input type="text" id="search" name="search" placeholder="Search" class="form-control" />
-
-        </div>
+                <img src="{{asset('image/departments/'.$department->img)}}" alt="{{$department->name}}" class="hoverZoomLink" id="img" >
+              
+        </a>
+               
+        
+        <span style="color: red">-</span>
+        @endforeach
     </div>
-
-    <br><br>
 
     <div class="AllData">
     @foreach ($orders as $order)
     <div class="OrderRow{{$order->id}}">
-    <a href="{{route('orders.show',$order->id)}}" class="inside-page__btn inside-page__btn--beach">
-        {{$order->id}}-{{$order->name}}
-        <br>
-        @isset($order->user->name)
-        {{$order->user->name}}
-        @else{{"users deleted"}}
-        @endisset
-        <br>
-        {{$order->description}}
-        <br>
-        {{$order->price}}
-        {{$order->path}}
 
-    </a>
-    <div>
-        <br>
-    @isset($order->view)
-     <img src="{{url('image\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
-    @else
-    <img src="{{url('image\nview.png')}}" alt="vieweer" style="width: 30px">
-    @endisset</div>
+        <div class="container">
+            <div class="box">
+               <span style="color: aquamarine" >{{$order->user->name}}</span>
+<br><br>
+           <a href="{{route('orders.show',$order->id)}}" style="text-decoration: none">
+                <article class="card">
+                    <img
+                    class="card__background"
+                    src="{{asset('image/orders/try.png')}}"
+                    alt="{{$order->name}}"
+                    width="1920"
+                    height="2193"
+                    />
+                    <div class="card__content | flow">
+                    <div class="card__content--container | flow">
+                        <h2 class="card__title">{{$order->name}}</h2>
+                        <p class="card__description">
+                            {{$order->description}}
+                        </p>
+                        <p>COST :{{$order->price}}</p>
 
-  
-<!-- Delete Orders -->    
-<button order_id={{$order->id}} class="delete_btn btn btn-danger"  style="margin-left: 150px;margin-top: -50px">DELETE</button>
-   
-        
-  
-        <br><br>
+                    </div>
+                        
+                    </div>
+                    
+                </article>
+           </a>
+                <div class="under_img">
+                    @isset($order->view)
+                     <img src="{{url('image\all\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
+                    @else
+                    <img src="{{url('image\all\nview.png')}}" alt="vieweer" style="width: 30px">
+                    @endisset
+                  
+                <!-- Delete Orders -->    
+                <div style="margin-top: -2px">
+                <button order_id={{$order->id}} id='delete' class="delete_btn"  style="margin-left: 150px;"><i class="fa fa-trash"></i></button>        
+                    </div>
+                <br><br>
+                </div>
+            </div>
+          </div>
+         
     </div>
     @endforeach
 </div>
@@ -72,19 +97,10 @@
 <!-- return search -->
 <div id="conte" class="searchdata">
 </div>
-
-    <br>
-    {{ $orders->links() }}
-
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
-    <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
-    <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
-    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
-    <br>
-
-    <script>
+<div style="margin-left: 1000px;">
+    {{$orders->links()}}
+</div>
+<script>
 
         $(document).on('click', '.delete_btn', function (e) {
             e.preventDefault();
@@ -103,6 +119,7 @@
                     if(data.status == true){
                         $('#success_msg').show();
                     }
+
                     $('.OrderRow'+data.id).remove();
                 }, error: function (reject) {
         
@@ -128,7 +145,6 @@
 
 
 <!-- Search Data --> 
-
 <script type="text/javascript">
     $('body').on('keyup','#search',function(){
       //  alert('hello');
@@ -161,8 +177,6 @@
         
                 }
             });
-
-
            
     });
     </script>

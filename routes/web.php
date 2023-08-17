@@ -28,13 +28,15 @@ use App\Http\Controllers\InterestedsController;
     Route::get('/', function () {
         return redirect('/logout');
         });
-    
-        //Login
-        Route::get('/login', [UsersController::class, 'loginIndex']);
+        // Home SRNZ
+        Route::get('/Home_SRNZ', [UsersController::class, 'Home_SRNZ'])->name('Home_SRNZ');
+
+        // Login
+        Route::get('/login', [UsersController::class, 'loginIndex'])->name('loginindex');
         Route::post('/login/checklogin', [UsersController::class, 'checklogin']);
         Route::get('/login/checklogin',function (){redirect(route('logout'));});
         Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
-        // Sinup 
+        // Sinup //section departments
         Route::resource('/registration', RegisterController::class);
         // login with social
         Route::get('/redirect/{service}',[ServiceController::class,'redirect']);
@@ -46,7 +48,9 @@ use App\Http\Controllers\InterestedsController;
         Route::get('/auth/linkedin/callback',[ServiceController::class,'linkedincallback'])->name('/auth/linkedin/callback'); 
         // callback Facebook 
         Route::get('/auth/facebook/callback',[ServiceController::class,'facebookcallback'])->name('/auth/facebook/callback');
-    
+        // forget
+        Route::get('/forget', [UsersController::class, 'forgetindex'])->name('forgetindex');
+        Route::post('/forget/users', [UsersController::class, 'forget'])->name('forget');
 
 
     //Auth Middleware
@@ -86,9 +90,9 @@ use App\Http\Controllers\InterestedsController;
         Route::get('/autocomplete-search-users', [UsersController::class, 'autocompleteSearch']);
         //search-users
         Route::POST('/search-users', [UsersController::class, 'search_users'])->name('users.search');
-        
-       });
     
+       });
+       
     //Customer Middleware
     Route::middleware(CheckCustomerRole::class)->group(function () {
         // controller with rescource

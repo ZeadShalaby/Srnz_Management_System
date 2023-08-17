@@ -18,8 +18,10 @@ class InterestedsController extends Controller
     public function index(Request $request)
     {
         //
+        $useres = auth()->user();
+
         $interesteds = Interesteds::where('user_id',Auth::user()->id)->paginate(5);
-        return view('interesteds.index',['interesteds' => $interesteds,'user_id'=>auth()->user()]);
+        return view('interesteds.index',['interesteds' => $interesteds,'user_id'=>auth()->user(),'SeCustomer'=>$useres]);
     }
 
     /**
@@ -45,7 +47,8 @@ class InterestedsController extends Controller
     {
         //
        // $orders = DB::table('orders')->where('id',$interested->order_id)->get();
-        return Redirect::route('ordersite.show',$interested->order_id);
+        $useres = auth()->user();
+        return Redirect::route('ordersite.show',$interested->order_id,['SeCustomer'=>$useres]);
     }
 
     /**

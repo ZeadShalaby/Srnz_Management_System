@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{asset('css/departments.show.css')}}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
     <title>Departments Information</title>
 </head>
 <body>
@@ -16,20 +18,51 @@
     @endif
    <h1>SHOW DEPARTMENTS</h1>
    <br>
-  <span><h1 style="color: blue">Name : </h1>  <h2 style="color: coral">  {{$departments->name}} </h2>  </span>
-  <span><h1 style="color: blue">Cde  : </h1>  <h2 style="color: coral">  {{$departments->code}} </h2>  </span>
-  <span><h1 style="color: blue">img  : </h1>  <h2 style="color: coral">  {{$departments->img}}  </h2>  </span>
+ 
 
     
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>  
-    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
-    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
-    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
-    <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
+   
 
 
     <br>
+   
+
+
+    <aside class="profile-card">
+        <header>
+          <!-- here’s the avatar -->
+          <a target="_blank" href="#">
+            <img src="{{asset('image/departments/'.$departments->img)}}" alt="departments" class="hoverZoomLink" >
+          </a>
+      
+          <!-- the username -->
+          <h1>
+          Departments Name
+        </h1>
+      
+          <!-- and role or location -->
+          <h2>
+            {{$departments->name}}   
+                     </h2>
+      
+        </header>
+      
+        <!-- bit of a bio; who are you? -->
+        <div class="profile-bio">
+      
+            <h1>
+                Departments Code
+              </h1>
+           
+              <h2>
+                {{$departments->code}}   
+                         </h2>
+      
+        </div>
+      
+        
+      </aside>
+
     @endsection
 </body>
 </html>

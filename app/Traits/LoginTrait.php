@@ -42,6 +42,10 @@ protected function Check($request)
     
 }
 
+
+
+
+
 protected function checkservice($users){
     $user_data = array(
         'email' => $users->email,
@@ -67,7 +71,32 @@ protected function checkservice($users){
     
 }
 
+protected function forgetCheck($request)
+{
 
+//login with phone number or email
+    $value = $request->input('email'); // zead@admin.srnz or 215478963
+    $field = filter_var($value,FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
+    $this->validate($request, [
+        'email'=>'required',
+        'password' => 'required|alphaNum|min:3'
+    ]);
+
+    $source = DB::table('srnz_edit')->where($field, $request->email)
+    ->first();
+    $user_data = array(
+        $field => $request->get('email'),
+        'password' => $request->get('password')
+    ); 
+
+
+    $result = new User;
+    $result->user_data = $user_data; // some variable
+    $result->source = $source; // some variable
+
+    return $result;
+    
+}
 
 
 }

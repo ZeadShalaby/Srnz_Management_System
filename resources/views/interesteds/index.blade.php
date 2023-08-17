@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
     <title>Interesteds</title>
 </head>
 <body>
     @extends('extends')
     @section('content')
     @if(session('error'))
-    <div class="alert alert-danger">
-    {{session('error')}}
+    @extends('layout.errormessage')
+    @section('message_danger')
+        
+    @endsection
     </div>
     @endif
-    <div class="alert alert-success" id="success_msg" style="display: none;">
-        Interested Remove successfully .
-    </div>
-    <div class="alert alert-success" id="success_all_msg" style="display: none;">
-        All_Interested Remove successfully .
-    </div>
-    <h1>Interesteds</h1>
+    @extends('layout.message-info')
+    @section('messages_info')
+        
+    @endsection
+    <h1>Favourites</h1>
     <br><br>
     <div class="InterestedRowall">
     @foreach ($interesteds as $interested)
@@ -41,15 +42,6 @@
     </form>
     @endforeach
     </div>
-    <br>
-    {{ $interesteds->links() }}
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">OR-restore</a>
-
-
-    <br>
-
     
     <script>
 
@@ -68,7 +60,7 @@
                 success: function (data) {
         
                     if(data.status == true){
-                        $('#success_msg').show();
+                        $('#Delete_Favourites').show();
                     }
                     $('.InterestedRow'+data.id).remove();
                 }, error: function (reject) {
@@ -95,7 +87,7 @@
                         success: function (data) {
                 
                             if(data.status == true){
-                                $('#success_all_msg').show();
+                                $('#Delete_Favourites').show();
                             }
                             $('.InterestedRowall').remove();
                         }, error: function (reject) {

@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{asset('css/orders.show.css')}}" rel="stylesheet">
+    <link href="{{asset('css/orders.css')}}" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
     <title>Orders Information</title>
 </head>
 <body>
@@ -11,35 +15,65 @@
     @section('content')
     
     <div class="alert alert-success" id="success_msg" style="display: none;">Add your favourite .</div>
-    <div class="alert alert-danger" id="error_msg" style="display: none;">Alredy Aded Favourite .</div>
+    <div class="alert alert-danger" id="error_msg" style="display: none; color:rebeccapurple">Alredy Aded Favourite .</div>
     <div class="alert alert-success" id="success_msg" style="display: none;">Delete Sucessfuly .</div>
 
    <h1>SHOW Orders</h1>
    <br>
-   <button  orders_id = {{$orders->id}} name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" id ="fav{{$orders->id}}" style="color: gold;" ></i></button> 
+   
+   
 
-    @isset($interesteds)
-    @foreach ($interesteds as $interested)
-    @if(($interested->user_id==$userid)&($interested->order_id==$orders->id))
-    <div style="margin-top: -48px">
-    <button orders_id = {{$orders->id}}  name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" style="color: red;" ></i></button> 
-    </div>
-    @endif
-    @endforeach
-    @else
-     
-    @endisset 
+    <aside class="profile-card">
+        <header>
+          <!-- here’s the avatar -->
+          <a target="_blank" href="#">
+            <img src="{{asset('image/orders/'.$orders->path)}}" alt="departments" class="hoverZoomLink" >
+          </a>
+          <button  orders_id = {{$orders->id}} name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" id ="fav{{$orders->id}}" style="color: gold;" ></i></button> 
+          @isset($interesteds)
+          @foreach ($interesteds as $interested)
+          @if(($interested->user_id==$userid)&($interested->order_id==$orders->id))
+          <div style="margin-top: -48px;margin-left: 158px">
+          <button orders_id = {{$orders->id}}  name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" style="color: red;" ></i></button> 
+          </div>
+          @endif
+          @endforeach
+          @else
+           
+          @endisset 
+          <!-- the username -->
+          <h1>
+          Orders Name
+        </h1>
+      
+          <!-- and role or location -->
+          <h2>
+            {{$orders->name}}   
+                     </h2>
+      
+        </header>
+      <h2>  @isset($orders->user->name) {{$orders->user->name}} @else{{'null user name'}}@endisset</h2>
+      <h2>  @isset($orders->department->name) {{$orders->department->name}} @else{{'null department name'}}@endisset</h2>
+     <h2>  {{$orders->gmail}} </h2>  
+     <h2> {{$orders->phone}} </h2>  
+     <p> {{$orders->description}} </p>  
+     <h2> {{$orders->price}} </h2>  
+        <!-- bit of a bio; who are you? -->
+        <div class="profile-bio">
+      
+            <h1>
+              </h1>
+           
+              <h2>
+                         </h2>
+      
+        </div>
+      
+        <!-- some social links to show off -->
+        
+      </aside>
 
 
-<br>
-  <span><h1 style="color: blue">Name : </h1>  <h2 style="color: coral">        {{$orders->name}} </h2>  </span>
-  <span><h1 style="color: blue">User : </h1>  <h2 style="color: coral">       @isset($orders->user->name) {{$orders->user->name}} @else{{'null user name'}}@endisset</h2>  </span>
-  <span><h1 style="color: blue">Department : </h1>  <h2 style="color: coral"> @isset($orders->department->name) {{$orders->department->name}} @else{{'null department name'}}@endisset</h2>  </span>
-  <span><h1 style="color: blue">gmail : </h1>  <h2 style="color: coral">       {{$orders->gmail}} </h2>  </span>
-  <span><h1 style="color: blue">phone : </h1>  <h2 style="color: coral">       {{$orders->phone}} </h2>  </span>
-  <span><h1 style="color: blue">description : </h1>  <h2 style="color: coral"> {{$orders->description}} </h2>  </span>
-  <span><h1 style="color: blue">price : </h1>  <h2 style="color: coral">       {{$orders->price}} </h2>  </span>
-  <span><h1 style="color: blue">path : </h1>  <h2 style="color: coral">        {{$orders->path}} </h2>  </span>
 
   <script>
     // AddFavourite with ajax
@@ -78,12 +112,6 @@
            });
              
            </script>
-  
-  <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-  <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
-  <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">OR-restore</a>
-  <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-
 
 
     <br>

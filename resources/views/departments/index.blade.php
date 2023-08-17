@@ -4,47 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{asset('css/card-dep.css')}}">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
     <title>Departments</title>
 </head>
 <body>
+   
+
     @extends('extends')
     @section('content')
-    <div class="alert alert-success" id="success_msg" style="display: none;">
-        Delete Sucessfuly .
-     </div>
+        
+    @endsection
+    
+
+    @extends('layout.message-department')
+    @section('messages_dep')
+    @endsection
+    
     <h1>Departments
-        <a href="{{route('departments.create')}}"> <img width="50px" height="50px" src="{{URL('image/add1.png')}}"  alt="add" ></i>
+        <a href="{{route('departments.create')}}"> <img width="50px" height="50px" src="{{URL('image/all/add1.png')}}"  alt="add" ></i>
         </a>
     </h1>
-    <div class="container mt-5">
-        <div classs="form-group">
-            
-                <button type="submit" name="search"> <i class='bx bx-search' ></i></button>
-                <input type="text" id="search_dep" name="search" placeholder="Search" class="form-control" />
-                
-        </div>
-    </div>
+
     
    
     <br><br>
 <div class="AllData">
     @foreach ($departments as $department)
     <div class="DepartmentRow{{$department->id}}">
-    <a href="{{route('departments.show',$department->id)}}" class="inside-page__btn inside-page__btn--beach">
-        {{$department->id}}-{{$department->name}}-{{$department->code}}
-<br>
-{{$department->img}}
-    </a>
- <br><br>
- <div style="margin-top: -30px">
-    <a href="{{route('departments.edit', $department->id)}}" class="btn btn-info"
-        
-       style="margin-left: 800px;margin-top: -20px;"> EDIT </a>
-
-
+        <div class="container">
+           <div class="box">
+            <div class="item">
     
-        <button department_id={{$department->id}} class="delete_btn btn btn-danger" style="margin-left: 900px;margin-top: -65px;">DELETE</button>
-</div>
+              <div class="item__image">
+    
+                <div class="image-switch__outer">
+    
+                  <div class="image-switch__inner">
+                    @if(isset($department->img))
+                    <img src="{{asset('image/departments/'.$department->img)}}" alt="departments">
+                  @else
+                  <img src="{{asset('image/all/course.svg')}}" alt="departments">
+                  @endif
+                </div>
+                </div>
+              </div>
+              <div class="item__description">
+                <div class="description-switch__outer">
+                  <div class="description-switch__inner">
+                 
+                      <button department_id={{$department->id}} class="delete_btn btn btn-danger" ><i class="fa fa-trash" id="delete"></i></button>
+                    <a href="{{route('departments.edit', $department->id)}}" class="edit_btn -info"> <i class="fa fa-edit" id="edit"></i> </a>
+                    
+
+                       <p>{{$department->name}}</p>
+                      
+                      <a href="{{route('departments.show',$department->id)}}" ><!--target="_blank"   open link in new page    -->  
+                        <i class="fas fa-location-arrow" id="show"></i>
+                      <div class="item__action-arrow">
+                      </a>
+    
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flap level0">
+                
+    
+                <div class="flap level1 flip-right">
+                    
+                  <div class="flap level2 flip-down">
+                    <div class="flap level3 flip-left"></div>
+                    <div class="flap level3 flip-right">
+                      <div class="flap level4 flip-up">
+                        <div class="flap level5 flip-right">
+                          <div class="flap level6 flip-left">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flap level2 flip-up">
+                    <div class="flap level3 flip-left">
+                      <div class="flap level4 flip-up"></div>
+                      <div class="flap level5 flip-down">
+                        <div class="flap level6 flip-left">
+                          <div class="flap level7 flip-up">
+                            <div class="flap level8 flip-left"></div>
+                            <div class="flap level8 flip-right"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flap level1 flip-left">
+                  <div class="flap level2 flip-up">
+                    <div class="flap level3 flip-left">
+                      <div class="flap level4 flip-down">
+                        <div class="flap level5 flip-left">
+                          <div class="flap level6 flip-right">
+                            <div class="flap level7 flip-up">
+                              <div class="flap level8--alt flip-right"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flap level2 flip-down">
+                    <div class="flap level3 flip-right">
+                      <div class="flap level4 flip-down">
+                        <div class="flap level5 flip-up"></div>
+                      </div>
+                      <div class="flap level5 flip-up">                                
+                        <div class="flap level6 flip-right"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item__hover-icon">
+                <div class="icon-switch__outer">
+                  <div class="icon-switch__inner">
+                    @if($department->id % 2 == 0 )
+                    <img src="{{asset('image/all/dep.png')}}" alt="departments">
+                    @else             
+                    <img src="{{asset('image/all/logo.png')}}" alt="departments">
+                    @endif
+                    <div class="code">
+                    <span >{{$department->code}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+       </div>
     </div>
     @endforeach
 </div>
@@ -54,16 +153,10 @@
 <div id="conte" class="searchdata">
 </div>
 
+<div class="paginator" style="margin-left: 1200px; margin-top:-1000px">
     {{ $departments->links() }}
+  </div>
 
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
-    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
-    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
-
-
-    <br>
  
  <!-- Delete Departments -->   
     <script>
@@ -97,7 +190,7 @@
 <!-- Auto Complite Search -->
     <script type="text/javascript">
         var route = "{{ url('autocomplete-search-departments') }}";
-        $('#search_dep').typeahead({
+        $('#search').typeahead({
             source: function (query, process) {
                 return $.get(route, {
                     query: query
@@ -114,7 +207,7 @@
 <script type="text/javascript">
 
 
-    $('body').on('keyup','#search_dep',function(){
+    $('body').on('keyup','#search',function(){
       //  alert('hello');
         var search_dep = $(this).val();
 
@@ -148,6 +241,5 @@
     });
 </script>
 
-    @endsection
 </body>
 </html>

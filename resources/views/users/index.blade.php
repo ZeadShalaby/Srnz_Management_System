@@ -4,76 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{asset('css/card-users.css')}}">
+
+
     <title>Users</title>
 </head>
 <body>
+    <h1>Users
+        <a href="{{route('users.create')}}"> <img width="50px" height="50px" src="{{URL('image/all/add1.png')}}"  alt="add" > Create New Admin</i>
+        </a>
+        </h1>
     @extends('extends')
     @section('content')
-<div class="alert alert-success" id="success_msg" style="display: none;">
-    Delete Sucessfuly .
-</div>
+    @extends('layout.message-users-delete')
+    @section('delete_users')
+        
+    @endsection 
 
-    <h1>Users
-    <a href="{{route('users.create')}}"> <img width="50px" height="50px" src="{{URL('image/add1.png')}}"  alt="add" > Create New Admin</i>
-    </a>
-    </h1>
+    
     <br>
-    <div class="container mt-5">
-        <div classs="form-group">
-            
-            <button id="searchs" class=" btn btn-danger" name="searchs"> <i class='bx bx-search' ></i></button>
-            <input type="text" id="search_user" name="search" placeholder="Search" class="form-control" />
+    
 
+    <br><br>
+
+    <div class="AllData">
+        @foreach ($users as $user)
+        <div class="UserRow{{$user->id}}">
+            <div class="container">
+                <div class="box">
+                <div class="card">
+                    <div class="content">
+                        <div class="back">
+                            <div class="back-content">
+                                <div class="card_box">
+                                    <span></span>
+                                </div>
+                                <svg stroke="#ffffff"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" height="50px" width="50px"
+                                     fill="#ffffff">
+        
+                                    <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+        
+                                    <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+        
+        
+                                    <g id="SVGRepo_iconCarrier">
+                                     @if($user->role == $usersrole)
+                                    <img src="{{asset('image/all/users.png')}}" alt="Customer" style="margin-top: -70px;width: 120px">          
+                                     @else
+                                     <img src="{{asset('image/all/admin.png')}}" alt="Customer" style="margin-top: -80px;width: 120px">   
+                                     @endif       
+                                    </g>
+        
+                                </svg>
+                                <strong>{{$user->name}}</strong>
+        
+                             
+                            </div>
+        
+                        </div>
+                        <div class="front">
+                
+                            <div class="img">
+                              <div class="circle">
+                              </div>
+                              <div class="circle" id="right">
+                              </div>
+                              <div class="circle" id="bottom">
+                              </div>
+                            </div>
+                      
+                            <div class="front-content">
+                                <small class="badge"> 
+                                    @if($user->role > $roles) 
+                                    <span class="spans">  
+                                    {{"Customer"}} </span>
+                                    @else
+                                    {{"Admin"}}   
+                                    @endif</small>
+                                    
+                               <small class="edit"> <a href="{{route('users.edit', $user->id)}}"> <i class="fa fa-edit"></i> </a></small>
+                               <small class="delete"><button user_id={{$user->id}} class="delete_btn btn btn-danger" id="delete_users"><i class="fa fa-trash"></i></button></small>
+                               <a href="{{route('users.show', $user->id)}}">
+                              <div class="description">
+                                <div class="title">
+                                  <p class="title">
+                                <img class="user_profile" src="{{asset('image/all/try.png')}}" alt="User_photo"/>
+                                </p>
+                                  <svg fill-rule="nonzero" height="15px" width="15px" viewBox="0,0,256,256" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g style="mix-blend-mode: normal" text-anchor="none" font-size="none" font-weight="none" font-family="none" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" stroke="none" fill-rule="nonzero" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></g></svg>
+                                </div>
+                                <p class="card-footer">
+                                    
+                                {{$user->name}}
+                                    <br>
+                                   {{$user->phone}}
+                                </p>
+                                    </div>
+                                  </a>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                <div>                   
+            </div>
         </div>
     </div>
-
-    <br><br>
-    <div class="AllData">
-
-    @foreach ($users as $user)
-    <div class="UserRow{{$user->id}}">
-    <a href="{{route('users.show',$user->id)}}" class="inside-page__btn inside-page__btn--beach">
-        
-        {{$user->id}}-{{$user->name}}-
-        @if($user->role > $roles) 
-        <span class="spans">  
-        {{"Customer"}} </span>
-        @else
-        {{"Admin"}}   
-        @endif
-        <br>
-        {{$user->profile_photo}}
-        
-
-    </a>
-        
-    <div style="margin-top: -30px">
-        <a href="{{route('users.edit', $user->id)}}" class="btn btn-info"
-            
-           style="margin-left: 800px;margin-top: -20px;"> EDIT </a>
+                
     
-    
-            <button user_id={{$user->id}} class="delete_btn btn btn-danger" style="margin-left: 900px;margin-top: -65px;">DELETE</button>
-       
     </div>
-</div>
-    <br><br>
-    @endforeach
-    </div>
-
+        @endforeach
+        </div>
     <br>
 
-<!-- return search -->
-<div id="conte" class="searchdata">
- </div> 
- 
-    {{ $users->links() }}
 
-    <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
-    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-    <a href="{{route('users.admin')}}" class="btn btn-info" type="submit">Admins</a>
-    <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">OR-restore</a>
+    <!-- return search -->
+<div id="conte" class="searchdata">
+</div> 
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+   
+ 
+
+
+{{$users->links()}}
+
+ 
+  
 
  <!-- Delete MyOrder -->   
 
@@ -109,7 +168,7 @@
 
         <script type="text/javascript">
             var route = "{{ url('autocomplete-search-users') }}";
-            $('#search_user').typeahead({
+            $('#search').typeahead({
                 source: function (query, process) {
                     return $.get(route, {
                         query: query
@@ -123,7 +182,7 @@
 <!-- Search Data --> 
 
 <script type="text/javascript">
-    $('body').on('keyup','#search_user',function(){
+    $('body').on('keyup','#search',function(){
       //  alert('hello');
         var search_user = $(this).val();
 
@@ -157,5 +216,8 @@
     });
     </script>
     @endsection
+    
+    
+    
 </body>
 </html>

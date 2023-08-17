@@ -1,0 +1,317 @@
+*{
+  margin: 0;
+  padding: 0; 
+  box-sizing:  border-box; 
+  font-family: 'Open Sans', sans-serif;
+  }
+  
+  body{ 
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  min-height: 100vh;
+  background: #111;
+  }
+  .square {
+  width: 700px;
+  position: relative;
+  height: 670px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  margin-left: 400px;
+  }
+  .square i{
+  position: absolute;
+  inset: 0;
+  border: 2px solid #fff;
+  transition: 0.5s;
+  }
+
+  .square i:nth-child(1){
+  
+  border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+  animation: rotate-animation 6s infinite linear;
+
+}
+  .square i:nth-child(2) {
+  border-radius: 41% 44% 56% 59%/38% 62% 63% 37%; 
+  animation: rotate-animation 10s infinite linear;
+
+  
+  }
+  .square i:nth-child(3){
+  
+  border-radius: 41% 44% 56% 59%/44% 56% 42% 58%;
+  animation: rotate-animation2 4s infinite linear;
+}
+  .square:hover i
+  
+  {
+  
+  border: 4px solid var(--clr); 
+  filter: drop-shadow (0 0 20px var(--clr));
+  
+  }
+  .square .login{
+  position: absolute;
+  width: 300px; 
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 20px;
+  
+  }
+  
+  .square .login h2{
+  
+  
+  color: #0078ff;
+  font-size: 2em;
+  font-family:"Lucida Handwriting", cursive;
+  
+  } 
+  label{
+    color: #0078ff;
+    font-family:"Lucida Handwriting", cursive;
+  
+
+
+  }
+  .square .login .inputBx{
+  
+  position: relative;
+   width: 100%;
+  
+  }
+  
+  
+  .square .login .inputBx input{
+  position: relative;
+  padding: 12px 20px; 
+  color: #fff; 
+  width: 100%;
+  background: transparent; 
+  border: 2px solid #f20de6;
+  border-radius: 40px;
+  font-size: 1.2em;
+  box-shadow: none;
+  outline: none;
+  }
+  .square .login .inputBx input:focus {
+    outline: 0;
+    border-color: #00caf7;
+  }
+ 
+  .square .login .inputBx #create_Admin{
+  
+  background: #0078ff; 
+  background: linear-gradient(45deg, #ff357a,#fff172);
+  cursor: pointer;
+  border-radius: 10px;
+  margin-left: 100px;
+  
+  } 
+  .square .login .inputBx input::placeholder{
+  
+  color: rgba(255,255,255,0.75);
+  font-family:"Lucida Handwriting", cursive;
+
+  }
+ 
+ #username{
+  margin-top: 10px;
+  margin-left: -100px;
+ }
+ #email{
+
+  margin-left: 100px;
+ }
+ #password{
+
+  margin-left: -100px;
+ }
+ #gmail{
+
+  margin-left: 250px;
+ }
+ #phone{
+
+  margin-left: -100px;
+ }
+  
+  
+  
+  
+  .bg-div {
+      height: 205px;
+      width: 205px;
+      margin-left: 1240px;
+      margin-top: -120px;
+      background: url('http://s2.music.126.net/style/web2/img/coverall.png?e8cb94d884e56897e524dec54b947d6e') no-repeat;
+      background-position: -140px -580px;
+      > img {
+          margin: 38px;
+          width: 130px;
+          height: 130px;
+          border-radius: 130px;
+          animation: rotate-animation 10s infinite linear;
+      }
+  }
+  @keyframes rotate-animation {
+      0% {
+          transform: rotate(0deg);
+    }
+    50% {
+          transform: rotate(180deg);
+      }
+      100% {
+          transform: rotate(360deg);
+      }
+  }
+  @keyframes rotate-animation2 {
+      0% {
+          transform: rotate(360deg);
+    }
+    50% {
+          transform: rotate(180deg);
+      }
+      100% {
+          transform: rotate(0deg);
+      }
+  }
+
+
+
+  /*button*/
+  .login #create_Admin {
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      color: #03e9f4;
+      font-size: 16px;
+      text-decoration: none;
+      text-transform: uppercase;
+      overflow: hidden;
+      transition: .5s;
+      margin-top: 20px;
+      letter-spacing: 4px
+    }
+    
+    .login #create_Admin:hover {
+      background: #f40303;
+      color: #ff0000;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #f48c03,
+                  0 0 25px #c90f0f,
+                  0 0 50px #c90f0f,
+                  0 0 100px #f48c03;
+    }
+   
+    .login #create_Admin span {
+      position: absolute;
+      display: block;
+    }
+    
+    .login #create_Admin span:nth-child(1) {
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px; 
+      border: 2px solid #03e9f4;
+      background: linear-gradient(80deg, transparent);
+      animation: btn-anim1 1s linear infinite;
+    }
+    
+    @keyframes btn-anim1 {
+      0% {
+        left: -100%;
+      }
+      50%,100% {
+        left: 100%;
+      }
+    }
+    
+    .login #create_Admin span:nth-child(2) {
+      top: -100%;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      border: 2px solid #03e9f4;
+      background: linear-gradient(170deg, transparent);
+      animation: btn-anim2 1s linear infinite;
+      animation-delay: .25s
+    }
+    
+    @keyframes btn-anim2 {
+      0% {
+        top: -100%;
+      }
+      50%,100% {
+        top: 100%;
+      }
+    }
+    
+    .login #create_Admin span:nth-child(3) {
+      bottom: 0;
+      right: -100%;
+      width: 100%;
+      height: 2px;
+      border: 2px solid #03e9f4;
+      background: linear-gradient(260deg, transparent);
+      animation: btn-anim3 1s linear infinite;
+      animation-delay: .5s
+    }
+    
+    @keyframes btn-anim3 {
+      0% {
+        right: -100%;
+      }
+      50%,100% {
+        right: 100%;
+      }
+    }
+    
+    .login #create_Admin span:nth-child(4) {
+      bottom: -100%;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      border: 2px solid #03e9f4;
+      background: linear-gradient(350deg, transparent);
+      animation: btn-anim4 1s linear infinite;
+      animation-delay: .75s
+    }
+    
+    @keyframes btn-anim4 {
+      0% {
+        bottom: -100%;
+      }
+      50%,100% {
+        bottom: 100%;
+      }
+    }
+    
+   
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #000000; 
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background-image: linear-gradient(180deg, #d0368a 0%, #d76005 99%);
+
+      border-radius: 10px;
+      transition: 0.5s;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555; 
+      
+    }
+  
