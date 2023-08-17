@@ -71,11 +71,11 @@
     
     @else
         
-        <div>
+        <div class="view_img">
         @isset($order->view)
-        <img src="{{url('image\all\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
+        <img  src="{{url('image\all\view.png')}}" alt="vieweer" style="margin-top: 10px"> {{''}}{{$order->view}}
         @else
-        <img src="{{url('image\all\nview.png')}}" alt="vieweer" style="width: 30px">
+        <img  src="{{url('image\all\nview.png')}}" alt="vieweer" style="margin-top: 10px" >
         @endisset
         </div>    
         <div class="under_img">
@@ -86,7 +86,7 @@
         @foreach ($interesteds as $interested)
         @if(($interested->user_id==$userid)&($interested->order_id==$order->id))
        <div style="margin-top: -20px">
-        <button orders_id = {{$order->id}}  name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" style="color: red;" ></i></button> 
+        <button orders_id = {{$order->id}}  name="favourite" id="favred" class="AddFav btn btn-lg" ><i class="fa fa-heart" style="color: red;" ></i></button> 
        </div>
         @endif
         @endforeach
@@ -101,14 +101,13 @@
         @isset($orders_user)
         @foreach($orders_user as $oruser)
         @if($oruser->id==$order->id)
-        <a href="{{route('ordersite.edit', $order->id)}}" class="btn btn-info"
-        
-            style="margin-left: 200px;margin-top: -150px;"> EDIT </a>
-     
-       
-            <button order_id={{$order->id}} class="delete_btn btn btn-danger"  style="margin-top: -200px;margin-left: 400px;">DELETE</button>
-      
-        @else
+        <div class="btnedits">
+        <a href="{{route('ordersite.edit', $order->id)}}" class="btn btn-info"> <i class="fa fa-edit"></i> </a>
+        </div>
+            <div class="btndeletes">
+            <button order_id={{$order->id}} class="delete_btn btn btn-danger"><i class="fa fa-trash"></i></button>
+            </div>
+            @else
         @endif
         @endforeach 
         @endisset 
@@ -117,7 +116,7 @@
 </div>
     @endforeach
      </div>
-     <div style="margin-left: 1000px">
+     <div style="margin-left: 1500px">
         {{$orders->links()}}
     </div>
     

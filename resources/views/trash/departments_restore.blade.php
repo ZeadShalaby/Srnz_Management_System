@@ -29,7 +29,20 @@
         <p style="text-align: center;font-size: 15px;color: blue">
             {{$department->name}}-{{$department->code}}
         </p>
-        <img class="photo" src="image/departments/{{$department->img}}" alt="folder">
+        
+        <div class="path_dep">
+            @if(isset($department->img))
+            <div class="imgdep">
+            <img class="photo" src="{{asset('image/departments/'.$department->img)}}" alt="departments">
+            </div>
+            @else
+            @if($department->id % 2 == 0 )
+            <img src="{{asset('image/all/dep.png')}}" alt="departments">
+            @else             
+            <img src="{{asset('image/all/logo.png')}}" alt="departments">
+            @endif
+            @endif
+        </div>
 
     </div>
 </div>

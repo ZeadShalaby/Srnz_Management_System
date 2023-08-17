@@ -29,19 +29,19 @@ class UsersController extends Controller
     {
         //
         $user = auth()->user();
-
+        $usersrole = Role::CUSTOMER;
         $users = User::where('role',Role::CUSTOMER)->paginate(10);
         
-        return view('users.index',['users'=>$users,'roles'=>1,'SeAdmin'=>$user]);
+        return view('users.index',['users'=>$users,'roles'=>1,'SeAdmin'=>$user,'usersrole'=>$usersrole]);
 
     }
 
     public function admin(){
         $user = auth()->user();
-
+        $usersrole = Role::CUSTOMER;
         $users = User::where('role',Role::ADMIN)->where('name','!=','Admin')->paginate(10);
         
-        return view('users.index',['users'=>$users,'roles'=>1,'SeAdmin'=>$user]);
+        return view('users.index',['users'=>$users,'roles'=>1,'SeAdmin'=>$user,'usersrole'=>$usersrole]);
     }
 
     /**

@@ -81,7 +81,7 @@ message--danger
       <span style="font-weight:bold;font-size:13px">{{session('error')}}</span>
       
 
-     <span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px">My Dear <span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px">@if(isset($SeCustomer)){{$SeCustomer->name}}@else{{$SeAdmin->name}}</span></span>
+     <span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px">My Dear <span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px">@if(isset($SeCustomer)){{$SeCustomer->name}}@endif</span></span>
   
      
         <!-- x icon through a path element -->

@@ -30,7 +30,43 @@
 
 
 
+   <div class="under_img">
 
+<div style="margin-left: 200px;margin-top: -35px">
+        <button  orders_id = {{$order->id}} name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" id ="fav{{$order->id}}" style="color: gold;" ></i></button> 
+        @isset($interesteds)
+        @foreach ($interesteds as $interested)
+        @if(($interested->user_id==$userid)&($interested->order_id==$order->id))
+       <div style="margin-top: -20px">
+        <button orders_id = {{$order->id}}  name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" style="color: red;" ></i></button> 
+       </div>
+        @endif
+        @endforeach
+        
+
+        @endisset 
+</div>
+        </div>
+        @endif
+
+        <br><br>
+        @isset($orders_user)
+        @foreach($orders_user as $oruser)
+        @if($oruser->id==$order->id)
+        <a href="{{route('ordersite.edit', $order->id)}}" class="btn btn-info"
+        
+            style="margin-left: 200px;margin-top: -150px;"> EDIT </a>
+     
+       
+            <button order_id={{$order->id}} class="delete_btn btn btn-danger"  style="margin-top: -200px;margin-left: 400px;">DELETE</button>
+      
+        @else
+        @endif
+        @endforeach 
+        @endisset 
+       </div>
+       </div>
+</div>
 
 
 

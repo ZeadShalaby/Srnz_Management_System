@@ -40,9 +40,9 @@
             @if(isset($order->user)){{$order->user->name}} @else Users Deleted : @endif {{$order->name}}  
             
         </p>
-    
-            <img class="photo" src="image/orders/{{$order->path}}" alt="orders">
-    
+            <div class="path">
+            <img  class="photo" src="image/orders/{{$order->path}}" alt="orders" style="">
+            </div>
         </div>
     </div>
         </div>

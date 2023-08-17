@@ -97,7 +97,7 @@
 <!-- return search -->
 <div id="conte" class="searchdata">
 </div>
-<div style="margin-left: 1000px">
+<div style="margin-left: 1000px;">
     {{$orders->links()}}
 </div>
 <script>

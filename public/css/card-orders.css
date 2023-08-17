@@ -160,7 +160,9 @@ p {
     transition: transform 500ms ease-out, opacity 500ms ease-out;
 
   }
-
+a{
+  text-decoration: none;
+}
   .card:hover,
   .card:focus-within {
     transform: scale(1.05);
@@ -202,4 +204,29 @@ p {
   }
 }
 
+.AddFav{
+  cursor:pointer ;
+  margin-top: 20px;
+}
+#favred{
+  margin-top: -20px;
+
+}
+.btnedits{
+  margin-left: 100px;
+  margin-top: -70px;
+}
+.btndeletes{
+  margin-top: -20px;
+  margin-left: 300px;
+  cursor:pointer ;
+
+}
+
+
+.view_img img{
+
+  width:30px;
+
+}
 

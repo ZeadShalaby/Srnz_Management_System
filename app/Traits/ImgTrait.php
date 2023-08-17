@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Orders;
 use App\Models\Departments;
+use App\Models\Interesteds;
 
 trait ImgTrait
 
@@ -30,7 +31,8 @@ trait ImgTrait
         $change_user = '';
         $order_search = Orders::where('name', 'LIKE', '%'. $request->info. '%')
         ->get();
-
+        $interesteds = Interesteds::get();
+        $ordersuser = Orders::where('user_id',auth()->user()->id)->get();
         if(auth()->user()->role==Role::ADMIN){
 
             /**   <img class="card-img-top" src="'.$product->path.'" alt="Card image cap"> */
@@ -44,26 +46,56 @@ trait ImgTrait
                                }else{$img=' <img src="'.url('image\all\nview.png').'" alt="vieweer" style="width: 30px"> ';}
             
                                 $output .=
-                                '<div class="OrderRow'.$product->id.'">
-                                <a href="'.route('orders.show',$product->id).'" class="inside-page__btn inside-page__btn--beach">
-                                '.$product->id.'-'.$product->name.'
-                                
-                                '.$change_user.'
-                                <br>
-                                '.$product->description.'
-                                <br>
-                                '.$product->price.'
-                                <br>
-                                '.$product->path.'" 
-                                </a>
-                                <div>
-                                <br>
-                               '.$img.'
-                                </div>
-                                <button order_id='.$product->id.' class="delete_btn btn btn-danger"  style="margin-left: 150px;margin-top: -50px">DELETE</button>  
+                                '<div class="OrderRow'.$product->id.'" >
+                                <div class="container" >
+                                <div class="box" >
+                                <a href="'.route('ordersite.show',$product->id).'" class="inside-page__btn inside-page__btn--beach" >
+                                <span style="color: aquamarine;text-decoration: none" >'.$product->user->name.'</span>
                                 <br><br>
-                                 </div>
+                   
+                   
+                                <article class="card" style="text-decoration: none">
+                                <img
+                                class="card__background"
+                                src="'.asset('image/orders/try.png').'"
+                                alt="'.$product->name.'"
+                                width="1920"
+                                height="2193"
+                                />
+                                <div class="card__content | flow">
+                                <div class="card__content--container | flow">
+                                    <h2 class="card__title">'.$product->name.'</h2>
+                                    <p class="card__description">
+                                        '.$product->description.'
+                                    </p>
+                                    <p>COST :'.$product->price.'</p>
+                   
+                                </div>
+                                    
+                                </div>
+                            </article>
+                   
+                   </a>
+                     
+                               
+                           <div class="under_img">
+                           '.$img.'
+                           
+                           <div style="margin-top: -2px">
+                           <button order_id='.$product->id.' id="delete" class="delete_btn"  style="margin-left: 150px;"><i class="fa fa-trash"></i></button>        
+                               </div>
+                           <br><br>
+                           </div>
+                           </div>
+                   
+                           </div>
+                           </div>
+           
+                               
                                 ';
+               
+   
+        
                  
                             }
             
@@ -80,9 +112,30 @@ trait ImgTrait
                 $product->user->name;}
                 else{"users deleted";}
                if(isset($product->view)){
-                $img=' <img src="'.url('image\all\view.png').'" alt="vieweer" style="width: 30px"> '.$product->view.'';
-               }else{$img=' <img src="'.url('image\all\nview.png').'" alt="vieweer" style="width: 30px"> ';}
-   
+                $img=' <img src="'.url('image\all\view.png').'" alt="vieweer" > '.$product->view.'';
+               }else{$img=' <img src="'.url('image\all\nview.png').'" alt="vieweer" > ';}
+              
+               if(isset($sefav)){ }
+               else{
+               $favgold = '<div class="AddFav"><button  orders_id = '.$product->id.' name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" id ="fav'.$product->id.'" style="color: gold; width:50px;" ></i></button></div>'; 
+               
+               if(isset($interesteds)){
+               foreach ($interesteds as $interested){
+               if(($interested->user_id==auth()->user()->id)&($interested->order_id==$product->id)){
+               $favgold = '<div id="favred">
+               <button orders_id = '.$product->id.'  name="favourite" class="AddFav btn btn-lg" ><i class="fa fa-heart" style="color: red;width:50px;" ></i></button> 
+               </div>';
+               }
+               }}
+               $btnedit = '';
+               $btndelete = '';
+               if(isset($ordersuser)){
+                foreach($ordersuser as $oruser){
+                 if($oruser->id==$product->id){
+                $btnedit =  '<div class="btnedits"><a href="'.route('ordersite.edit', $product->id).'"class="btn btn-info" style="margin-left: 200px;margin-top: -150px;"><i class="fa fa-edit"></i> </a></div';
+                $btndelete = '<div class="btndeletes"><button order_id='.$product->id.' class="delete_btn btn btn-danger"  style="margin-top: -200px;margin-left: 400px;"><i class="fa fa-trash"></i></button>';
+               }}}}
+      
                 $output .=
                 '<div class="OrderRow'.$product->id.'">
                 <div class="container">
@@ -115,28 +168,32 @@ trait ImgTrait
    
    </a>
      
-               
-           <div>
-           '.$img.'
-           
+
    
-           </div>
-           </div>
-   
-           </div>
-           </div>
+            <div class="view_img">
+            '.$img.'
+            <div class="under_img">
+            '.$favgold.'
+            </div>
+            '.$btnedit.'
+            '.$btndelete.'
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
    
    
                 ';
 
+  
+
+
+        
          }
 
          return $output;   
          
-
-
-    
-     
     }
 
     }
@@ -250,31 +307,141 @@ trait ImgTrait
    // search department get response
    protected function DepSearch($request){
     $output = '';
+   
     $dep_search = Departments::where('name', 'LIKE', '%'. $request->info. '%')
         ->orwhere('code', 'LIKE', '%'. $request->info. '%')
         ->get();
       
         foreach ($dep_search as $product) {
+            if(isset($product->img)){
+                $dep_img = '<img src="'.asset('image/departments/'.$product->img).'" alt="departments">';
+               }else{$dep_img=' <img src="'.url('image\all\course.svg').'" alt="departments" > ';}
+              
+        
+            if($product->id % 2 == 0 ){
+            $icon_dep = ' <img src="'.asset('image/all/dep.png').'" alt="departments">';}
+                else{             
+                $icon_dep = ' <img src="'.asset('image/all/logo.png').'" alt="departments">';}
+        
              $output.='
              <div class="DepartmentRow'.$product->id.'">
-             <a href="'.route('departments.show',$product->id).'" class="inside-page__btn inside-page__btn--beach">
-             '.$product->id.'-'.$product->name.'-'.$product->code.'
-             <br>
-             '.$product->img.'
-             </a>
-             <br><br>
-             <div style="margin-top: -30px">
-             <a href="'.route('departments.edit', $product->id).'" class="btn btn-info"
-             style="margin-left: 800px;margin-top: -20px;"> EDIT </a>
-             <button department_id='.$product->id.' class="delete_btn btn btn-danger" style="margin-left: 900px;margin-top: -65px;">DELETE</button>
+             <div class="container">
+             <div class="box">
+             <div class="item">
+             <div class="item__image">
+             <div class="image-switch__outer">
+             <div class="image-switch__inner">
+             '.$dep_img.'
              </div>
              </div>
+             </div>
+             <div class="item__description">
+             <div class="description-switch__outer">
+             <div class="description-switch__inner">
+              
+             <button department_id='.$product->id.' class="delete_btn btn btn-danger" ><i class="fa fa-trash" id="delete"></i></button>
+             <a href="'.route('departments.edit', $product->id).'" class="edit_btn -info"> <i class="fa fa-edit" id="edit"></i> </a>
+             
+
+                <p>'.$product->name.'</p>
+               
+               <a href="'.route('departments.show',$product->id).'" ><!--target="_blank"   open link in new page    -->  
+                 <i class="fas fa-location-arrow" id="show"></i>
+               <div class="item__action-arrow">
+               </a>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+
+  
+            <div class="flap level0">
+                
+    
+            <div class="flap level1 flip-right">
+                
+              <div class="flap level2 flip-down">
+                <div class="flap level3 flip-left"></div>
+                <div class="flap level3 flip-right">
+                  <div class="flap level4 flip-up">
+                    <div class="flap level5 flip-right">
+                      <div class="flap level6 flip-left">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flap level2 flip-up">
+                <div class="flap level3 flip-left">
+                  <div class="flap level4 flip-up"></div>
+                  <div class="flap level5 flip-down">
+                    <div class="flap level6 flip-left">
+                      <div class="flap level7 flip-up">
+                        <div class="flap level8 flip-left"></div>
+                        <div class="flap level8 flip-right"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flap level1 flip-left">
+              <div class="flap level2 flip-up">
+                <div class="flap level3 flip-left">
+                  <div class="flap level4 flip-down">
+                    <div class="flap level5 flip-left">
+                      <div class="flap level6 flip-right">
+                        <div class="flap level7 flip-up">
+                          <div class="flap level8--alt flip-right"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flap level2 flip-down">
+                <div class="flap level3 flip-right">
+                  <div class="flap level4 flip-down">
+                    <div class="flap level5 flip-up"></div>
+                  </div>
+                  <div class="flap level5 flip-up">                                
+                    <div class="flap level6 flip-right"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item__hover-icon">
+            <div class="icon-switch__outer">
+              <div class="icon-switch__inner">
+               '.$icon_dep.'
+              <div class="code">
+              <span >'.$product->code.'</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
+</div>
+             
              ';
         
         }
    
    return $output;
    }
+
+
+                  
+                  
+                  
+               
+                    
+             
+                   
 
 }
 

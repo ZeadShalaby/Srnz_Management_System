@@ -57,6 +57,13 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'users' => [
+            'driver' => 'local',
+            'root' => base_path('public/image/users/'),
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
