@@ -1,4 +1,13 @@
 
+<!---- favourite delete all ----->
+@foreach ($interesteds as $interested)
+        <button  class="removeall_btn btn btn-dark" name="deleteall"style="margin-top: -165px;margin-left: 600px;">RemoveAll</button>
+        @break
+    </form>
+    @endforeach
+
+
+
 <!--- setting page --->
 @if (session('status'))
         @extends('layout.messages-success')
@@ -6,6 +15,8 @@
         @endsection
         
     @endif
+
+    searches
 
 <!--extends after do css generate design -->
 @if(isset($orders))

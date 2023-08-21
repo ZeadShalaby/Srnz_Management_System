@@ -28,7 +28,6 @@ class OrdersSiteController extends Controller
         $interested = Interesteds::get();
         $orders_user = Orders::where('user_id', Auth::user()->id)->get();
         $departments = Departments::get();
-
       //  dd($orders_user);
         if($interested){
         return view('ordersite.index',['orders'=>$orders,'interesteds'=>$interested,'userid'=>auth()->user()->id,'orders_user'=>$orders_user,'SeCustomer'=>$useres,'Departments'=>$departments]);

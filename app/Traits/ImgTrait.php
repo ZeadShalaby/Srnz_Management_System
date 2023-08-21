@@ -324,6 +324,7 @@ trait ImgTrait
                 $icon_dep = ' <img src="'.asset('image/all/logo.png').'" alt="departments">';}
         
              $output.='
+             
              <div class="DepartmentRow'.$product->id.'">
              <div class="container">
              <div class="box">

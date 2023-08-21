@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/department_create.css')}}">
     <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{asset('css/hideshow.css')}}">
 
     <title>ADD Departments </title>
 </head>
@@ -13,9 +14,10 @@
    
     @extends('extends')
     @section('content')
-    <div class="alert alert-success" id="success_msg" style="display: none;">
-        Create Sucessfuly .
-     </div>
+    @extends('layout.create_dep')
+    @section('dep_create')
+        
+    @endsection
      <div class="alert alert-danger" id="name_error_msg" style="display: none;">
         Name Oreday Exist .
      </div>
@@ -27,6 +29,7 @@
         
     </div>
 
+    <div id="divshow" style="visibility: hidden;">
 
     <div class="login">
         <div class="login__content">
@@ -64,15 +67,38 @@
             </div>
         </div>
     </div>
+    </div>
+<!--- hide show ---->
+<div id="divhide" class="createhide" style="visibility: visible;align-items: center">
+    <div class="card">
+      <div class="header">
+        <div class="img"></div>
+        <div class="details">
+          <span class="name"></span>
+          <span class="about"></span>
+        </div>
+      </div>
+      <div class="description">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+      </div>
+      <div class="btns">
+        <div class="btn btn-1"></div>
+        <div class="btn btn-2"></div>
+      </div>
+    </div>
+  </div>
 
-
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('orders.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('users.index')}}"class="btn btn-dark">Users</a>
-    <a href="{{route('departments.restore.index')}}"class="btn btn-dark">DE-restore</a>
-    <a href="{{route('orders.restore.index')}}"class="btn btn-dark">OR-restore</a>
-    <a href="{{route('departments.index')}}"class="btn btn-dark">Departments</a>
-
+  <!-- Delay Departments Create -->   
+  <script>
+    function showdiv(){
+      document.getElementById("divshow").style.visibility = "visible";
+      document.getElementById("divhide").style.visibility = "hidden";
+ 
+     }
+     setTimeout("showdiv()",3200);
+  </script>
 
 
 
@@ -98,6 +124,8 @@
                     $('#name_error_msg').hide();
                     $('#code_error_msg').hide();
                     $('#success_msg').show();
+                    document.getElementById("departmentsForm").reset();  
+
                 }
                 if (data.type == 'code') {
                     $('#error').hide();

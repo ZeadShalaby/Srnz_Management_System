@@ -11,16 +11,16 @@ body {
 
     
 .container {
-    width: 1200px;
+    width: 1160px;
     margin: 0px auto;
     
 }
 .box{
-    width: 305px;
-    padding: 80px;
+    width: 280px;
+    padding: 85px;
     float: left;
     margin: 40px;
-    margin-left: 55px;
+    margin-left: 65px;
   }
 .item {
     position: relative;
@@ -31,6 +31,7 @@ body {
     perspective: 500px;
     perspective-origin: 50% 50%;
     transform-style: preserve-3d;
+    
 }
 .item__hover-icon {
     position: absolute;
@@ -154,6 +155,7 @@ body {
 }
 .image-switch__inner {
     height: 100%;
+    
     transition: opacity 0.45s linear 0.9s;
 }
 .description-switch__outer {
@@ -181,6 +183,7 @@ body {
     display: flex;
     transform-style: preserve-3d;
     z-index: -1;
+
 }
 .delete_btn{
     background-color: rgb(57, 57, 57);
@@ -226,6 +229,7 @@ body {
 }
 .level0 {
     background-color: #48c;
+
 }
 
 .level1 {

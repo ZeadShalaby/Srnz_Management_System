@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\CountTrait;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Orders;
@@ -20,6 +21,8 @@ use Illuminate\Validation\ValidationExceptio;
 
 class UsersController extends Controller
 {
+    use CountTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -60,6 +63,10 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+
+
+
+
         //Create Admin
         $sourcename = DB::table('users')->where('name', $request->name)->value('name');
         $sourceemail = DB::table('users')->where('email', $request->email)->value('email');
@@ -142,11 +149,25 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         //
+        dd($request->profile_photo);
+        if(isset($request->imges)){
+            $folder = 'image/users';
+            $file_name = $this->saveImage($request->imges,$folder);
+           
+            $department->update([
+                'name'=> $user->name,
+                'email'=> $user->email,
+                'gmail'=>$user->gmail,
+                'profile_photo'=>$file_name,
+                'phone'=>$user->phone,
+                'password'=> $user->password,
+                 ]);
+        }
         $formFields = $request->validate([
-
             'name'=> 'required',
             'email'=> 'required',
             'gmail'=> 'required',
+            'profile_photo'=>'required',
             'password'=> 'required',
             'phone'=> 'required',
         ]);
@@ -250,7 +271,6 @@ class UsersController extends Controller
 
       // forget password
       public function forget(Request $request){
-        dd($request);
         $result = $this->forgetCheck($request);
         if (!(Auth::attempt($result->user_data))) {
             return back()->with('error', 'Wrong Login Details');
@@ -286,6 +306,15 @@ class UsersController extends Controller
             
          
      }
+
+    //Settings
+   public function setting(){
+    $orders = Orders::where('user_id',auth()->user()->id)->get();
+    $favourite = Interesteds::where('user_id',auth()->user()->id)->get();
+    $numorders = $this->countorders($orders);
+    $numfav = $this->countfavourite($favourite);
+    return view('users.setting',['users'=>auth()->user(),'SeAdmin'=>auth()->user(),'SeCustomer'=>auth()->user(),'CountOrders'=>$numorders,'CountFav'=>$numfav,'check'=>1]);
+   }
 
     
 }

@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/restore.css')}}">
-    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{asset('css/load-depre.css')}}">
+
+    <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml"> 
 
     <title>Restore Departments</title>
 </head>
@@ -17,8 +19,8 @@
         
     @endsection
 
-    <h1 id="h1">Restore Departments</h1>
     <br><br>
+    <div id="divshow" style="visibility: hidden;">
 
     @foreach ($departments as $department)
     <div class="container">
@@ -49,8 +51,43 @@
     </div>
     @endforeach
 
-    
-         
+</div>
+
+<div id="divhide" class="divhide" style="visibility: visible;">
+<div class="onefirst">
+<div class="animation-container">
+    <div class="lightning-container">
+        <div class="lightning white"></div>
+        <div class="lightning red"></div>
+    </div>
+    <div class="boom-container">
+        <div class="shape circle big white"></div>
+        <div class="shape circle white"></div>
+        <div class="shape triangle big yellow"></div>
+        <div class="shape disc white"></div>
+        <div class="shape triangle blue"></div>
+    </div>
+    <div class="boom-container second">
+        <div class="shape circle big white"></div>
+        <div class="shape circle white"></div>
+        <div class="shape disc white"></div>
+        <div class="shape triangle blue"></div>
+    </div>
+</div>
+
+
+</div>
+</div>
+<!-- delay orders -->   
+<script>
+function showdiv(){
+  document.getElementById("divshow").style.visibility = "visible";
+  document.getElementById("divhide").style.visibility = "hidden";
+
+ }
+ setTimeout("showdiv()",3600);
+</script>
+   
 
     <script>
 

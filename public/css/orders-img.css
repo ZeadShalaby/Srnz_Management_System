@@ -1,13 +1,16 @@
 .departments #img  {
-	width: 100px;
-	max-width: 100%;
+    width: 70px;
+	max-width: 100px;
 	-webkit-border-radius: 50%;
-	border-radius: 50%;
 	-webkit-transition: -webkit-box-shadow 0.3s ease;
 	transition: box-shadow 0.3s ease;
 	-webkit-box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
 	box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
-    vertical-align: middle
+    vertical-align: middle;
+	border-top-left-radius: 50% 50%; 
+    border-top-right-radius: 50% 50%; 
+    border-bottom-right-radius: 50% 50%; 
+    border-bottom-left-radius: 50% 50%; 
   }
   
   .departments #img:hover  {

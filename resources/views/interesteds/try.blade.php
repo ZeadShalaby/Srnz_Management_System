@@ -3,17 +3,14 @@
 <html lang="en" dir="ltr">
    <head>
       <meta charset="utf-8">
-      <title>Favourite</title>
+      <title>Profile Card Hover Animation | CodingNepal</title>
       <link rel="stylesheet" href="style.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
       <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
       <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
       <link rel="stylesheet" href="{{asset('css/card-fav.css')}}">
-      <link rel="stylesheet" href="{{asset('css/hide-fav.css')}}">
-
    </head>
    <body>
-
     @extends('extends')
     @section('content')
     @if(session('error'))
@@ -21,13 +18,12 @@
     @section('message_danger')
         
     @endsection
+    </div>
     @endif
     @extends('layout.message-info')
     @section('messages_info')
         
     @endsection
-    <div id="divshow" style="visibility: hidden;">
-
     <div class="InterestedRowall">
         @foreach ($interesteds as $interested)
         <div class="InterestedRow{{$interested->id}}">
@@ -63,8 +59,8 @@
 
          <div class="icons">
             <li><a href="#"><button interested_id={{$interested->id}} class="remove_btn btn btn-danger" style="border:none" ><span class="fa fa-remove"></span></button></a></li>
-            <li><a href="{{route('ordersite.show',$interested->order_id)}}" style="text-decoration: none">
-                <span class="fa fa-eye"></span></a></li>
+            <li><a href="#"><span class="fa fa-eye"></span></a></li>
+            
          </div>
       </div>
     
@@ -73,29 +69,6 @@
         </div>
         @endforeach
     </div>
-</div>
-</div>
-
-<!--- hide favourite  --->
-<div id="divhide" class="divhide" style="visibility: visible;">
-
-    <div class="backs"></div>
-    <div class="hearts"></div>
-    
-</div>
-    
-
-    <!-- delay Departments -->   
-    <script>
-        function showdiv(){
-        document.getElementById("divshow").style.visibility = "visible";
-        document.getElementById("divhide").style.visibility = "hidden";
-
-        }
-        setTimeout("showdiv()",3200);
-    </script>
-
-
       <script>
         // card favourite
          const img = document.querySelector("img");

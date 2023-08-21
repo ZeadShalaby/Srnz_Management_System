@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\CountTrait;
 use App\Models\Orders;
 use App\Models\Interesteds;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class InterestedsController extends Controller
 {
+    use CountTrait;
     /**
      * Display a listing of the resource.
      */
@@ -19,9 +21,10 @@ class InterestedsController extends Controller
     {
         //
         $useres = auth()->user();
-
+        $favourite = Interesteds::where('user_id',auth()->user()->id)->get();
+        $numfav = $this->countfavourite($favourite);
         $interesteds = Interesteds::where('user_id',Auth::user()->id)->paginate(5);
-        return view('interesteds.index',['interesteds' => $interesteds,'user_id'=>auth()->user(),'SeCustomer'=>$useres]);
+        return view('interesteds.index',['interesteds' => $interesteds,'user_id'=>auth()->user(),'SeCustomer'=>$useres,'countcheck'=>$numfav]);
     }
 
     /**

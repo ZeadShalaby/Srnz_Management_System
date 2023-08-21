@@ -8,10 +8,13 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="{{asset('css/order.css')}}">
     <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+    <link href="{{asset('css/loadorders.css')}}" rel="stylesheet">
 
     <title>ADD Orders </title>
 </head>
 <body>
+    <div id="divshow" style="visibility: hidden;">
+
    @extends('extends')
    @section('cintent')
        
@@ -52,7 +55,7 @@
 
     <div class="bold"></div>
 
-    <div class="wrapper">
+    <div class="wrapper"  style="margin-left: 100px">
 
     <form action="{{route('ordersite.store')}}" id="ordersForm" method="post" enctype="multipart/form-data" >
         @csrf  
@@ -111,15 +114,26 @@
 
 </form>
     </div>
-<div style="margin-top: 650px">
-
-    <a href="{{route('homepage')}}"class="btn btn-dark">HomePage</a>
-    <a href="{{route('ordersite.index')}}"class="btn btn-dark">Orders</a>
-    <a href="{{route('orders.restore.site.index')}}"class="btn btn-dark">OR-restore</a>
-    <a href="{{route('interesteds.index')}}"class="btn btn-dark">Interesteds</a>
-
 </div>
 
+    <div id="divhide" class="divhide" style="visibility: visible;">
+        <div class="loader">
+            <div class="inner one"></div>
+            <div class="inner two"></div>
+            <div class="inner three"></div>
+          </div>
+    </div>
+    
+    
+    <!-- delay orders -->   
+    <script>
+    function showdiv(){
+      document.getElementById("divshow").style.visibility = "visible";
+      document.getElementById("divhide").style.visibility = "hidden";
+    
+     }
+     setTimeout("showdiv()",3200);
+    </script>
 
 
 </body>

@@ -7,11 +7,16 @@
     <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
     <link href="{{asset('css/orders-img.css')}}" rel="stylesheet">
     <link href="{{asset('css/card-orders.css')}}" rel="stylesheet">
+    <link href="{{asset('css/loadorders.css')}}" rel="stylesheet">
+
 
     <title>Orders</title>
 </head>
 <body>
  
+    <div id="divshow" style="visibility: hidden;">
+
+
     @extends('extends')
     @section('content')
     <div class="alert alert-success" id="success_msg" style="display: none;">Add your favourite .</div>
@@ -61,7 +66,7 @@
                         <p>COST :{{$order->price}}</p>
 
                     </div>
-                        
+                        ccccc
                     </div>
                 </article>
      
@@ -116,13 +121,34 @@
 </div>
     @endforeach
      </div>
-     <div style="margin-left: 1500px">
+     <div style="margin-left: 1000px">
         {{$orders->links()}}
     </div>
     
 <!-- return search -->
 <div id="conte" class="searchdata">
 </div>
+    </div>
+
+<div id="divhide" class="divhide" style="visibility: visible;">
+    
+
+    <!-- 2 -->
+    <div class="loader">
+        <div class="inner one"></div>
+        <div class="inner two"></div>
+        <div class="inner three"></div>
+      </div>
+</div>
+<!-- delay orders -->   
+<script>
+    function showdiv(){
+      document.getElementById("divshow").style.visibility = "visible";
+      document.getElementById("divhide").style.visibility = "hidden";
+    
+     }
+     setTimeout("showdiv()",3200);
+    </script>
 
     <script>
  // AddFavourite with ajax

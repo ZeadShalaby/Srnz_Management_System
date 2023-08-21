@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/department_create.css')}}">
     <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
-
+    <link rel="stylesheet" href="{{asset('css/hideshow.css')}}">
     <title>Edit Departments</title>
 </head>
 <body style="background-color: rgb(27, 26, 26);">
@@ -14,6 +14,8 @@
     @section('content')
     <h1 id="h1">EDIT DEPARTMENTS</h1>
     <br>
+    <div id="divshow" style="visibility: hidden;">
+
     <div class="login" style="margin-top:-80px">
         <div class="login__content">
             <div class="login__img">
@@ -46,8 +48,7 @@
             </div>
             @enderror
         </div>
-    
-        
+       
             <button style="width: 100%" class="login__button" type="submit">EDiT</button>
         
     </form>
@@ -57,7 +58,38 @@
             </div>
         </div>
     </div>
-   
+    </div>
+    <!--- hide show ---->
+<div id="divhide" class="createhide" style="visibility: visible;align-items: center">
+    <div class="card">
+      <div class="header">
+        <div class="img"></div>
+        <div class="details">
+          <span class="name"></span>
+          <span class="about"></span>
+        </div>
+      </div>
+      <div class="description">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+      </div>
+      <div class="btns">
+        <div class="btn btn-1"></div>
+        <div class="btn btn-2"></div>
+      </div>
+    </div>
+  </div>
+
+ <!-- Delay Departments Edit -->   
+ <script>
+    function showdiv(){
+      document.getElementById("divshow").style.visibility = "visible";
+      document.getElementById("divhide").style.visibility = "hidden";
+ 
+     }
+     setTimeout("showdiv()",3200);
+  </script>
 
     @endsection
 

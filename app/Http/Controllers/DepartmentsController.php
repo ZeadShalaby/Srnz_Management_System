@@ -48,7 +48,7 @@ class DepartmentsController extends Controller
 
         $formFields = $request->validate([
 
-            'img'  => 'required|image|mimes:jpg,png,gif|max:2048',
+            'img'  => 'required|image|mimes:jpg,png,gif|max:3072',
             'code' => 'required',
             'name' => 'required',
 
@@ -122,6 +122,7 @@ class DepartmentsController extends Controller
     public function update(Request $request,Departments $department)
     {
 
+        dd($request);
         $formFields = $request->validate([
 
             'name' => 'required',

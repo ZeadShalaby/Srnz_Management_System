@@ -89,7 +89,7 @@
 
         <label for="username">Username/Phone</label>
         <input  type="text" id="username" name="email" class="input" value="{{old('email')}}"/>
-
+  
 
         <label for = "password" name="password">Password</label>
         <input type="password" id="password" name="password" class="input" value="{{old('password')}}"/>

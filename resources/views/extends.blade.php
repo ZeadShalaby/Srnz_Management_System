@@ -13,6 +13,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{asset('css/extends.css')}}">
     <link rel="stylesheet" href="{{asset('css/slide.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
 
 
@@ -90,7 +91,7 @@
     </li>
     
     <li>
-       <a href="#">
+       <a href="{{route('setting')}}">
          <i class='bx bx-cog' ></i>
          <span class="links_name">Setting</span>
        </a>
@@ -175,8 +176,9 @@
       </a>
       <span class="tooltip">Delete_Account</span>
       </li>
+     
     <li>
-    <a href="#" >
+      <a href="{{route('setting')}}">
     <i class='bx bx-cog' ></i>
     <span class="links_name">Setting</span>
     </a>
