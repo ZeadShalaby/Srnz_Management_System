@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/user_create.css')}}">
     <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{asset('css/load-user.css')}}">
 
     <title>Create Admin</title>
 </head>
@@ -25,6 +26,8 @@
 
     <br>
     
+    <div id="divshow" style="visibility: hidden;">
+
     <div class="square">
 
         <i style="--clr:#fffd44;"></i>
@@ -83,8 +86,28 @@
         <img src="{{URL('image\all\logo_srnz.png')}}" alt="img" />
     </div>
 
+    </div>
 
 
+    <div id="divhide" class="divhide" style="visibility: visible;">
+
+        <div class="spinner" style="margin-top: -100px">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+          </div>
+        
+        </div>
+    
+    <!-- delay Departments -->   
+    <script>
+        function showdiv(){
+          document.getElementById("divshow").style.visibility = "visible";
+          document.getElementById("divhide").style.visibility = "hidden";
+    
+         }
+         setTimeout("showdiv()",3200);
+      </script>
+    
 
 
 <script>

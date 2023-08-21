@@ -64,6 +64,10 @@ use App\Http\Controllers\InterestedsController;
 
         //home-page 
         Route::get('/Home_Page', [UsersController::class, 'homepage'])->name('homepage');
+
+        //setting-page
+        Route::get('/setting-page', [UsersController::class, 'setting'])->name('setting');
+
         
         });
 

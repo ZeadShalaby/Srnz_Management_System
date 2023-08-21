@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/message.css')}}">
 
-    <title>messages</title>
+    <title>messages_sucess</title>
 </head>
 <body>
     <div class="container">
-    @yield('trash-ord')
+        @yield('dep_create')
         
     </div>
     <div class="notification">
@@ -68,8 +68,11 @@
         -->
         <div class="notification__message message--info" id="success_msg" style="display: none">
           <h1 style="color: rgb(0, 0, 0);font-weight:bold;">Info</h1>
-          <p style="font-weight:bold;font-size:13px">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-         <span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px">My Sir :<span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px">  @if(isset($SeAdmin)){{$SeAdmin->name}} @else{{$SeCustomer->name}} @endif</span></span>
+          <p style="font-weight:bold;font-size:17px">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+         <span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px">My Dear :<span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px">@if(isset($SeAdmin)) {{$SeAdmin->name}}</span></span>
+            @endif
+                       
+         </span></span>
       
             <!-- x icon through a path element -->
             <button aria-labelledby="button-dismiss">
@@ -100,7 +103,7 @@
     
     <script>
     
-    
+     
     
     // utility function returning a random item from the input array
     const randomItem = arr => arr[Math.floor(Math.random() * arr.length)];
@@ -109,13 +112,14 @@
     const messageTitle = [
       
       
-      'info',
+      'success',
      
     ];
     // possible values for the body of the message
     // end result of the emmet shortcut p*10>lorem10
     const messageText = [
-        'Orders Restore Sucessfuly Done Work.'
+    'Create Departments Successfully.....'
+        
     ];
     
     /* logic
@@ -176,5 +180,8 @@
     // immediately call the generateMessage function to kickstart the loop
     
     </script>
+
+<!----------------------    --------------------->
+
 </body>
 </html>

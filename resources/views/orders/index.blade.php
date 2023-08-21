@@ -7,11 +7,13 @@
     <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
     <link href="{{asset('css/orders-img.css')}}" rel="stylesheet">
     <link href="{{asset('css/card-orders.css')}}" rel="stylesheet">
+    <link href="{{asset('css/loadorders.css')}}" rel="stylesheet">
 
     <title>Orders</title>
 </head>
 <body>
-   
+    <div id="divshow" style="visibility: hidden;">
+
     @extends('extends')
     @section('content')
     
@@ -29,8 +31,7 @@
 
     <h1>Orders</h1>
  
-
-    <div class="departments">
+        <div class="departments">
         @foreach ($Departments as $department)
         <a href="{{route('registration.show',$department->id)}}" class="inside-page__btn inside-page__btn--beach">
             
@@ -66,8 +67,16 @@
                         <p class="card__description">
                             {{$order->description}}
                         </p>
-                        <p>COST :{{$order->price}}</p>
-
+                        <p >COST :{{$order->price}}</p>
+                        <span style="display: none">{{$start=1}}</span>
+                        @while ($start<=5)
+                              @if($order->id<$start)
+                              <span class="fa fa-star" style="color: rgb(242, 255, 0)"></span>
+                              @else
+                             <span class="fa fa-star" style="color: rgb(188, 188, 187)"></span>
+                             @endif
+                             <span style="display: none">{{$start++}}</span>
+                        @endwhile
                     </div>
                         
                     </div>
@@ -93,6 +102,27 @@
     </div>
     @endforeach
 </div>
+
+</div>
+
+<div id="divhide" class="divhide" style="visibility: visible;">
+    <div class="loader">
+        <div class="inner one"></div>
+        <div class="inner two"></div>
+        <div class="inner three"></div>
+      </div>
+</div>
+
+
+<!-- delay orders -->   
+<script>
+function showdiv(){
+  document.getElementById("divshow").style.visibility = "visible";
+  document.getElementById("divhide").style.visibility = "hidden";
+
+ }
+ setTimeout("showdiv()",3200);
+</script>
 
 <!-- return search -->
 <div id="conte" class="searchdata">

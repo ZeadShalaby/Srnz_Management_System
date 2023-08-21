@@ -1,0 +1,44 @@
+.profile-pic {
+  color: transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.profile-pic input {
+  display: none;
+}
+.profile-pic .hover {
+  position: absolute;
+  object-fit: cover;
+  width: 65px;
+  height: 65px;
+  box-shadow: 0 0 10px 0 rgba(150, 30, 30, 0.35);
+  background-color: rgba(63, 63, 63, 0.8);
+  border-radius: 100%;
+  z-index: 0;
+  margin-top: 50px;
+  cursor: pointer;
+
+}
+.profile-pic .-label {
+  cursor: pointer;
+  margin-top: -105px;
+
+}
+.profile-pic:hover .-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  color: #fafafa;
+  transition: background-color 0.2s ease-in-out;
+}
+.profile-pic span {
+  display: inline-flex;
+  padding: 0.2em;
+  height: 2em;
+}
+

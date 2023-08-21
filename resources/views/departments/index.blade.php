@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
     <link rel="stylesheet" href="{{asset('css/card-dep.css')}}">
+    <link rel="stylesheet" href="{{asset('css/hideshow.css')}}">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
@@ -32,6 +33,7 @@
     
    
     <br><br>
+<div id="divshow" style="visibility: hidden;">
 <div class="AllData">
     @foreach ($departments as $department)
     <div class="DepartmentRow{{$department->id}}">
@@ -147,17 +149,53 @@
     </div>
     @endforeach
 </div>
+</div>
+<!--- hide show ---->
+<div id="divhide" class="divhide" style="visibility: visible;">
+  <div class="card">
+    <div class="header">
+      <div class="img"></div>
+      <div class="details">
+        <span class="name"></span>
+        <span class="about"></span>
+      </div>
+    </div>
+    <div class="description">
+      <div class="line line-1"></div>
+      <div class="line line-2"></div>
+      <div class="line line-3"></div>
+    </div>
+    <div class="btns">
+      <div class="btn btn-1"></div>
+      <div class="btn btn-2"></div>
+    </div>
+  </div>
+</div>
     <br>
 
 <!-- return search -->
 <div id="conte" class="searchdata">
 </div>
-
 <div class="paginator" style="margin-left: 1200px; margin-top:-1000px">
     {{ $departments->links() }}
   </div>
 
- 
+ <!-- delay Departments -->   
+  <script>
+    function showconte(){
+      document.getElementById("search").style.visibility = "hidden";
+
+    }
+    setTimeout("showdiv()",3200);
+
+    function showdiv(){
+      document.getElementById("divshow").style.visibility = "visible";
+      document.getElementById("divhide").style.visibility = "hidden";
+
+     }
+     setTimeout("showdiv()",3200);
+  </script>
+
  <!-- Delete Departments -->   
     <script>
 

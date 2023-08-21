@@ -1,0 +1,214 @@
+body {
+    background: #f2f4f8;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    height: 100vh;
+    font-family: "Open Sans";
+  }
+  
+  
+  .container{
+    width: 1200px;
+    margin: 0px auto;
+    }
+    .box{
+      width: 305px;
+      padding: 20px;
+      float: left;
+      margin: 40px;
+    }
+ 
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+body{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Poppins',sans-serif;
+text-align: center;
+}
+.containers{
+height: 250px;
+width: 250px;
+overflow: hidden;
+margin: 0 auto;
+border-radius: 50%;
+transition: all 0.3s ease-in-out;
+box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.3);
+background: linear-gradient(45deg, #7b00e0, #ae31d9);
+
+}
+.containers:hover{
+height: 320px;
+width: 310px;
+border-radius: 5px;
+box-shadow: 0px 1px 35px 0px rgba(0,0,0,0.3);
+}
+.containers .wrapper img{
+position: relative;
+z-index: 20;
+border-radius: 50%;
+display: block;
+height: 200px;
+width: 200px;
+border: 5px solid #fff;
+object-fit: cover;
+margin: 20px auto;
+transition: all 0.3s ease;
+}
+.containers:hover .wrapper img.active{
+height: 470px;
+width: 350px;
+margin: 0px auto;
+border: none;
+border-radius: 5px;
+}
+.wrapper .title{
+color: #fff;
+font-size: 30px;
+font-weight: 500;
+padding: 10px;
+line-height: 25px;
+margin-top: 60px;
+}
+.wrapper .place{
+color: #fff;
+font-size: 17px;
+line-height: 0px;
+margin: 10px 0;
+}
+.content{
+color: #fff;
+font-size: 17px;
+margin-top: 10px;
+padding: 1px 20px 10px 20px!important;
+}
+.content .buttons{
+display: flex;
+}
+.buttons .btn{
+height: 40px;
+width: 150px;
+margin: 0 5px;
+}
+.buttons .btn button{
+height: 100%;
+width: 100%;
+background: #fff;
+border: none;
+outline: none;
+cursor: pointer;
+font-size: 17px;
+font-weight: 500;
+border-radius: 5px;
+transition: all 0.3s;
+}
+.btn button:hover{
+transform: scale(0.95);
+}
+.containers .icons{
+position: relative;
+margin-top: -50px;
+margin-left: 2px;
+list-style: none;
+}
+.containers .icons.active{
+display: none;
+}
+.containers .icons li{
+height: 40px;
+width: 40px;
+margin: 5px 0;
+opacity: 0;
+margin-left: -100px;
+transition: all 0.5s ease;
+}
+.containers:hover .icons li{
+opacity: 1;
+margin-left: 7px;
+}
+.containers:hover .icons li:nth-child(2){
+transition-delay: 0.2s;
+}
+.containers:hover .icons li:nth-child(3){
+transition-delay: 0.4s;
+}
+.container .icons li a{
+color: #7b00e0;
+height: 100%;
+width: 100%;
+border-radius: 50%;
+background: #fff;
+display: block;
+line-height: 40px;
+transition: all 0.3s;
+}
+.containers .icons li a:hover{
+transform: scale(0.9);
+}
+
+.heart{
+  margin-top: -150px;
+
+}
+.heart2{
+  margin-top: 50px;
+  position: relative;
+  margin-top: -290px;
+  margin-left: 235px;
+  list-style: none;
+}
+.heart2 i{
+  color: #000;
+  font-size: 50px;
+  animation: beat 0.9s infinite;
+  text-shadow:
+      0 0 5px red,
+      0 0 45px red,
+      0 0 90px red
+  ;
+}
+.heart i{
+  color: #000;
+  font-size: 90px;
+  animation: beat 0.9s infinite;
+  text-shadow:
+      0 0 5px red,
+      0 0 45px red,
+      0 0 90px red
+  ;
+}
+@keyframes beat{
+  0%{
+      transform: scale(1);
+  }
+  20%{
+      transform: scale(1.15);
+  }
+  40%{
+      transform: scale(1.4);
+  }
+}
+
+.containers .heart2 li{
+  height: 40px;
+  width: 40px;
+  margin: 5px 0;
+  opacity: 0;
+  margin-left: 100px;
+  transition: all 0.5s ease;
+  }
+  .containers:hover .heart2 li{
+  opacity: 1;
+  margin-left: 7px;
+  }
+  .containers:hover .heart2 li:nth-child(2){
+  transition-delay: 0.2s;
+  }
+  .containers:hover .heart2 li:nth-child(3){
+  transition-delay: 0.4s;
+  }
+
+
+
+
