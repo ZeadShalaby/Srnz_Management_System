@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
-    <link href="{{asset('css/orders-img.css')}}" rel="stylesheet">
     <link href="{{asset('css/card-orders.css')}}" rel="stylesheet">
     <link href="{{asset('css/loadorders.css')}}" rel="stylesheet">
-
+    <link href="{{asset('css/orders-img.css')}}" rel="stylesheet">
     <title>Orders</title>
 </head>
 <body>
@@ -35,14 +34,35 @@
         @foreach ($Departments as $department)
         <a href="{{route('registration.show',$department->id)}}" class="inside-page__btn inside-page__btn--beach">
             
-                <img src="{{asset('image/departments/'.$department->img)}}" alt="{{$department->name}}" class="hoverZoomLink" id="img" >
-              
+            <div class="containeres" style="margin-top: 200px">
+                <div class="boxs">
+                <div class="icon-image">
+                  <div class="icon">
+                    <img src="{{asset('image/all/img1.jpg')}}" alt="" />
+                </div>
+                  <div class="hover-image one">
+                    <div class="img">
+                        @if(!isset($department->img))
+                        <img src="{{asset('image/all/img1.jpg')}}" alt="" />
+                        @else
+                        <img src="{{asset('image/departments/'.$department->img)}}" alt="" />
+                        @endif
+                    </div>
+                    <div class="content">
+                      <div class="details">
+                        <div class="name">{{$department->name}}</div>
+                        <div class="job">{{$department->code}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </div>              
         </a>
                
-        
-        <span style="color: red">-</span>
-        @endforeach
+   @endforeach
     </div>
+    <br><br><br> 
 
     <div class="AllData">
     @foreach ($orders as $order)
@@ -50,9 +70,17 @@
 
         <div class="container">
             <div class="box">
-               <span style="color: aquamarine" >{{$order->user->name}}</span>
-<br><br>
-           <a href="{{route('orders.show',$order->id)}}" style="text-decoration: none">
+                <a href="{{route('orders.show',$order->id)}}" style="text-decoration: none">
+
+                <div class="icon-images" style="margin-top: -30px">
+
+                    <div class="icons" >
+                        <img src="{{asset('image/all/img1.jpg')}}" alt="users" />                
+                        <div  class="spann" style="color: aquamarine;margin-left:90px;" >{{$order->user->name}}</div>
+                    </div>
+                    </div>
+                    
+                    <br>
                 <article class="card">
                     <img
                     class="card__background"
@@ -67,10 +95,17 @@
                         <p class="card__description">
                             {{$order->description}}
                         </p>
-                        <p >COST :{{$order->price}}</p>
+                        <p >COST :{{$order->price}} <span style="color: rgb(59, 212, 105)">$</span></p>
                         <span style="display: none">{{$start=1}}</span>
+                        <span style="display: none">{{$orderid=$order->id}}</span>
+
                         @while ($start<=5)
-                              @if($order->id<$start)
+                        @if($orderid>5)
+                        <span style="display: none"> {{ $orderid %=5 }}</span>
+                        @endif
+                         
+                         
+                              @if($orderid<$start)
                               <span class="fa fa-star" style="color: rgb(242, 255, 0)"></span>
                               @else
                              <span class="fa fa-star" style="color: rgb(188, 188, 187)"></span>
@@ -83,27 +118,26 @@
                     
                 </article>
            </a>
-                <div class="under_img">
-                    @isset($order->view)
-                     <img src="{{url('image\all\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
-                    @else
-                    <img src="{{url('image\all\nview.png')}}" alt="vieweer" style="width: 30px">
-                    @endisset
-                  
-                <!-- Delete Orders -->    
-                <div style="margin-top: -2px">
-                <button order_id={{$order->id}} id='delete' class="delete_btn"  style="margin-left: 150px;"><i class="fa fa-trash"></i></button>        
-                    </div>
-                <br><br>
-                </div>
+        <div class="under_imgs">
+            @isset($order->view)
+            <img src="{{url('image\all\view.png')}}" alt="vieweer" style="width: 30px"> {{''}}{{$order->view}}
+        @else
+        <img src="{{url('image\all\nview.png')}}" alt="vieweer" style="width: 30px">
+        @endisset
+        
+    <!-- Delete Orders -->    
+    <div style="margin-top: -18px">
+    <button order_id={{$order->id}} id='delete' class="delete_btn"  style="margin-left: 150px;"><i class="fa fa-trash"></i></button>        
+        </div>
+    <br><br>
             </div>
-          </div>
+        </div>
+    </div>
          
     </div>
     @endforeach
 </div>
 
-</div>
 
 <div id="divhide" class="divhide" style="visibility: visible;">
     <div class="loader">

@@ -1,4 +1,8 @@
 
+<img src="{{asset('image/departments/'.$department->img)}}" alt="{{$department->name}}" class="hoverZoomLink" id="img" >
+
+
+
 <!---- favourite delete all ----->
 @foreach ($interesteds as $interested)
         <button  class="removeall_btn btn btn-dark" name="deleteall"style="margin-top: -165px;margin-left: 600px;">RemoveAll</button>
@@ -221,3 +225,112 @@
         </div>
     </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#body{
+    background-color: rgb(18, 18, 18);
+
+}
+
+.container{
+width: 1250px;
+margin: 10px auto;
+margin-top: -350px;
+}
+.box{
+width: 305px;
+padding: 20px;
+float: right;
+margin: 0px;
+
+}
+.box .img{
+width: 100%;
+height: 170px;
+object-fit: contain;
+}
+.up_photo .photo{
+    width: 30%;
+    height: 70px;
+    margin-top: -150rem;
+    margin-left: 92px;
+    border-top-left-radius: 50% 50%; 
+    border-top-right-radius: 50% 50%; 
+    border-bottom-right-radius: 50% 50%; 
+    border-bottom-left-radius: 50% 50%;   
+  }
+
+.restore{
+    width: 10%;
+    height:10%;
+    
+}
+.box #href{
+    margin-left: 80px;
+    margin-top: 100px;
+    
+}
+
+.path{
+    margin-top: -75px;
+}
+
+.path_dep{
+    margin-top: -130px;
+    margin-left: 100px;
+}
+.path_dep img{
+    width: 70px;
+}
+.imgdep{
+    margin-top: 55px;
+    margin-left: -92px;
+}
+

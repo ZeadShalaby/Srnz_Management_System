@@ -31,10 +31,10 @@
 <br>
 
     @foreach ($orders as $order)
-    <div class="container">
+    <div class="container" >
         <div class="box">
     
-        <div class="OrderRow{{$order->id}}">
+        <div class="OrderRow{{$order->id}}" >
         <a href="#restore" id="href"  order_id={{$order->id}} class="restore_btn " ><img class="restore"src="{{URL('image/all/restore.png')}}" alt="folder"></a>
         <img class="img" src="{{URL('image/all/folders.png')}}" alt="folder">
     
@@ -43,7 +43,7 @@
             
         </p>
             <div class="path">
-            <img  class="photo" src="image/orders/{{$order->path}}" alt="orders" style="">
+            <img  class="photo" src="image/orders/{{$order->path}}" alt="orders">
             </div>
         </div>
     </div>
@@ -52,8 +52,8 @@
 
     </div>
 
-    <div id="divhide" class="divhide" style="visibility: visible;">
-        <div class="preloader">
+    <div id="divhide" class="divhide" style="visibility: visible;" >
+        <div class="preloader" style="margin-top: 100px" >
             <svg class="cart" role="img" aria-label="Shopping cart line animation" viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="8">
                     <g class="cart__track" stroke="hsla(0,10%,10%,0.1)">
@@ -73,11 +73,10 @@
                 </g>
             </svg>
             <div class="preloader__text">
-                <p class="preloader__msg">Bringing you the goods…</p>
+                <p class="preloader__msg" >Bringing you the goods…</p>
             </div>
         </div>
     </div>
-
     <!-- delay orders -->   
 <script>
     function showdiv(){

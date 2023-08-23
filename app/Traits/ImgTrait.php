@@ -33,6 +33,9 @@ trait ImgTrait
         ->get();
         $interesteds = Interesteds::get();
         $ordersuser = Orders::where('user_id',auth()->user()->id)->get();
+
+       
+                                    
         if(auth()->user()->role==Role::ADMIN){
 
             /**   <img class="card-img-top" src="'.$product->path.'" alt="Card image cap"> */
@@ -44,14 +47,27 @@ trait ImgTrait
                                if(isset($product->view)){
                                 $img=' <img src="'.url('image\all\view.png').'" alt="vieweer" style="width: 30px"> '.$product->view.'';
                                }else{$img=' <img src="'.url('image\all\nview.png').'" alt="vieweer" style="width: 30px"> ';}
-            
+                               $start=1;
+                               $orderid=$product->id;
+                                  while ($start<=5){
+                                     if($orderid>5){ $orderid %=5 ; }                                  
+                                     if($orderid<$start){
+                                       $stars =' <span class="fa fa-star" style="color: rgb(242, 255, 0)"></span>';}
+                                     else{
+                                     $stars =' <span class="fa fa-star" style="color: rgb(188, 188, 187)"></span>';}
+                                 $start++;}
                                 $output .=
                                 '<div class="OrderRow'.$product->id.'" >
                                 <div class="container" >
                                 <div class="box" >
                                 <a href="'.route('ordersite.show',$product->id).'" class="inside-page__btn inside-page__btn--beach" >
-                                <span style="color: aquamarine;text-decoration: none" >'.$product->user->name.'</span>
-                                <br><br>
+                                <div class="icon-images" style="margin-top: -30px">
+
+                                <div class="icons" >
+                                    <img src="'.asset('image/all/img1.jpg').'" alt="users" />                
+                                    <div  class="spann" style="color: aquamarine;margin-left:90px;" >'.$product->user->name.'</div>
+                                </div>
+                                </div>                                <br>
                    
                    
                                 <article class="card" style="text-decoration: none">
@@ -68,8 +84,14 @@ trait ImgTrait
                                     <p class="card__description">
                                         '.$product->description.'
                                     </p>
-                                    <p>COST :'.$product->price.'</p>
-                   
+                                    <p>COST :'.$product->price.' <span style="color: rgb(59, 212, 105)">$</span></p>
+                                    <span class="fa fa-star" style="color: rgb(188, 188, 187)"></span>
+                                    <span class="fa fa-star" style="color: rgb(188, 188, 187)"></span>
+                                    <span class="fa fa-star" style="color: rgb(242, 255, 0)"></span>
+                                    <span class="fa fa-star" style="color: rgb(242, 255, 0)"></span>
+
+                                     '.$stars.'
+                                    
                                 </div>
                                     
                                 </div>
@@ -78,10 +100,10 @@ trait ImgTrait
                    </a>
                      
                                
-                           <div class="under_img">
+                           <div class="under_imgs">
                            '.$img.'
                            
-                           <div style="margin-top: -2px">
+                           <div style="margin-top: -18px">
                            <button order_id='.$product->id.' id="delete" class="delete_btn"  style="margin-left: 150px;"><i class="fa fa-trash"></i></button>        
                                </div>
                            <br><br>
@@ -135,7 +157,15 @@ trait ImgTrait
                 $btnedit =  '<div class="btnedits"><a href="'.route('ordersite.edit', $product->id).'"class="btn btn-info" style="margin-left: 200px;margin-top: -150px;"><i class="fa fa-edit"></i> </a></div';
                 $btndelete = '<div class="btndeletes"><button order_id='.$product->id.' class="delete_btn btn btn-danger"  style="margin-top: -200px;margin-left: 400px;"><i class="fa fa-trash"></i></button>';
                }}}}
-      
+               $start=1;
+               $orderid=$product->id;
+                 while ($start<=5){
+                     if($orderid>5){ $orderid %=5 ; }                                  
+                     if($orderid<$start){
+                       $stars =' <span class="fa fa-star" style="color: rgb(242, 255, 0)"></span>';}
+                     else{
+                     $stars =' <span class="fa fa-star" style="color: rgb(188, 188, 187)"></span>';}
+                 $start++;}
                 $output .=
                 '<div class="OrderRow'.$product->id.'">
                 <div class="container">
@@ -159,8 +189,13 @@ trait ImgTrait
                     <p class="card__description">
                         '.$product->description.'
                     </p>
-                    <p>COST :'.$product->price.'</p>
-   
+                    <p>COST :'.$product->price.' <span style="color: rgb(59, 212, 105)">$</span></p>
+                    <span class="fa fa-star" style="color: rgb(188, 188, 187)"></span>
+                    <span class="fa fa-star" style="color: rgb(188, 188, 187)"></span>
+                    <span class="fa fa-star" style="color: rgb(242, 255, 0)"></span>
+                    <span class="fa fa-star" style="color: rgb(242, 255, 0)"></span>
+
+                     '.$stars.'
                 </div>
                     
                 </div>

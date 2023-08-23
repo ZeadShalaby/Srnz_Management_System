@@ -195,7 +195,7 @@ class OrdersSiteController extends Controller
     public function favoruite(Request $request){
 
            //$_POST['id']
-            $order_id=$request->id;
+             $order_id=$request->id;
             $check_order = interesteds::where('order_id', $order_id)->where('user_id',auth()->user()->id)->get();
             if($check_order)
             foreach ($check_order as $check) 

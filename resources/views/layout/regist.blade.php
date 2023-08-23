@@ -16,6 +16,7 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const gmail = document.getElementById('gmail');
 const phone = document.getElementById('phone');
+const profile_photo = document.getElementById('profile_photo');
 
 // Show input error message
 function showError(input, message) {

@@ -122,7 +122,6 @@ class DepartmentsController extends Controller
     public function update(Request $request,Departments $department)
     {
 
-        dd($request);
         $formFields = $request->validate([
 
             'name' => 'required',

@@ -5,7 +5,7 @@
 
 .container{
 width: 1250px;
-margin: 10px auto;
+margin: 0px auto;
 }
 .box{
 width: 305px;
@@ -55,4 +55,5 @@ object-fit: contain;
     margin-top: 55px;
     margin-left: -92px;
 }
+
 

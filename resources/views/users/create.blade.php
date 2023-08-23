@@ -98,7 +98,7 @@
         
         </div>
     
-    <!-- delay Departments -->   
+    <!-- delay users -->   
     <script>
         function showdiv(){
           document.getElementById("divshow").style.visibility = "visible";

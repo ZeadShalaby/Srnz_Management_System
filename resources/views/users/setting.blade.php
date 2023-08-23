@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{asset('css/setting.css')}}">
     <link rel="stylesheet" href="{{asset('css/hover-image.css')}}">
+    <link rel="stylesheet" href="{{asset('css/load-setting.css')}}">
+    <link rel="stylesheet" href="{{asset('css/star.css')}}">
+
+
     <title>Setting</title>
 </head>
 <body>
@@ -13,6 +18,8 @@
   @extends('extends')
   @section('content')
   @endsection
+
+  <div id="divshow" style="visibility: hidden;">
 
     <div class="main-content">
         <!-- Top navbar -->
@@ -106,7 +113,7 @@
           </div>
         </div>
         <!-- Page content -->
-        <form action="{{route('users.update',$users->id)}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('users.update',$users->id)}}" name="formseting" method="post" enctype="multipart/form-data">
           @csrf
           @method('put')
         <div class="container-fluid mt--7">
@@ -123,7 +130,7 @@
                             <span class="glyphicon glyphicon-camera"><img class="hover" src="{{asset('image/all/camera.png')}}" alt="camera"></span>
                           </label>
                           <input id="file" name="profile_photo" type="file" value="{{$users->profile_photo}}" />
-                          <img src="https://demos.creative-tim.com/argon-dashboard/assets-old/img/theme/team-4.jpg" class="rounded-circle">
+                          <img src="{{asset('image/all/profile.png')}}" class="rounded-circle">
                         </div>
                      @else
                      <div class="profile-pic">
@@ -165,7 +172,7 @@
                   </div>
                   <div class="text-center">
                     <h3>
-                      Jessica Jones<span class="font-weight-light">, 27</span>
+                      {{$users->name}}<span class="font-weight-light">, 27</span>
                     </h3>
                     <div class="h5 font-weight-300">
                       <i class="ni location_pin mr-2"></i>Bucharest, Romania
@@ -208,7 +215,7 @@
                       <h3 class="mb-0">@if($users->role == $check)Gender : Admin @else Gender : Customer @endif</h3>
                     </div>
                     <div class="col-4 text-right">
-                      <a href="#!" class="btn btn-sm btn-primary"  style="background-color: #0b1526;"><button type="submit" style="color: white;background-color: black;font-weight: bold;border: none;cursor: pointer;">Settings</button> </a>
+                      <a href="#!" user_id='{{$users->id}}' class="btn btn-sm btn-primary"  style="background-color: #0b1526;"><button  name="setting" style="color: white;background-color: black;font-weight: bold;border: none;cursor: pointer;">Settings</button> </a>
                     </div>
                   </div>
                 </div>
@@ -284,7 +291,8 @@
                             <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
                           </div>
                         </div>
-                        
+                        <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
+
                       </div>
                     </div>
                     <hr class="my-4">
@@ -416,7 +424,106 @@
               </div>
           </div>
       </div>
-  </footer>
+   </footer>
+</div>
 
+<div id="divhide" class="divhide" style="visibility: visible;">
+
+<!-- SPINNER ORBITS -->
+<div class="spinner-box">
+
+<div id='stars'></div>
+<div id='stars2'></div>
+<div id='stars3'></div>
+<div id='stars4'></div>
+<div id='stars5'></div>
+<div id='stars6'></div>
+<div id='stars7'></div>
+<div id='stars7'></div>
+
+
+  <div class="blue-orbit leo">
+  </div>
+
+  <div class="green-orbit leo">
+  </div>
+  
+  <div class="red-orbit leo">
+  </div>
+  
+  <div class="white-orbit w1 leo">
+  </div><div class="white-orbit w2 leo">
+  </div><div class="white-orbit w3 leo">
+  </div>
+</div>
+
+  
+  </div>
+
+<!-- delay setting -->   
+<script>
+  function showdiv(){
+    document.getElementById("divshow").style.visibility = "visible";
+    document.getElementById("divhide").style.visibility = "hidden";
+
+   }
+   setTimeout("showdiv()",3600);
+</script>
+
+
+
+  <script>
+
+    $(document).on('click', '#setting', function (e) {
+        e.preventDefault();
+
+        var formData = new FormData($('#formseting')[0]);
+        var user_id =  $(this).attr('user_id');
+
+        $.ajax({
+            type: 'put',
+            enctype: 'multipart/form-data',
+            url: "{{route('users.update',5)}}",
+            data: {
+                    '_token': "{{csrf_token()}}",
+                    'id' :user_id,
+                    'formData':formData,
+                },
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+
+                if (data.status == true) {
+                    $('#error').hide();
+                    $('#name_error_msg').hide();
+                    $('#code_error_msg').hide();
+                    $('#success_msg').show();
+                    document.getElementById("departmentsForm").reset();  
+
+                }
+                if (data.type == 'code') {
+                    $('#error').hide();
+                    $('#name_error_msg').hide();
+                    $('#code_error_msg').show();
+                }
+                if (data.type == 'name') {
+                    $('#error').hide();
+                    $('#code_error_msg').hide();
+                    $('#name_error_msg').show();
+                }
+
+            }, error: function (reject) {
+                var response = $.parseJSON(reject.responseText);
+               
+                $.each(response.errors, function (key, val) {
+                    $("#error").text(val[0]).show();
+                });}
+               
+        });
+    });
+
+
+</script>
 </body>
 </html>

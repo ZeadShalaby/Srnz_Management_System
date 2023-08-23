@@ -79,7 +79,7 @@ message--danger
       <h1 style="color: rgb(0, 0, 0);font-weight:bold;">Info</h1>
      
       <p style="font-weight:bold;font-size:13px">Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-     <span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px">My Dear :<span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px"></span></span>
+      <span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px">My Dear :<span style="color: rgb(255, 106, 0);font-weight:bold;font-size:15px"></span>@if(isset($SeAdmin)){{$SeAdmin->name}} @else {{$SeCustomer->name}} @endif</span>
   
      
         <!-- x icon through a path element -->

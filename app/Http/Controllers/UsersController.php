@@ -149,25 +149,12 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         //
-        dd($request->profile_photo);
-        if(isset($request->imges)){
-            $folder = 'image/users';
-            $file_name = $this->saveImage($request->imges,$folder);
-           
-            $department->update([
-                'name'=> $user->name,
-                'email'=> $user->email,
-                'gmail'=>$user->gmail,
-                'profile_photo'=>$file_name,
-                'phone'=>$user->phone,
-                'password'=> $user->password,
-                 ]);
-        }
+
+      
         $formFields = $request->validate([
             'name'=> 'required',
             'email'=> 'required',
             'gmail'=> 'required',
-            'profile_photo'=>'required',
             'password'=> 'required',
             'phone'=> 'required',
         ]);
@@ -224,10 +211,15 @@ class UsersController extends Controller
     public function homepage()
     {
         $user = auth()->user();
+        $orders = Orders::where('user_id',auth()->user()->id)->get();
+        $favourite = Interesteds::where('user_id',auth()->user()->id)->get();
+        $numorders = $this->countorders($orders);
+        $numfav = $this->countfavourite($favourite);
+
       if (Auth::user()->role == Role::ADMIN) {
-            return view('home-page.admin',['SeAdmin'=>$user]);
+            return view('home-page.admin',['SeAdmin'=>$user,'CountOrders'=>$numorders,'CountFav'=>$numfav,'check'=>1]);
         }
-        else{return view('home-page.customer',['SeCustomer'=>$user]);}    
+        else{return view('home-page.customer',['SeCustomer'=>$user,'CountOrders'=>$numorders,'CountFav'=>$numfav,'check'=>1]);}    
     }
 
     //login

@@ -126,7 +126,7 @@ class OrdersController extends Controller
     public function restore_index()
     {
         $useres = auth()->user();
-        return view('trash.orders_restore', ['orders' => Orders::onlyTrashed()->paginate(10),'SeAdmin'=>$useres]);
+        return view('trash.orders_restore', ['orders' => Orders::onlyTrashed()->paginate(9),'SeAdmin'=>$useres]);
      }
     
     // restore

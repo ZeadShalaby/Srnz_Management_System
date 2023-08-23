@@ -1,40 +1,175 @@
-.departments #img  {
-    width: 70px;
-	max-width: 100px;
-	-webkit-border-radius: 50%;
-	-webkit-transition: -webkit-box-shadow 0.3s ease;
-	transition: box-shadow 0.3s ease;
-	-webkit-box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
-	box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
-    vertical-align: middle;
-	border-top-left-radius: 50% 50%; 
-    border-top-right-radius: 50% 50%; 
-    border-bottom-right-radius: 50% 50%; 
-    border-bottom-left-radius: 50% 50%; 
-  }
-  
-  .departments #img:hover  {
-	-webkit-box-shadow: 0px 0px 0px 12px rgba(174, 6, 110, 0.1);
-	box-shadow: 0px 0px 0px 12px rgba(174, 6, 110, 0.1);
-    vertical-align: middle
-  }
-
-  .under_img{
-	background-color: rgb(234, 234, 234);
-	width: 350px;
-	height: 50px;
-	border-radius: 0.625rem;
-	margin-top: -45px;
-}
-.delete_btn{
-	background-color: none;
-    border: none;
-	cursor: pointer;
-}
-.AddFav{
-	background-color: none;
-    border: none;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
 }
 
+body{
+	background-color: #171717;
 
-	
+}
+.containeres{
+	width: 900px;
+	margin: 0px auto;
+	margin-left: 290px;
+    margin-top: 140px;
+}
+.boxs{
+	width: 60px;
+	padding: 10px;
+	float: left;
+	margin: 10px;
+	}
+.icon-image{
+  position: relative;
+  height: 70px;
+  width: 70px;
+  margin: 0 5px;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  background: #fff;
+}
+.icon-image .icon img{
+  position: absolute;
+  height: 95%;
+  width: 95%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #0396FF;
+}
+.icon-image::before{
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 50%;
+  top: -50px;
+  transform: translateX(-50%);
+}
+.icon-image .hover-image{
+  position: absolute;
+  height: 230px;
+  width: 300px;
+  bottom: 100px;
+  left: 50%;
+  z-index: 0;
+  transform: translateX(-50%);
+  border-radius: 25px;
+  pointer-events: none;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.5s ease, z-index 0s, left 0.5s ease ;
+  transition-delay: 0s, 0.5s, 0.5s;
+}
+.icon-image:hover .hover-image{
+  left: -200px;
+  z-index: 12;
+  transform: translateX(80px);
+  transition: left 0.5s ease, z-index 0s, transform 0.5s ease;
+  transition-delay: 0s, 0.5s, 0.5s;
+}
+.hover-image img{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  border-radius: 25px;
+}
+.hover-image .content{
+  position: absolute;
+  width: 100%;
+  bottom: -10px;
+  padding: 0 10px;
+}
+.content::before{
+  content: '';
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  background: #fff;
+  left: 50%;
+  bottom: -7px;
+  transform: rotate(45deg) translateX(-50%);
+  z-index: -1;
+}
+.content .details{
+  position: relative;
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+.icon-image:hover .details{
+  transition: all 0.5s ease;
+  transition-delay: 0.9s;
+  opacity: 1;
+  transform: translateY(4px);
+  pointer-events: auto;
+}
+.details::before{
+  content: '';
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  background: #fff;
+  left: 50%;
+  bottom: -15px;
+  transform: rotate(45deg) translateX(-50%);
+  z-index: -1;
+}
+.content .details .name{
+ font-size: 20px;
+ font-weight: 500;
+}
+.content .details .job{
+ font-size: 17px;
+ color: #0396FF;
+ margin: -3px 0 5px 0;
+}
+.content .details a:hover{
+  color: #0396FF;
+}
+.containeres .last .hover-image{
+  transition: none;
+}
+.containeres .last:hover .hover-image{
+  transition: 0;
+}
+.last:hover .details{
+  transition-delay: 0s;
+}
+
+.icon-images{
+  position: relative;
+  height: 70px;
+  width: 70px;
+  margin: 0 5px;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  background: #fff;
+}
+.icon-images .icons img{
+  position: absolute;
+  height: 95%;
+  width: 95%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ff5303;
+}
+
+.spann{
+  margin-top: 10px;
+}

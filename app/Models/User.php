@@ -24,10 +24,10 @@ class User extends Authenticatable
         'password',
         'gmail',
         'phone',
+        'profile_photo',
         'role',
         'social_id',
         'social_type',
-        'profile_photo',
         'remember_token',
     ];
 
