@@ -73,6 +73,7 @@ section{
             <input id="password" class="form-control" type="password" placeholder="Enter/Password" name="password" value="{{ old('password') }}">
             <small>Error message</small>
           </div>
+          
           <button id="create" type="submit" class="nn btn btn-success" >Create</button>
         </form>
       </div>

@@ -39,6 +39,7 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         //
+    
         $source = DB::table('users')->where('email', $request->email)->first();
 
         $formFields = $request->validate([
@@ -96,7 +97,7 @@ class RegisterController extends Controller
             'name'=> $request->name,
             'email'=> $request->email,
             'gmail'=>$request->gmail,
-            'profile_photo'=>"",
+            'profile_photo'=>'',
             'phone'=>$request->phone,
             'password'=> $request->password,
             'role'=>Role::CUSTOMER,

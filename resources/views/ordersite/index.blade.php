@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
-    <link href="{{asset('css/orders-img.css')}}" rel="stylesheet">
     <link href="{{asset('css/card-orders.css')}}" rel="stylesheet">
     <link href="{{asset('css/loadorders.css')}}" rel="stylesheet">
+    <link href="{{asset('css/orders-img.css')}}" rel="stylesheet">
+
 
 
     <title>Orders</title>
@@ -30,16 +31,37 @@
     <div class="departments">
         @foreach ($Departments as $department)
         <a href="{{route('registration.show',$department->id)}}" class="inside-page__btn inside-page__btn--beach">
-            
-                <img src="{{asset('image/departments/'.$department->img)}}" alt="{{$department->name}}" class="hoverZoomLink" id="img" >
-              
+            <div class="containeres">
+                <div class="boxs">
+                <div class="icon-image">
+                  <div class="icon">
+                    <img src="{{asset('image/all/img1.jpg')}}" alt="" />
+                </div>
+                  <div class="hover-image one">
+                    <div class="img">
+                        @if(!isset($department->img))
+                        <img src="{{asset('image/all/img1.jpg')}}" alt="" />
+                        @else
+                        <img src="{{asset('image/departments/'.$department->img)}}" alt="" />
+                        @endif
+                    </div>
+                    <div class="content">
+                      <div class="details">
+                        <div class="name">{{$department->name}}</div>
+                        <div class="job">{{$department->code}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </div>
         </a>
                
         
-        <span style="color: red">-</span>
         @endforeach
     </div>
-    <br><br>
+    <br><br><br><br>    
+
     <div class="AllData">  
         @foreach ($orders as $order)
         <div class="OrderRow{{$order->id}}">
@@ -47,8 +69,14 @@
                 <div class="box">
    <a href="{{route('ordersite.show',$order->id)}}" style="text-decoration: none">
     
-           <span style="color: aquamarine" >{{$order->user->name}}</span>
-<br><br>
+    <div class="icon-images" style="margin-top: -30px">
+
+        <div class="icons" >
+            <img src="{{asset('image/all/img1.jpg')}}" alt="users" />                
+            <div  class="spann" style="color: aquamarine;margin-left:90px;" >{{$order->user->name}}</div>
+        </div>
+        </div>
+         <br>
                 <article class="card">
                     <img
                     class="card__background"
@@ -63,11 +91,21 @@
                         <p class="card__description">
                             {{$order->description}}
                         </p>
-                        <p>COST :{{$order->price}}</p>
+                        <p>COST :{{$order->price}} <span style="color: rgb(59, 212, 105)">$</span></p>
 
-                    </div>
-                        ccccc
-                    </div>
+                        <span style="display: none">{{$start=1}}</span>
+                        <span style="display: none">{{$orderid=$order->id}}</span>
+                        @while ($start<=5)
+                        @if($orderid>$start)
+                        <span style="display: none">{{$orderid-=3}}</span>
+                        @endif
+                              @if($orderid<$start)
+                              <span class="fa fa-star" style="color: rgb(242, 255, 0)"></span>
+                              @else
+                             <span class="fa fa-star" style="color: rgb(188, 188, 187)"></span>
+                             @endif
+                             <span style="display: none">{{$start++}}</span>
+                        @endwhile
                 </article>
      
 </a>
@@ -121,9 +159,7 @@
 </div>
     @endforeach
      </div>
-     <div style="margin-left: 1000px">
-        {{$orders->links()}}
-    </div>
+    
     
 <!-- return search -->
 <div id="conte" class="searchdata">
@@ -139,6 +175,10 @@
         <div class="inner two"></div>
         <div class="inner three"></div>
       </div>
+</div>
+
+<div style="margin-left: 1000px;">
+    {{$orders->links()}}
 </div>
 <!-- delay orders -->   
 <script>

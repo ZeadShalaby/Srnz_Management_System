@@ -230,3 +230,39 @@ a{
 
 }
 
+.under_img{
+	background-color: rgb(234, 234, 234);
+	width: 350px;
+	height: 50px;
+	border-radius: 0.625rem;
+	margin-top: -45px;
+}
+.delete_btn{
+	background-color: none;
+  border: none;
+	cursor: pointer;
+}
+.delete_btn i{
+color: rgb(255, 0, 0);
+	cursor: pointer;
+}
+
+
+.delete_btns i{
+color: rgb(255, 0, 0);
+	cursor: pointer;
+}
+
+.AddFav{
+	background-color: none;
+    border: none;
+}
+
+
+.under_imgs{
+	background-color: rgb(234, 234, 234);
+	width: 350px;
+	height: 50px;
+	border-radius: 0.625rem;
+	margin-top: 5px;
+}

@@ -70,8 +70,9 @@ body {
   line-height: 1.5;
   margin: 0;
   text-align: left;
-  color: #525f7f;
-  background-color: #0b0b0b;
+  color: #171b24;
+  background-color: #171717;
+  
 }
 
 [tabindex='-1']:focus {
@@ -2066,8 +2067,8 @@ html, body {
 
 .spark:nth-child(1) {
 	animation:
-		spark-radius 2.03s 1s both,
-		spark-one-motion 2s 1s both;
+		spark-radius 5.03s 1s both,
+		spark-one-motion 5s 1s both;
 }
 
 @keyframes spark-radius {
@@ -2088,8 +2089,8 @@ html, body {
 
 .spark:nth-child(2) {
 	animation:
-		spark-radius 2.03s 1s both,
-		spark-two-motion 2.03s 1s both;
+		spark-radius 5.03s 1s both,
+		spark-two-motion 5.03s 1s both;
 }
 
 @keyframes spark-two-motion {
@@ -2103,8 +2104,8 @@ html, body {
 
 .spark:nth-child(3) {
 	animation:
-		spark-radius 2.05s 1s both,
-		spark-three-motion 2.03s 1s both;
+		spark-radius 5.05s 1s both,
+		spark-three-motion 5.03s 1s both;
 }
 
 @keyframes spark-three-motion {

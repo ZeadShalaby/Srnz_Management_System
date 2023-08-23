@@ -32,7 +32,7 @@
 <br>
  
     @foreach ($orders as $order)
-    <div class="container">
+    <div class="container" style="margin-top: -500px">
     <div class="box">
 
     <div class="OrderRow{{$order->id}}">
@@ -43,9 +43,9 @@
         {{$order->user->name}} : {{$order->name}}  
         
     </p>
-
+       <div class="path" >
         <img class="photo" src="image/orders/{{$order->path}}" alt="orders">
-
+       </div>
     </div>
 </div>
     </div>
@@ -55,7 +55,7 @@
     </div>
 
     <div id="divhide" class="divhide" style="visibility: visible;">
-        <div class="preloader">
+        <div class="preloader" style="margin-top: 100px">
             <svg class="cart" role="img" aria-label="Shopping cart line animation" viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="8">
                     <g class="cart__track" stroke="hsla(0,10%,10%,0.1)">
