@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{URL('image/home/srnz.png')}}" type="image/svg+xml">
+    <link href="{{asset('css/departments.show.css')}}" rel="stylesheet">
 
     <title>Orders Information</title>
 </head>
@@ -17,17 +18,51 @@
             
         @endsection
     @endif
-   <h1>SHOW Users</h1>
    <br>
-  <span><h1 style="color: blue">profile_photo : </h1>  <h2 style="color: coral"> {{$users->profile_photo}} </h2>  </span>
-  <span><h1 style="color: blue">Name : </h1>  <h2 style="color: coral">        {{$users->name}} </h2>  </span>
-  <span><h1 style="color: blue">Email : </h1>  <h2 style="color: coral">        {{$users->email}} </h2>  </span>
-  <span><h1 style="color: blue">gmail : </h1>  <h2 style="color: coral">       {{$users->gmail}} </h2>  </span>
-  <span><h1 style="color: blue">phone : </h1>  <h2 style="color: coral">       {{$users->phone}} </h2>  </span>
-  <span><h1 style="color: blue">password : </h1>  <h2 style="color: coral"> {{$users->password}} </h2>  </span>
-  <span><h1 style="color: blue">role : </h1>  <h2 style="color: coral">   @if($users->role == 2)  {{"Customer"}} @else {{"Admin"}} @endif  </h2>  </span>
-
  
+  <aside class="profile-card">
+    <header>
+      <!-- here’s the avatar -->
+      <a target="_blank" href="#">
+        <img src="{{asset('image/users/'.$users->profile_photo)}}" alt="departments" class="hoverZoomLink" >
+      </a>
+  
+      <!-- the username -->
+      <h1>
+      Departments Name
+    </h1>
+  
+      <!-- and role or location -->
+      <h2>
+        {{$users->name}}   
+      </h2>
+  
+    </header>
+  
+    <!-- bit of a bio; who are you? -->
+    <div class="profile-bio">
+  
+        <h1>
+            Departments Code
+          </h1>
+       
+          <h2>
+            {{$users->email}}   
+            <br>
+            {{$users->gmail}}
+            <br>
+            {{$users->phone}}
+            <br>
+            {{$users->password}}
+            <br>
+            @if($users->role == 2)  {{"Customer"}} @else {{"Admin"}} @endif 
+                     </h2>
+  
+    </div>
+  
+    
+  </aside>
+
   
     
 

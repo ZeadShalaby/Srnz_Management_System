@@ -1830,8 +1830,10 @@ textarea[resize='horizontal'] {
   left: 0;
   width: 100%;
   height: 100%;
-  transition: all .15s ease;
+ 
 }
+
+
 
 @media screen and (prefers-reduced-motion: reduce) {
   .mask {

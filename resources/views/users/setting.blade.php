@@ -82,7 +82,7 @@
                   <div class="media align-items-center" style="  margin-top: 35px;" >
                     <span class="avatar avatar-sm rounded-circle" style="  margin-top: -5px;">
                       @if(isset($users->profile_photo))
-                      <img alt="Image placeholder" src="https://demos.creative-tim.com/argon-dashboard/assets-old/img/theme/team-4.jpg">
+                      <img alt="Image placeholder" src="{{asset('image/all/profile.png')}}">
                      @else
                      <img src="{{asset('image/users/'.$users->profile_photo)}}" alt="Image users">
                      @endif
@@ -100,7 +100,7 @@
         <!-- Header -->
         <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url({{asset('image/all/gback.svg')}}); background-size: 50%; background-position: center left;background-color: #000000;">
           <!-- Mask -->
-          <span class="mask bg-gradient-default opacity-8"></span>
+          <!--<span class="mask bg-gradient-default opacity-8"></span>-->
           <!-- Header container -->
           <div class="container-fluid d-flex align-items-center">
             <div class="row" style="margin-left: 120px;margin-top: -20px;">
@@ -113,7 +113,7 @@
           </div>
         </div>
         <!-- Page content -->
-        <form action="{{route('users.update',$users->id)}}" name="formseting" method="post" enctype="multipart/form-data">
+        <form @if($users->role == 2)action="{{route('registration.update',$users->id)}}"@else action="{{route('users.update',$users->id)}}"@endif name="formseting" method="post" enctype="multipart/form-data">
           @csrf
           @method('put')
         <div class="container-fluid mt--7">
@@ -192,7 +192,7 @@
     
                 </div>
     
-                <div class="animate">
+                <div class="animate" >
                   <div class="loader" style="--bg: hsl(185.97889774641104, 100%, 85%)">
                       <div class="dot" style="--index: 0"></div>
                       <div class="dot" style="--index: 1"></div>
@@ -209,10 +209,10 @@
             <div class="col-xl-8 order-xl-1">
               <div class="card bg-secondary shadow">
                
-                <div class="card-header bg-white border-0" >
+                <div class="card-header bg-blue border-0" >
                   <div class="row align-items-center">
                     <div class="col-8">
-                      <h3 class="mb-0">@if($users->role == $check)Gender : Admin @else Gender : Customer @endif</h3>
+                      <h3 class="mb-0" style="color: azure;font-weight: bold">@if($users->role == $check)Gender : Admin @else Gender : Customer @endif</h3>
                     </div>
                     <div class="col-4 text-right">
                       <a href="#!" user_id='{{$users->id}}' class="btn btn-sm btn-primary"  style="background-color: #0b1526;"><button  name="setting" style="color: white;background-color: black;font-weight: bold;border: none;cursor: pointer;">Settings</button> </a>

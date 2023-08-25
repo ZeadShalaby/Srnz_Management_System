@@ -137,7 +137,7 @@ message--danger
     // possible values for the body of the message
     // end result of the emmet shortcut p*10>lorem10
     const messageText = [
-   'Youre Deleted Your Account Are You Sure ...?!'
+   'Youre Deleted Your Account Are You Sure?!'
    ];
     
     /* logic

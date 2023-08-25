@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{asset('css/load-home.css')}}">
     <link rel="stylesheet" href="{{asset('css/star.css')}}">
     <link rel="stylesheet" href="{{asset('css/setting.css')}}">
-    <link rel="stylesheet" href="{{asset('css/hove-image.css')}}">
 
     <title>CUSTOMER PAGE</title>
 </head>
@@ -28,7 +27,6 @@
   
    <div id="divshow" style="visibility: hidden;">
 
-    <h1> Customer Page</h1>
     <div class="main-content">
         <!-- Top navbar -->
         <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
@@ -108,7 +106,6 @@
         <!-- Header -->
         <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url({{asset('image/all/gback.svg')}}); background-size: 50%; background-position: center left;background-color: #000000;">
           <!-- Mask -->
-          <span class="mask bg-gradient-default opacity-8"></span>
           <!-- Header container -->
           <div class="container-fluid d-flex align-items-center">
             <div class="row" style="margin-left: 120px;margin-top: -20px;">
@@ -133,19 +130,15 @@
                     <div class="card-profile-image">
                       <a href="#">
                         @if(isset($SeCustomer->profile_photo))
-                        <div class="profile-pic">
+                        <div class="profile-pic" style="margin-top: -150px">
                           <label class="-label" for="file">
-                            <span class="glyphicon glyphicon-camera"><img class="hover" src="{{asset('image/all/camera.png')}}" alt="camera"></span>
                           </label>
-                          <input id="file" name="profile_photo" type="file" value="{{$SeCustomer->profile_photo}}" />
                           <img src="{{asset('image/all/profile.png')}}" class="rounded-circle">
                         </div>
                      @else
-                     <div class="profile-pic">
+                     <div class="profile-pic" style="margin-top: -150px">
                       <label class="-label" for="file">
-                        <span class="glyphicon glyphicon-camera"><img class="hover" src="{{asset('image/all/camera.png')}}" alt="camera"></span>
                       </label>
-                      <input id="file" type="file" name="profile_photo" onchange="loadFile(event)"/>
                       <img src="{{asset('image/users/'.$SeCustomer->profile_photo)}}" alt="Image users">
                     </div>
                      @endif
@@ -153,7 +146,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4" style="margin-top: -20px">
                   <div class="d-flex justify-content-between">
                     <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
                     <a href="#" class="btn btn-sm btn-default float-right">Message</a>
@@ -164,11 +157,11 @@
                     <div class="col">
                       <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                         <div>
-                          <span class="heading">{{$CountOrders}}</span>
+                          <span class="heading">{{$numorders}}</span>
                           <span class="description">orders</span>
                         </div>
                         <div>
-                          <span class="heading">{{$CountFav}}</span>
+                          <span class="heading">{{$numfav}}</span>
                           <span class="description">favourite</span>
                         </div>
                         <div>
@@ -216,13 +209,28 @@
             </div>
             <div class="col-xl-8 order-xl-1">
               <div class="card bg-secondary shadow">
+
+                <div class="card-header bg-blue border-0" >
+                  <div class="row align-items-center">
+                    <div class="col-8">
+                      <h3 class="mb-0" style="color: azure;font-weight: bold">@if($users->role == $check)Gender : Admin @else Gender : Customer @endif</h3>
+                    </div>
+                  
+                  </div>
+                </div>
+               
+                <div class="card-body" style="background-color: rgb(35, 35, 36)">
+
+                
+                </div>
+
                
               
           </div>
         </div>
-      </div>
+          </div>
           
-    <footer class="footer-section">
+    <footer class="footer-section" style="width: 102.7%">
       <div class="container">
           <div class="footer-cta pt-5 pb-5">
               <div class="row">
@@ -355,13 +363,13 @@
             <div id='stars6'></div>
             <div id='stars7'></div>
             <div id='stars7'></div>
-        <figure>
+            </div>
+        <figure style="margin-left: 40px;">
             <div></div><div></div>
             <div></div><div></div>
             <div></div><div></div>
             <div></div><div></div>
           </figure>
-            </div>
         </div>
     <!-- delay home -->   
     <script>

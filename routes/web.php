@@ -67,7 +67,7 @@ use App\Http\Controllers\InterestedsController;
 
         //setting-page
         Route::get('/setting-page', [UsersController::class, 'setting'])->name('setting');
-
+      
         
         });
 

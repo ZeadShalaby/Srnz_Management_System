@@ -3,7 +3,7 @@ name: Tests
 on:
   push:
     branches:
-      - master
+      - main
       - '*.x'
   pull_request:
   schedule:
@@ -45,3 +45,13 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/phpunit
+
+      - name: "login to Docker hub"
+        run: docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_TOKEN }}
+  
+      - name: "Bulding Docker image"
+        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/SRNZ_Project_System .
+
+      - name: "Pushing to Docker hub"
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/SRNZ_Project_System   
+

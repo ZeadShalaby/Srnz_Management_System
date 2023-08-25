@@ -116,3 +116,14 @@
       transform: translateY(-2000px);
     }
   }
+
+  .spinner-box {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    margin-top: -1900px;
+    margin-left: 600px;
+  }

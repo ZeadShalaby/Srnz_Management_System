@@ -14,7 +14,7 @@
     <title>Create CUSTOMER</title>
 </head>
 <style>
-section{
+ section{
   width: 100%;
   background-position: center;
   font-family: 'Open Sans', sans-serif;
@@ -27,7 +27,7 @@ section{
   background-size:cover;
   animation-name: animateBg ;
   animation: animateBg 10s infinite;
-}
+ }
   @keyframes animateBg {
   100%{
    filter: hue-rotate(360deg);
@@ -35,15 +35,17 @@ section{
   } 
 </style>
 <body >
+  <section>  
+
     @extends('layout.regist')
     @section('register')
-    <div class="alert alert-success" id="success_msg" style="display: none; color:blue">
-      Create Sucessfuly .
-   </div>
-     
-     <section>    
+    
+   @extends('layout.success-regist')
+   @section('success_regist')
+     @endsection
+       
       
-    <div class="container">
+    <div class="container" style="margin-left: -800px">
         <form  id="form" class="form">
             @csrf
          <img src="{{URL('image\all\logo_srnz.png')}}" alt="LogoSrnz" id="logo_srnz">
@@ -73,7 +75,6 @@ section{
             <input id="password" class="form-control" type="password" placeholder="Enter/Password" name="password" value="{{ old('password') }}">
             <small>Error message</small>
           </div>
-          
           <button id="create" type="submit" class="nn btn btn-success" >Create</button>
         </form>
       </div>

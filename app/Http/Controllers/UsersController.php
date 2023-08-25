@@ -65,8 +65,6 @@ class UsersController extends Controller
     {
 
 
-
-
         //Create Admin
         $sourcename = DB::table('users')->where('name', $request->name)->value('name');
         $sourceemail = DB::table('users')->where('email', $request->email)->value('email');
@@ -81,7 +79,6 @@ class UsersController extends Controller
         ]);
 
         //     
-
 
             if($sourcename==$request->name){
                 $msg='Name Oreday Exist';
@@ -169,8 +166,9 @@ class UsersController extends Controller
             'phone'=>$request->phone,
             'password'=> $request->password,
          ]);        
-         
-        return Redirect::route('users.show',$user->id)->with('status', 'Update Successfully');
+         if(auth()->user()->role == Role::ADMIN){
+        return Redirect::route('users.show',$user->id)->with('status', 'Update Successfully');}
+        else{ return Redirect::route('users.setting',$user->id)->with('status', 'Update Successfully');}
 
     }
 
@@ -207,7 +205,7 @@ class UsersController extends Controller
      return view('home-page.Home');
 
    }
-
+  // home users
     public function homepage()
     {
         $user = auth()->user();
@@ -217,9 +215,10 @@ class UsersController extends Controller
         $numfav = $this->countfavourite($favourite);
 
       if (Auth::user()->role == Role::ADMIN) {
-            return view('home-page.admin',['SeAdmin'=>$user,'CountOrders'=>$numorders,'CountFav'=>$numfav,'check'=>1]);
+        return view('home-page.admin',['users'=>$user,'SeAdmin'=>$user,'SeCustomer'=>$user,'check'=>1]);
         }
-        else{return view('home-page.customer',['SeCustomer'=>$user,'CountOrders'=>$numorders,'CountFav'=>$numfav,'check'=>1]);}    
+        else{
+            return view('home-page.customer',['users'=>$user,'SeCustomer'=>$user,'numfav'=>$numfav,"numorders"=>$numorders,"CountFav"=>$numfav,'check'=>1]);}    
     }
 
     //login

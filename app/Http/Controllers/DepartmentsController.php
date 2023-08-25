@@ -23,7 +23,7 @@ class DepartmentsController extends Controller
         //
         $useres = auth()->user();
 
-        $departments=Departments::paginate(10);
+        $departments=Departments::paginate(7);
         return view('departments.index',['departments' => $departments,'SeAdmin'=>$useres]);
 
     }
