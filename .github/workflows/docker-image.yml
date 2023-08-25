@@ -24,11 +24,11 @@ jobs:
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
 
-      - name: "Bulding Docker image"
-        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/srnzsystem .
+      - name: Bulding Docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/srnzsystem .
 
-      - name: "Pushing to Docker hub"
-        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/srnzsystem  
+      - name: Pushing to Docker hub
+        run: docker push ${{ secrets.DOCKER_PASSWORD }}/srnzsystem  
 
 
 
