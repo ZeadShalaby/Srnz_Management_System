@@ -223,8 +223,6 @@
               
                 <div class="card-body" style="background-color: rgb(35, 35, 36)">
                   <img src="{{asset('image/all/homes.gif')}}" alt="homes" style="height: 800px;width: 800px;border-radius: 30px;border: 2px solid rgb(16, 16, 17);margin-left: -7px;box-shadow: 5px cornflowerblue ">
-
-                
                 </div>
               
           </div>
