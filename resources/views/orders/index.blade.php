@@ -11,7 +11,6 @@
     <title>Orders</title>
 </head>
 <body>
-    <div id="divshow" style="visibility: hidden;">
 
     @extends('extends')
     @section('content')
@@ -27,8 +26,9 @@
     @section('message_danger')
 
     @endsection
+    <div id="divshow" style="visibility: hidden;">
 
-    <h1>Orders</h1>
+    <h1 style="visibility: hidden">Orders</h1>
  
         <div class="departments">
         @foreach ($Departments as $department)

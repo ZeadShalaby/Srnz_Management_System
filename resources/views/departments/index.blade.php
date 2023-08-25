@@ -172,6 +172,7 @@
   </div>
 </div>
     <br>
+    {{$departments->links()}}
 
 <!-- return search -->
 <div id="conte" class="searchdata">

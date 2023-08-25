@@ -32,7 +32,7 @@
         <header>
           <!-- here’s the avatar -->
           <a target="_blank" href="#">
-            <img src="{{asset('image/departments/'.$departments->img)}}" alt="departments" class="hoverZoomLink" >
+            <img src="{{asset('image/departments/'.$departments->img)}}" alt="users" class="hoverZoomLink" >
           </a>
       
           <!-- the username -->
