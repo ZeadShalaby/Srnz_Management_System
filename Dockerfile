@@ -1,36 +1,41 @@
+# Use the official PHP-FPM image as the base image
 FROM php:8.1-fpm
 
+LABEL authors="Zead Shalaby"
 
-WORKDIR /var/www/html
-
-
+# Install required dependencies
 RUN apt-get update && apt-get install -y \
     git \
-    curl \
+    unzip \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    zip \
-    unzip
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
+# Install Node.js and npm
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
 
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# Install the Composer package manager
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Set working directory
+WORKDIR /var/www/html
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-
+# Copy Laravel project files
 COPY . .
 
+# Install PHP dependencies
+RUN composer install --no-interaction --optimize-autoloader
 
-RUN composer install --no-interaction --no-progress --no-scripts
+# Generate key
+RUN php artisan key:generate
 
+# Install JavaScript dependencies
+RUN npm install
 
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html \
-    && chmod -R 777 storage bootstrap/cache
-
-
+# Build webpack assets
+#RUN npx mix watch
 
 # Expose port 8000 (assuming Laravel's default port)
 EXPOSE 8000
