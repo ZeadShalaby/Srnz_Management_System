@@ -28,7 +28,7 @@ jobs:
         run: docker build -t ${{ secrets.USERNAME_TOCKEN }}/srnzsystem .
 
       - name: "Pushing to Docker hub"
-        run: docker push ${{ secrets.PASSWORD_TOKEN }}/srnzsystem  
+        run: docker push ${{ secrets.USERNAME_TOCKEN }}/srnzsystem  
 
 
 
