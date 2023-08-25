@@ -25,10 +25,10 @@ jobs:
 
 
       - name: "Bulding Docker image"
-        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/srnz:latest .
+        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/srnzsystem .
 
       - name: "Pushing to Docker hub"
-        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/srnz:latest  
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/srnzsystem  
 
 
 
