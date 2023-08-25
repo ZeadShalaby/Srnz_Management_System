@@ -32,4 +32,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.USERNAME }}/SRNZ:latest
+          tags: ${{ secrets.USERNAME_TOCKEN }}/SRNZ:latest
