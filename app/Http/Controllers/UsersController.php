@@ -227,7 +227,7 @@ class UsersController extends Controller
         return view('login.login');
     }
 
-    /**
+    /**ssssssss
      * @throws ValidationException
      *///check login 
     function checklogin(Request $request)
