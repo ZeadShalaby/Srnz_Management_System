@@ -227,7 +227,7 @@ class UsersController extends Controller
         return view('login.login');
     }
 
-    /**
+    /**ssssssss
      * @throws ValidationException
      *///check login 
     function checklogin(Request $request)
@@ -235,6 +235,8 @@ class UsersController extends Controller
         $result = $this->Check($request);
         if (!(Auth::attempt($result->user_data))) {
             return back()->with('error', 'Wrong Login Details');
+            return back()->with('error', 'Wrong Login Details');
+
         }
         if (Auth::user()->role == Role::ADMIN) {
             return view('home-page.admin',['SeAdmin'=>$result->source]);
