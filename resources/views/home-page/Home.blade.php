@@ -144,7 +144,7 @@
                 <a href="#menu" class="navbar-link hover-underline">
                   <div class="separator"></div>
     
-                  <span class="span">Menus</span>
+                  <span class="span">orders</span>
                 </a>
               </li>
     
@@ -206,9 +206,9 @@
           </nav>
     
           <a href="#" class="btn btn-secondary">
-            <span class="text text-1">Find A Table</span>
+            <span class="text text-1">Get Orders</span>
     
-            <span class="text text-2" aria-hidden="true">Find A Table</span>
+            <span class="text text-2" aria-hidden="true">Get Orders</span>
           </a>
     
           <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
@@ -242,21 +242,21 @@
                 <div class="slider-bg">
                   <img src="{{URL('image/home/hero-slider-1.jpg')}}" width="1880" height="950" alt="" class="img-cover">
                 </div>
-                <p class="label-2 section-subtitle slider-reveal">Tradational & Hygine</p>
+                <p class="label-2 section-subtitle slider-reveal">Super SRNZ</p>
     
                 <h1 class="display-1 hero-title slider-reveal">
                   For the love of <br>
-                  delicious food
+                  Shine Orders
                 </h1>
     
                 <p class="body-2 hero-text slider-reveal">
-                  Come with family & feel the joy of mouthwatering food
+                  Come With Us & feel the Shine of Multi Diffrent Orders 
                 </p>
     
                 <a href="#" class="btn btn-primary slider-reveal">
-                  <span class="text text-1">View Our Menu</span>
+                  <span class="text text-1">View Our Orders</span>
     
-                  <span class="text text-2" aria-hidden="true">View Our Menu</span>
+                  <span class="text text-2" aria-hidden="true">View Our Orders</span>
                 </a>
     
               </li>
@@ -275,13 +275,13 @@
                 </h1>
     
                 <p class="body-2 hero-text slider-reveal">
-                  Come with family & feel the joy of mouthwatering food
+                  Come With Us & feel the Shine of Multi Diffrent Orders 
                 </p>
     
                 <a href="#" class="btn btn-primary slider-reveal">
-                  <span class="text text-1">View Our Menu</span>
+                  <span class="text text-1">View Our Orders</span>
     
-                  <span class="text text-2" aria-hidden="true">View Our Menu</span>
+                  <span class="text text-2" aria-hidden="true">View Our Orders</span>
                 </a>
     
               </li>
@@ -292,7 +292,7 @@
                   <img src="{{URL('image/home/hero-slider-3.jpg')}}" width="1880" height="950" alt="" class="img-cover">
                 </div>
     
-                <p class="label-2 section-subtitle slider-reveal">amazing & delicious</p>
+                <p class="label-2 section-subtitle slider-reveal">amazing & Shine</p>
     
                 <h1 class="display-1 hero-title slider-reveal">
                   Where every flavor <br>
@@ -300,13 +300,13 @@
                 </h1>
     
                 <p class="body-2 hero-text slider-reveal">
-                  Come with family & feel the joy of mouthwatering food
+                  Come With Us & feel the Shine of Multi Diffrent Orders 
                 </p>
     
                 <a href="#" class="btn btn-primary slider-reveal">
-                  <span class="text text-1">View Our Menu</span>
+                  <span class="text text-1">View Our Orders</span>
     
-                  <span class="text text-2" aria-hidden="true">View Our Menu</span>
+                  <span class="text text-2" aria-hidden="true">View Our Orders</span>
                 </a>
     
               </li>

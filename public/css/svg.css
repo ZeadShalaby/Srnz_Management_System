@@ -1,0 +1,44 @@
+
+.svg{
+  animation:animi 15s infinite alternate;
+  height: 500px;
+  width: 550px;
+  border-radius: 43% 57% 62% 38% / 43% 41% 59% 57% ; 
+  transform: translate(-100px, -50px) rotate(-90deg); transition: 1s;
+  transform: translate(-100px,-50px) rotate(-90deg);
+  transition: 1s cubic-bezier(.07, .8, .16, 1);  
+  margin-left: 50px;
+  box-shadow: 5px cornflowerblue;
+  background-color: rgb(26, 25, 25); 
+
+}
+@keyframes animi {
+  
+  0% {
+    transform: rotate(0deg); 
+    border-radius: 43% 57% 62% 38% / 43% 41% 59% 57% ;
+    top: 15%;
+    left: 10%;
+  }
+
+  25% {
+    transform: rotate(50deg); 
+    border-radius: 84% 16% 89% 11% / 42% 34% 66% 58%;
+
+    top: 30%;
+    left: 30%;
+  }
+  50% {
+    transform:  rotate(100deg); 
+    border-radius: 61% 39% 23% 77% / 25% 48% 52% 75% ;
+    
+    top: 15%;
+    left: 10%;
+  }
+  100% {
+    transform:  rotate(150deg); 
+    border-radius: 76% 24% 33% 67% / 68% 55% 45% 32%;
+    top: 30%;
+    left: 50%;
+    }
+  }

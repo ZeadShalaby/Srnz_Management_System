@@ -215,10 +215,10 @@ class UsersController extends Controller
         $numfav = $this->countfavourite($favourite);
 
       if (Auth::user()->role == Role::ADMIN) {
-        return view('home-page.admin',['users'=>$user,'SeAdmin'=>$user,'SeCustomer'=>$user,'check'=>1]);
+        return view('home-page.admin',['users'=>$user,'SeAdmin'=>$user,'SeCustomer'=>$user,'check'=>1,'numorders'=>$numorders,'numfav'=>$numfav]);
         }
         else{
-            return view('home-page.customer',['users'=>$user,'SeCustomer'=>$user,'numfav'=>$numfav,"numorders"=>$numorders,"CountFav"=>$numfav,'check'=>1]);}    
+            return view('home-page.customer',['users'=>$user,'SeAdmin'=>$user,'SeCustomer'=>$user,'numfav'=>$numfav,"numorders"=>$numorders,"CountFav"=>$numfav,'check'=>1]);}    
     }
 
     //login
@@ -232,18 +232,26 @@ class UsersController extends Controller
      *///check login 
     function checklogin(Request $request)
     {   
+        
         $result = $this->Check($request);
+        
         if (!(Auth::attempt($result->user_data))) {
             return back()->with('error', 'Wrong Login Details');
             return back()->with('error', 'Wrong Login Details');
 
         }
+        $orders = Orders::where('user_id',auth()->user()->id)->get();
+        $favourite = Interesteds::where('user_id',auth()->user()->id)->get();
+        $numorders = $this->countorders($orders);
+        $numfav = $this->countfavourite($favourite);
         if (Auth::user()->role == Role::ADMIN) {
-            return view('home-page.admin',['SeAdmin'=>$result->source]);
+
+            return view('home-page.admin',['SeAdmin'=>$result->source,'numorders'=>$numorders,'numfav'=>$numfav]);
+
         }
         if (Auth::user()->role == Role::CUSTOMER) {
 
-            return view('home-page.customer',['SeCustomer'=>$result->source]);
+            return view('home-page.customer',['SeCustomer'=>$result->source,'numorders'=>$numorders,'numfav'=>$numfav]);
 
         }
         
