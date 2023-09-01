@@ -9,7 +9,10 @@
         @break
     </form>
     @endforeach
-
+    
+    <h3 class="mb-0" style="color: azure;font-weight: bold">@if($users->role == $check)Gender : Admin @else Gender : Customer @endif</h3>
+    {{$numfav}}
+    {{$numorders}}
 
 
 <!--- setting page --->

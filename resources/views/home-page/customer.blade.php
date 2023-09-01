@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{asset('css/load-home.css')}}">
     <link rel="stylesheet" href="{{asset('css/star.css')}}">
     <link rel="stylesheet" href="{{asset('css/setting.css')}}">
+    <link rel="stylesheet" href="{{asset('css/svg.css')}}">
 
     <title>CUSTOMER PAGE</title>
 </head>
@@ -157,35 +158,35 @@
                     <div class="col">
                       <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                         <div>
-                          <span class="heading">{{$numorders}}</span>
+                          <span class="heading" style="color: rgb(190, 40, 120)">{{$numorders}}</span>
                           <span class="description">orders</span>
                         </div>
                         <div>
-                          <span class="heading">{{$numfav}}</span>
+                          <span class="heading" style="color: rgb(190, 40, 120)">{{$numfav}}</span>
                           <span class="description">favourite</span>
                         </div>
                         <div>
-                          <span class="heading">89</span>
+                          <span class="heading" style="color: rgb(190, 40, 120)">89</span>
                           <span class="description">Comments</span>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="text-center">
-                    <h3>
-                      {{$SeCustomer->name}}<span class="font-weight-light">, 27</span>
+                    <h3 style="color: rgb(190, 40, 120)">
+                      {{$SeCustomer->name}}<span class="font-weight-light"></span>
                     </h3>
-                    <div class="h5 font-weight-300">
+                    <div class="h5 font-weight-300" style="color: rgb(143, 141, 141)">
                       <i class="ni location_pin mr-2"></i>Bucharest, Romania
                     </div>
-                    <div class="h5 mt-4">
-                      <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                    <div class="h5 mt-4" style="color: rgb(143, 141, 141)">
+                      <i class="ni business_briefcase-24 mr-2" ></i>Solution Manager - Creative Tim Officer
                     </div>
-                    <div>
+                    <div style="color: rgb(143, 141, 141)">
                       <i class="ni education_hat mr-2"></i>University of Computer Science
                     </div>
-                    <hr class="my-4">
-                    <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
+                    <hr class="my-4" >
+                    <p style="color: rgb(143, 141, 141)">Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
                     <a href="#">Show more</a>
                   </div>
     
@@ -213,15 +214,18 @@
                 <div class="card-header bg-blue border-0" >
                   <div class="row align-items-center">
                     <div class="col-8">
-                      <h3 class="mb-0" style="color: azure;font-weight: bold">@if($users->role == $check)Gender : Admin @else Gender : Customer @endif</h3>
                     </div>
-                  
+                    <h3 class="mb-0" style="color: azure;font-weight: bold;margin-left: -560px">@if($SeCustomer->role == 1)Gender : Admin @else Gender : Customer @endif</h3>
+
                   </div>
                 </div>
                
                 <div class="card-body" style="background-color: rgb(35, 35, 36)">
-
-                
+                  <div class="card-body" style="background-color: rgb(35, 35, 36)">
+                    <img src="{{asset('image/all/soso.svg')}}" alt="homes" class="svg" >
+                  
+                  </div>
+                   
                 </div>
 
                
