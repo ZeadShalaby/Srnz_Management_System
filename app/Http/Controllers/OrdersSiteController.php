@@ -71,7 +71,6 @@ class OrdersSiteController extends Controller
             $msg= 'please update setting first (add your phone to show your orders and connect  with other people) .';
             return back()->with('important',$msg);}
         else{
-
         //save image (Departments) in folder 
         $folder = 'image/orders';
         $file_name = $this->saveImage($request->path,$folder);

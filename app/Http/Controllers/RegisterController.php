@@ -47,7 +47,7 @@ class RegisterController extends Controller
             'email'=> 'required',
             'gmail'=> 'required',
             'password'=> 'required',
-            'phone'=> 'required',
+            'phone',
         ]);
 
         //check before create
@@ -157,32 +157,38 @@ class RegisterController extends Controller
     /**
      * Update the specified resource in storage.
      */
+ 
+        //
+            //
+
     public function update(Request $request, User $registration)
     {
         //
-            //
-            $formFields = $request->validate([
-                'name'=> 'required',
-                'email'=> 'required',
-                'gmail'=> 'required',
-                'password'=> 'required',
-                'phone'=> 'required',
-            ]);
-            //update image
-        $role = $request->role;
-           $edit = $registration->update([
-                'name'=> $request->name,
-                'email'=> $request->email,
-                'gmail'=>$request->gmail,
-                'profile_photo'=>Auth::user()->profile_photo,
-                'phone'=>$request->phone,
-                'password'=> $request->password,
-             ]);        
-   if($edit){
-         return Redirect::route('setting')->with('status', 'Update Successfully');
-   }
-        
+
+        $formFields = $request->validate([
+            'name'=> 'required',
+            'email'=> 'required',
+            'gmail'=> 'required',
+            'password'=> 'required',
+            'phone'=> 'required',
+        ]);
+        //update image
+    $role = $request->role;
+    $edit = $registration->update([
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'gmail'=>$request->gmail,
+            'profile_photo'=>Auth::user()->profile_photo,
+            'phone'=>$request->phone,
+            'password'=> $request->password,
+         ]);  
+
+         if($edit){
+            return Redirect::route('setting')->with('status', 'Update Successfully');
+      }
+
     }
+
 
     /**
      * Remove the specified resource from storage.

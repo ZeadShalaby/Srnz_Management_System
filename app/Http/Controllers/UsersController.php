@@ -97,7 +97,6 @@ class UsersController extends Controller
                 ]);
             }
             else{
-                
                 $pass = $encrypted = Crypt::encryptString($request->password);
                 $user = User::create([
                     'name'=> $request->name,
@@ -147,7 +146,7 @@ class UsersController extends Controller
     {
         //
 
-      
+
         $formFields = $request->validate([
             'name'=> 'required',
             'email'=> 'required',
@@ -156,9 +155,8 @@ class UsersController extends Controller
             'phone'=> 'required',
         ]);
         //update image
-    $role = $request->role;
-   
-       $edit = $user->update([
+
+    $edit = $user->update([
             'name'=> $request->name,
             'email'=> $request->email,
             'gmail'=>$request->gmail,
@@ -168,7 +166,7 @@ class UsersController extends Controller
          ]);        
          if(auth()->user()->role == Role::ADMIN){
         return Redirect::route('users.show',$user->id)->with('status', 'Update Successfully');}
-        else{ return Redirect::route('users.setting',$user->id)->with('status', 'Update Successfully');}
+        else{              return Redirect::route('setting')->with('status', 'Update Successfully');}
 
     }
 

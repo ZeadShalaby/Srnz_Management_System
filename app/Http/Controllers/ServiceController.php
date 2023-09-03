@@ -36,12 +36,13 @@ class ServiceController extends Controller
             else{return back()->with('error', 'Wrong Login Details');}
         }
          else{
+            
             User::create([
                 'name'=> $users->name,
                 'email'=> $users->email,
                 'gmail'=>$users->email,
                 'profile_photo'=>$users->avatar,
-                'phone',
+                'phone'=>self::increment(),
                 'password'=> $users->id,
                 'role'=>Role::CUSTOMER,
                 'remember_token' => Str::random(10),
@@ -73,7 +74,7 @@ class ServiceController extends Controller
                'email'=> $users->email,
                'gmail'=>$users->email,
                'profile_photo'=>$users->avatar,
-               'phone',
+               'phone'=>self::increment(),
                'password'=> $users->id,
                'role'=>Role::CUSTOMER,
                'remember_token' => $users->token,
@@ -107,7 +108,7 @@ class ServiceController extends Controller
            'email'=> $users->email,
            'gmail'=>$users->email,
            'profile_photo'=>$users->avatar,
-           'phone',
+           'phone'=>self::increment(),
            'password'=> $users->id,
            'role'=>Role::CUSTOMER,
            'remember_token' => $users->token,
@@ -141,7 +142,7 @@ class ServiceController extends Controller
                'email'=> $users->email,
                'gmail'=>$users->email,
                'profile_photo'=>$users->avatar,
-               'phone',
+               'phone'=>self::increment(),
                'password'=> $users->id,
                'role'=>Role::CUSTOMER,
                'remember_token' => $users->token,
@@ -154,5 +155,15 @@ class ServiceController extends Controller
             else{return back()->with('error', 'Wrong Login Details');}
             
        }   
+    }
+
+
+    public function increment()
+    {
+        do {
+            $increment = random_int(1000000000, 9999999999);
+        } while (User::where("phone", "=", $increment)->first());
+
+        return $increment;
     }
 }
