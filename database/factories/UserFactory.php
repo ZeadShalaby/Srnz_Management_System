@@ -18,6 +18,8 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $img = array("profile.png","gg.jpg", "joker.jpg", "joker1.jpg","jj.jpg");
+        $increment = random_int(0,4);
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
@@ -25,7 +27,7 @@ class UserFactory extends Factory
             'gmail'=>fake()->unique()->safeEmail(),
             'phone'=>fake()->numberBetween($min = 123456789, $max = 98561237894),
             'role' => Role::CUSTOMER,
-            'profile_photo'=>fake()->imageUrl($width=400, $height=400),
+            'profile_photo'=>$img[$increment],
             'remember_token' => Str::random(10),
 
         ];
@@ -40,7 +42,7 @@ class UserFactory extends Factory
             ];
         });
     }
-
+    
     public function CUSTOMER()
     {
         return $this->state(function (array $attributes) {
