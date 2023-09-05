@@ -25,7 +25,7 @@
     * [Locally](#running-locally)
     * [Via Container](#running-via-container)
 * [Contributing](#contributing)
-* [Authorss](#authors)
+* [Authorss](#authorss)
 * [Screen Shot](#screen-shot)
 
 
