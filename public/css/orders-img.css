@@ -10,13 +10,11 @@ body{
 	background-color: #171717;
 
 }
-.containeres{
-	width: 900px;
-	margin: 0px auto;
+.contains{
+
 	margin-left: 290px;
-    margin-top: 140px;
 }
-.boxs{
+.boxes{
 	width: 60px;
 	padding: 10px;
 	float: left;

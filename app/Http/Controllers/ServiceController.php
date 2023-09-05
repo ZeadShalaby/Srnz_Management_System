@@ -30,13 +30,16 @@ class ServiceController extends Controller
          $user =  Socialite::driver('google')->user();
          $users=$user;
          $finduser = User::where('social_id',$users->id)->get()->value('social_id');
+         $findemail = User::where('email',$user->email)->get()->value('email');
          if($finduser>0){
             $checkuser = $this->checkservice($users);
             if($checkuser==true){return Redirect::route('homepage');}
             else{return back()->with('error', 'Wrong Login Details');}
         }
          else{
-            
+            if($user->email==$findemail){
+                return view("errors.error");
+            }
             User::create([
                 'name'=> $users->name,
                 'email'=> $users->email,
@@ -63,12 +66,17 @@ class ServiceController extends Controller
         $user =  Socialite::driver('github')->user();
         $users=$user;
         $finduser = User::where('social_id',$users->id)->get()->value('social_id');
+        $findemail = User::where('email',$user->email)->get()->value('email');
+
         if($finduser>0){
            $checkuser = $this->checkservice($users);
            if($checkuser==true){return Redirect::route('homepage');}
            else{return back()->with('error', 'Wrong Login Details');}
        }
         else{
+            if($user->email==$findemail){
+                return view("errors.error");
+            }
            User::create([
                'name'=> $users->name,
                'email'=> $users->email,
@@ -92,17 +100,21 @@ class ServiceController extends Controller
 
    // linkedin
    public function linkedincallback(){
-           
+        
     $user =  Socialite::driver(static::LINKEDIN_TYPE)->user();
     $users=$user;
-    dd($users);
     $finduser = User::where('social_id',$users->id)->get()->value('social_id');
+
     if($finduser>0){
        $checkuser = $this->checkservice($users);
        if($checkuser==true){return Redirect::route('homepage');}
        else{return back()->with('error', 'Wrong Login Details');}
    }
     else{
+        if($user->email==$findemail){
+            return view("errors.error");
+        }
+
        User::create([
            'name'=> $users->name,
            'email'=> $users->email,
@@ -131,12 +143,19 @@ class ServiceController extends Controller
     $user =  Socialite::driver('facebook')->user();
         $users=$user;
         $finduser = User::where('social_id',$users->id)->get()->value('social_id');
+        $findemail = User::where('email',$user->email)->get()->value('email');
+
+
         if($finduser>0){
            $checkuser = $this->checkservice($users);
            if($checkuser==true){return Redirect::route('homepage');}
            else{return back()->with('error', 'Wrong Login Details');}
        }
         else{
+            if($user->email==$findemail){
+                return view("errors.error");
+            }
+            
            User::create([
                'name'=> $users->name,
                'email'=> $users->email,
