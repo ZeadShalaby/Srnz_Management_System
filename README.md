@@ -25,7 +25,7 @@
     * [Locally](#running-locally)
     * [Via Container](#running-via-container)
 * [Contributing](#contributing)
-* [Authors](#authors)
+* [Authorss](#authors)
 * [Screen Shot](#screen-shot)
 
 
@@ -222,7 +222,7 @@ Any contributions you make are **greatly appreciated**.
 4. Push to the Branch (`git push origin feature/GoalFeature`)
 5. Open a Pull Request
 
-## Authors
+## Authorss
 * **Ziad Shalaby** - *Computer Science Student* - [Ziad Shalaby](https://github.com/ZeadShalaby)
 
 
