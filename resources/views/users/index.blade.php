@@ -100,7 +100,7 @@
                                                     <div class="title">
                                                         <p class="title">
                                                             <img class="user_profile"
-                                                                src="{{ asset('image/all/try.png') }}"
+                                                                src="{{ asset('image/all/' . $user->profile_photo) }}"
                                                                 alt="User_photo" />
                                                         </p>
                                                         <svg fill-rule="nonzero" height="15px" width="15px"

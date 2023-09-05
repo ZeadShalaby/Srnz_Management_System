@@ -41,7 +41,7 @@
 
                             <div class="wrapper">
                                 <a href="#">
-                                    <img src="{{ asset('image/all/try.png') }}" alt="">
+                                    <img src="{{ asset('image/orders/' . $interested->order->path) }}" alt="">
                                     <div class="heart">
                                         <i class="fa-solid fa-heart"></i>
                                     </div>

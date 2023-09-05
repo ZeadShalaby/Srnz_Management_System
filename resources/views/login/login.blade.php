@@ -28,16 +28,15 @@
 
     @if ($message = Session::get('error'))
         <div class="alert alert-danger alert-block">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>{{ $message }}</strong>
+            <strong style="color: red ; margin-left:680px ;font-weight: bold">{{ $message }}</strong>
         </div>
     @endif
 
     @if (count($errors) > 0)
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" style="margin-left: 650px">
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li style="color: red; font-weight: bold">{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
@@ -63,34 +62,7 @@
 
         </div>
     </div>
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
 
-    @if (isset(Auth::user()->email))
-        <script>
-            window.location = "/login/successlogin";
-        </script>
-    @endif
-
-    @if ($message = Session::get('error'))
-        <div class="alert alert-danger alert-block">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>{{ $message }}</strong>
-        </div>
-    @endif
-
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
     <form method="post" action="{{ url('/login/checklogin') }}">
         {{ csrf_field() }}

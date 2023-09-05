@@ -101,7 +101,7 @@
                 </li>
                 <li class="profile">
                     <div class="profile-details">
-                        <img src="{{ asset('image/users/' . $SeAdmin->profile_photo) }}" alt="profileImg">
+                        <img src="{{ asset('image/all/' . $SeAdmin->profile_photo) }}" alt="profileImg">
                         <div class="name_job">
                             <div class="name">{{ $SeAdmin->name }}</div>
                             <div class="job">{{ $SeAdmin->phone }}</div>
@@ -189,7 +189,7 @@
                 </li>
                 <li class="profile">
                     <div class="profile-details">
-                        <img {{ asset('image/users/' . $SeCustomer->profile_photo) }} alt="profileImg">
+                        <img src="{{ asset('image/all/' . $SeCustomer->profile_photo) }}" alt="profileImg">
                         <div class="name_job">
                             <div class="name">{{ $SeCustomer->name }}</div>
                             <div class="job">{{ $SeCustomer->phone }}</div>

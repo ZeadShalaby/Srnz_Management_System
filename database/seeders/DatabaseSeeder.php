@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\posts;
 use App\Models\Orders;
@@ -27,7 +28,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
     // Create 5 departments
-   $departments = Departments::factory()->count(5)->create();
+   $departments = Departments::factory()->count(9)->create();
 
     User::create([
         'name' => 'Admin',
@@ -35,8 +36,8 @@ class DatabaseSeeder extends Seeder
         'password' => Hash::make('admin'), 
         'gmail'=>fake()->unique()->safeEmail(),
         'phone'=>fake()->numberBetween($min = 123456789, $max = 98561237894),
-        'role' =>'1',
-        'profile_photo'=>fake()->imageUrl($width=400, $height=400),
+        'role' =>Role::ADMIN,
+        'profile_photo'=>"profileA.png",
         'remember_token' => Str::random(10),
       
     ]); 
@@ -47,8 +48,8 @@ class DatabaseSeeder extends Seeder
         'password' => Hash::make('customer'), 
         'gmail'=>fake()->unique()->safeEmail(),
         'phone'=>fake()->numberBetween($min = 123456789, $max = 98561237894),
-        'role' =>'2',
-        'profile_photo'=>fake()->imageUrl($width=400, $height=400),
+        'role' =>Role::CUSTOMER,
+        'profile_photo'=>"profile.png",
         'remember_token' => Str::random(10),
       
     ]);
@@ -58,8 +59,8 @@ class DatabaseSeeder extends Seeder
         'gmail'=>fake()->unique()->safeEmail(),
         'password' => Hash::make('admin'),
         'phone'=>fake()->numberBetween($min = 123456789, $max = 98561237894),
-        'role' =>'1',
-        'profile_photo'=>fake()->imageUrl($width=400, $height=400),
+        'role' =>Role::ADMIN,
+        'profile_photo'=>"jj.jpg",
         'remember_token' => Str::random(10),
     ]);
 
@@ -68,9 +69,9 @@ class DatabaseSeeder extends Seeder
         'email' => fake()->unique()->safeEmail(),
         'gmail'=>fake()->unique()->safeEmail(),
         'password' => Hash::make('customer'),
-        'phone'=>fake()->numberBetween($min = 123456789, $max = 98561237894),
-        'role' =>'2',
-        'profile_photo'=>fake()->imageUrl($width=400, $height=400),
+        'phone'=>"jj.jpg",
+        'role' =>Role::CUSTOMER,
+        'profile_photo'=>"jj.jpg",
         'remember_token' => Str::random(10),
     ]);
 

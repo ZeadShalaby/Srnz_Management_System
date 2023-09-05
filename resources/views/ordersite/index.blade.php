@@ -82,7 +82,7 @@
                                     </div>
                                     <br>
                                     <article class="card">
-                                        <img class="card__background" src="{{ asset('image/orders/try.png') }}"
+                                        <img class="card__background" src="{{ asset('image/orders/' . $order->path) }}"
                                             alt="{{ $order->name }}" width="1920" height="2193" />
                                         <div class="card__content | flow">
                                             <div class="card__content--container | flow">

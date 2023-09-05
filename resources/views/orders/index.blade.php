@@ -39,7 +39,7 @@
                         <div class="boxes">
                             <div class="icon-image">
                                 <div class="icon">
-                                    <img src="{{ asset('image/all/img1.jpg') }}" alt="" />
+                                    <img src="{{ asset('image/departments/' . $department->img) }}">
                                 </div>
                                 <div class="hover-image one">
                                     <div class="img">
@@ -76,7 +76,8 @@
                                 <div class="icon-images" style="margin-top: -30px">
 
                                     <div class="icons">
-                                        <img src="{{ asset('image/all/img1.jpg') }}" alt="users" />
+                                        <img src="{{ asset('image/all/' . $order->user->profile_photo) }}"
+                                            alt="users" />
                                         <div class="spann" style="color: aquamarine;margin-left:90px;">
                                             {{ $order->user->name }}</div>
                                     </div>
@@ -84,7 +85,7 @@
 
                                 <br>
                                 <article class="card">
-                                    <img class="card__background" src="{{ asset('image/orders/try.png') }}"
+                                    <img class="card__background" src="{{ asset('image/orders/' . $order->path) }}"
                                         alt="{{ $order->name }}" width="1920" height="2193" />
                                     <div class="card__content | flow">
                                         <div class="card__content--container | flow">

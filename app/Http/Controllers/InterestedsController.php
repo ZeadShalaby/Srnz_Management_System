@@ -23,7 +23,7 @@ class InterestedsController extends Controller
         $useres = auth()->user();
         $favourite = Interesteds::where('user_id',auth()->user()->id)->get();
         $numfav = $this->countfavourite($favourite);
-        $interesteds = Interesteds::where('user_id',Auth::user()->id)->paginate(5);
+        $interesteds = Interesteds::where('user_id',Auth::user()->id)->get();
         return view('interesteds.index',['interesteds' => $interesteds,'user_id'=>auth()->user(),'SeCustomer'=>$useres,'countcheck'=>$numfav]);
     }
 
