@@ -26,7 +26,7 @@
     * [Via Container](#running-via-container)
 * [Contributing](#contributing)
 * [Authors](#authors)
-* [Screen Shot](#about-the-project)
+* [Screen Shot](#screen-shot)
 
 
 ## Screen Shoot
