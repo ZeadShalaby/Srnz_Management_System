@@ -47,7 +47,7 @@
 
 
 
-📌Book Page: 
+📌Departments Page: 
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-📌Admin Page: 
+📌Orders Page: 
 
 
 
@@ -64,6 +64,22 @@
 
 
 📌User Page: 
+
+
+
+<img src="https://i.imgur.com/MXVd2tL.png" alt="project(Coise-User)" width="900" height="380">
+
+
+
+📌Favourite Page: 
+
+
+
+<img src="https://i.imgur.com/MXVd2tL.png" alt="project(Coise-User)" width="900" height="380">
+
+
+
+📌Event Page: 
 
 
 
