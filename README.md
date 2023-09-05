@@ -7,7 +7,7 @@
 <h3 align="center">SRZN PROJECT SYSTEM</h3>
 
   <p align="center">
-    A Project not define yet
+     Project Laravel | socialite (linkedin,github,google,facebook) | Event Listener
     <br/>
     <br/>
   </p>
