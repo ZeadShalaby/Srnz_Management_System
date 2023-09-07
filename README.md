@@ -7,11 +7,11 @@
 <h3 align="center">SRZN PROJECT SYSTEM</h3>
 
   <p align="center">
-    A Project not define yet
+     Project Laravel | socialite (linkedin,github,google,facebook) | Event Listener (View)
     <br/>
     <br/>
   </p>
-
+  
 ![Forks](https://img.shields.io/github/forks/ZeadShalaby/SRNZ_PROJECT_SYSTEM?style=social) ![Issues](https://img.shields.io/github/issues/ZeadShalaby/SRNZ_PROJECT_SYSTEM) ![License](https://img.shields.io/github/license/ZeadShalaby/SRNZ_PROJECT_SYSTEM)
 
 ## Table Of Contents
@@ -26,6 +26,70 @@
     * [Via Container](#running-via-container)
 * [Contributing](#contributing)
 * [Authors](#authors)
+* [Screenshots](#Screenshots)
+
+
+## Screenshots
+<p>
+# Screenshots
+
+📌Home Page:
+
+<img src="https://i.imgur.com/bfGGH7U.png" alt="project(Coise-User)" width="1000" height="450">
+
+
+
+📌Login Page:
+
+
+<img src="https://i.imgur.com/O680nDN.png" alt="project(Coise-User)" width="1000" height="400">
+
+
+
+
+📌Departments Page: 
+
+
+
+<img src="https://i.imgur.com/VXNDEjT.png" alt="project(Coise-User)" width="1000" height="400">
+
+
+
+📌Orders Page: 
+
+
+
+<img src="https://i.imgur.com/QJTlibX.png" alt="project(Coise-User)" width="1000" height="400">
+
+
+
+📌User Page: 
+
+
+
+<img src="https://i.imgur.com/n7z8WjA.png" alt="project(Coise-User)" width="1000" height="400">
+
+
+
+📌Favourite Page: 
+
+
+
+<img src="https://i.imgur.com/TqZCrfC.png" alt="project(Coise-User)" width="1000" height="400">
+
+
+
+📌Event Page: 
+
+
+
+<img src="https://i.imgur.com/7xbb9nU.png" alt="project(Coise-User)" width="1000" height="400">
+
+
+
+
+
+</p>
 
 ## About The Project
 
