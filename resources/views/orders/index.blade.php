@@ -39,7 +39,8 @@
                         <div class="boxes">
                             <div class="icon-image">
                                 <div class="icon">
-                                    <img src="{{ asset('image/departments/' . $department->img) }}">
+                                    <img src="{{ asset('image/departments/' . $department->img) }}"
+                                        alt="{{ $department->name }}">
                                 </div>
                                 <div class="hover-image one">
                                     <div class="img">

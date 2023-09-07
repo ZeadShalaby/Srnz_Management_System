@@ -30,7 +30,7 @@
                         src="{{ URL('image/all/addgallery.png') }}" alt="add"></i>
                 </a></h1>
 
-            <br>
+            <br><br><br><br><br><br><br>
             <div class="departments">
                 @foreach ($Departments as $department)
                     <a href="{{ route('registration.show', $department->id) }}"
@@ -39,7 +39,8 @@
                             <div class="boxes">
                                 <div class="icon-image">
                                     <div class="icon">
-                                        <img src="{{ asset('image/all/img1.jpg') }}" alt="" />
+                                        <img src="{{ asset('image/departments/' . $department->img) }}"
+                                            alt="{{ $department->name }}">
                                     </div>
                                     <div class="hover-image one">
                                         <div class="img">
@@ -75,7 +76,8 @@
                                     <div class="icon-images" style="margin-top: -30px">
 
                                         <div class="icons">
-                                            <img src="{{ asset('image/all/img1.jpg') }}" alt="users" />
+                                            <img src="{{ asset('image/all/' . $order->user->profile_photo) }}"
+                                                alt="users" />
                                             <div class="spann" style="color: aquamarine;margin-left:90px;">
                                                 {{ $order->user->name }}</div>
                                         </div>
