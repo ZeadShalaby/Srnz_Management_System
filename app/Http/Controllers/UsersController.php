@@ -164,9 +164,9 @@ class UsersController extends Controller
             'phone'=>$request->phone,
             'password'=> $request->password,
          ]);        
-         if(auth()->user()->role == Role::ADMIN){
+         if(!auth()->user()->role == Role::ADMIN){
         return Redirect::route('users.show',$user->id)->with('status', 'Update Successfully');}
-        else{              return Redirect::route('setting')->with('status', 'Update Successfully');}
+        else{return Redirect::route('setting')->with('status', 'Update Successfully');}
 
     }
 

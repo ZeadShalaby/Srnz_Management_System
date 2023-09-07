@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="{{ URL('image/home/srnz.png') }}" type="image/svg+xml">
     <link href="{{ asset('css/departments.show.css') }}" rel="stylesheet">
 
-    <title>Orders Information</title>
+    <title>Users Information</title>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 
                 <!-- the username -->
                 <h1>
-                    Departments Name
+                    Users Name
                 </h1>
 
                 <!-- and role or location -->
