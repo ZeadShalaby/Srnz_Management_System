@@ -200,7 +200,7 @@ docker pull zeadshalaby/lms
  run the container
 
  ```
- docker run --name lms -p 8000:8000 -d zeadshalaby/lms
+ docker run --name lms -p 8000:8000 -d zeadshalaby/srnz
  ```
  
  connect to Container Terminal
