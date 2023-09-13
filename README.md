@@ -194,7 +194,7 @@ go to the following route
 pull the image 
 
 ```
-docker pull zeadshalaby/lms
+docker pull zeadshalaby/srnz 
 ``` 
 
  run the container
