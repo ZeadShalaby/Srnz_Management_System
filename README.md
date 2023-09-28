@@ -200,13 +200,13 @@ docker pull zeadshalaby/srnz
  run the container
 
  ```
- docker run --name lms -p 8000:8000 -d zeadshalaby/srnz
+ docker run --name srnz -p 8000:8000 -d zeadshalaby/srnz
  ```
  
  connect to Container Terminal
  
  ```
- docker exec -it lms /bin/sh
+ docker exec -it srnz /bin/sh
  ```
  
  make the migrations to update the database
