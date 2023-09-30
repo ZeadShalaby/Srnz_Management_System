@@ -95,8 +95,7 @@
                                 <div class="media align-items-center" style="  margin-top: 35px;">
                                     <span class="avatar avatar-sm rounded-circle" style="  margin-top: -5px;">
                                         @if (isset($SeCustomer->profile_photo))
-                                            <img alt="Image placeholder"
-                                                src="https://demos.creative-tim.com/argon-dashboard/assets-old/img/theme/team-4.jpg">
+                                            <img alt="Image placeholder" src="{{ asset('image/all/profile.png') }}">
                                         @else
                                             <img src="{{ asset('image/users/' . $SeCustomer->profile_photo) }}"
                                                 alt="Image users">
