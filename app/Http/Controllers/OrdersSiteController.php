@@ -76,11 +76,11 @@ class OrdersSiteController extends Controller
         $file_name = $this->saveImage($request->path,$folder);
         $name = $request->name;
         $sename = DB::table('orders')->where('name', $name)->value('id');  
-
         if($sename>0){
             $msg= 'Name Oredy Eists .';
            return back()->with('error',$msg);
         }
+
        else{
             $order = Orders::create([
                 'name'=> $request->name,
@@ -194,7 +194,7 @@ class OrdersSiteController extends Controller
     public function favoruite(Request $request){
 
            //$_POST['id']
-             $order_id=$request->id;
+            $order_id=$request->id;
             $check_order = interesteds::where('order_id', $order_id)->where('user_id',auth()->user()->id)->get();
             if($check_order)
             foreach ($check_order as $check) 
