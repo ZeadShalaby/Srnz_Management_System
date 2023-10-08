@@ -1,10 +1,10 @@
 <br/>
 <p align="center">
-  <a href="https://github.com/ZeadShalaby/SRNZ_PROJECT_SYSTEM">
+  <a href="https://github.com/ZeadShalaby/Srnz_Management_System">
     <img src="https://i.imgur.com/6kMSHq5.png" alt="Logo" width="300" height="270">
   </a>
     
-<h3 align="center">SRZN PROJECT SYSTEM</h3>
+<h3 align="center">SRZN MANAGEMENT SYSTEM</h3>
 
   <p align="center">
      Project Laravel | socialite (linkedin,github,google,facebook) | Event Listener (View)
@@ -132,13 +132,13 @@ Make sure that either **MySQL** or **MariaDB** are installed either manually or 
 Clone the project
 
 ```bash
-  https://github.com/ZeadShalaby/SRZN_Project_System
+  https://github.com/ZeadShalaby/Srnz_Management_System
 ```
 
 Go to the project directory
 
 ```bash
-  cd SRZN_Project_System
+  cd Srnz_Management_System
 ```
 
 Install dependencies
@@ -224,7 +224,7 @@ docker pull zeadshalaby/srnz
 Any contributions you make are **greatly appreciated**.
 
 * If you have suggestions for adding or removing projects, feel free
-  to [open an issue](https://github.com/ZeadShalaby/SRNZ_PROJECT_SYSTEM/issues/new) to discuss it, or directly
+  to [open an issue](https://github.com/ZeadShalaby/Srnz_Management_System/issues/new) to discuss it, or directly
   create a pull request after you edit the *README.md* file with necessary changes.
 * Please make sure you check your spelling and grammar.
 * Create individual PR for each suggestion.
